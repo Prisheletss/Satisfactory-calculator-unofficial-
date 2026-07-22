@@ -1,0 +1,7 @@
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.exe.config
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.exe
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.pdb
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.csproj.AssemblyReference.cache
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.csproj.CoreCompileInputs.cache
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.exe
+D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.pdb
