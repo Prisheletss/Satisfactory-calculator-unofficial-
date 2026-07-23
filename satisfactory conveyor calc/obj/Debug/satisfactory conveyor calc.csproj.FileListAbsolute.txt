@@ -5,3 +5,10 @@ D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\sa
 D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.csproj.CoreCompileInputs.cache
 D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.exe
 D:\проги\C#\штучки\сатис\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.pdb
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.exe.config
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.exe
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\bin\Debug\satisfactory conveyor calc.pdb
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.csproj.AssemblyReference.cache
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.csproj.CoreCompileInputs.cache
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.exe
+D:\GitHub\Satisfactory-calculator-unofficial-\satisfactory conveyor calc\obj\Debug\satisfactory conveyor calc.pdb
