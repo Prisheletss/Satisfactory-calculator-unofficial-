@@ -1,0 +1,2 @@
+\contentsline {chapter}{\numberline {1}Терминология}{4}{}%
+\contentsline {section}{\numberline {1.1}Конвейер}{4}{}%
