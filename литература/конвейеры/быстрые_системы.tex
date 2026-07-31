@@ -1,0 +1,231 @@
+\chapter{Быстрые системы}
+
+\section{Введение}
+
+\noindent Рассмотрим следующую систему:
+
+\begin{itemize}
+	\item Конвейеры имеют всюду равномерную скорость $v$, притом достаточно большую
+	
+	\item Конвейерные разъединители работают по следующим правилам:
+		\begin{itemize}
+			\item Всевозможные их числа выходов образуют множество $\mathbb{T} = \{ t_1, ..., t_n \}$
+			\item Правило вывода: чередовать ресурс между выходами 
+				
+				Схема очерёдности:
+				
+				\vspace{0.25in}
+				
+				\begin{tikzpicture}[
+					a/.style={rectangle, draw=black!60, fill=black!5, ultra thick, minimum size=20}
+					]
+					
+					%Nodes
+					\node[a] (1)   at (0, 2) 		   {$1$};
+					\node[a] (2)   at (-1.902, 0.618)  {$2$};
+					\node[a] (3)   at (-1.176, -1.618) {$3$};
+					\node[a] (etc) at (1.176, -1.618)  {$\ldots$};
+					\node[a] (i)   at (1.902, 0.618)   {$t_i$};
+					
+					%Lines
+					\draw[->, very thick] (1) to (2);
+					\draw[->, very thick] (2) to (3);
+					\draw[->, very thick] (3) to (etc);
+					\draw[->, very thick] (etc) to (i);
+					\draw[->, very thick] (i) to (1);
+				\end{tikzpicture}
+				
+			\item При этом распределение происходит мгновенно: как только ресурс заходит -- так только и выходит
+				
+		\end{itemize}
+		
+	\item Конвейерный соединитель может принимать любое число ресурсов, и мгновенно объединяет их в один конвейер
+	
+\end{itemize}
+
+
+
+
+
+\vspace{0.25in}
+
+\noindent Всвязи с мгновенностью распределений, назовём такую систему "быстрой"
+
+\vspace{0.4in}
+
+\noindent В быстрых системах определён следующий набор действий:
+
+\begin{itemize}
+	\item Разделение -- разделение одного конвейера на $t$ равных частей
+	
+	\item Соединение -- соединение $n \in \mathbb{N}$ конвейеров в один
+	
+	\item Отделение --; набор из последовательных и параллельных соединений с целью отделения $q_1$ ресурсов от конвейерной ленты, перевозящей $q_0$ ресурсов ($q_1 < q_0$)
+	
+	\item Возврат -- сначала отделение некоторой части потока, а затем соединение этой части с началом самого потока
+	
+		Пример:
+		
+		\begin{tikzpicture}[
+			s/.style={rectangle, draw=black!60, fill=black!5, thin, minimum size=20},
+			a/.style={rectangle, draw=black!60, fill=black!5, thin, minimum size=20},
+			o/.style={rectangle, draw=black!60, fill=black!5, thin, minimum size=20},
+			]
+			
+			%Nodes
+			\node[a]    (a1)                          	{a};
+			\node[s]    (s1)        [above = of a1]     {s};
+			\node[s]    (s2)        [left = of s1]      {s};
+			\node[o]	(in1)		[below = of a1]		{in};
+			\node[a]    (a2)        [above = of s1]   	{a};
+			\node[o]	(out1)		[above = of a2]		{out};
+			\node[o]	(out2)		[left = of out1]	{out};
+			
+			%Lines
+			\draw[->, thin] (in1.north) to node[right] 	 			  {$1$} 		  (a1.south);
+			\draw[->, thin] (a1.north)  to node[right] 	 		 	  {$\frac{6}{5}$} (s1.south);
+			\draw[->, thin] (s1.west)   to node[above] 	 		 	  {$\frac{2}{5}$} (s2.east);
+			\draw[->, ultra thick] (s2) to[bend left=-45] node[left]  {$\frac{1}{5}$} (a1);
+			\draw[->, thin] (s1.north)  to node[right] 				  {$\frac{2}{5}$} (a2.south);
+			\draw[->, thin] (s1) 	    to[bend right=90] node[right] {$\frac{2}{5}$} (a2);
+			\draw[->, thin] (a2.north)  to node[right] 	 			  {$\frac{4}{5}$} (out1.south);
+			\draw[->, thin] (s2.north)  to node[left]	 			  {$\frac{1}{5}$} (out2.south);
+		\end{tikzpicture}
+		
+		
+\end{itemize}
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Назовём все числа вида $\prod_{i=1}^n t_i^{a_i}$ , где $a_i \in \mathbb{N}_0$ "стандартными". Тогда каждое число, обратное стандартному может быть получено, как отделение от конвейера в 1 при помощи смеси $t_1$-арного,~...~,~и $t_n$-арного деревьев.
+
+\
+
+Пример: для множества $\mathbb{T} = \{2, 3\}$ , число $2^13^1=6$ является стандартным, тогда $1/6$ является стандартной дробью, его можно получить двумя способами:
+
+\vspace{0.25in}
+
+
+
+
+
+\begin{minipage}{0.4\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, thick, minimum size=20},
+		a/.style = {rectangle, draw=red!60, fill=red!5, thick, minimum size=20},
+		o/.style = {rectangle, draw=green!60, fill=green!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in1)	at (0, 2)		{in};
+		\node[s]	(s1)	at (0, 0)		{s};
+		\node[s]	(s2)    at (-1.5, -2)	{s};
+		\node[s]	(s3)    at (1.5, -2)	{s};
+		\node[o]	(out1)	at (-2.5, -4)	{out};
+		\node[o]	(out2)	at (-1.5, -4)	{out};
+		\node[o]	(out3)	at (-0.5, -4)	{out};
+		\node[o]	(out4)	at (0.5, -4)	{out};
+		\node[o]	(out5)	at (1.5, -4)	{out};
+		\node[o]	(out6)	at (2.5, -4)	{out};
+		
+		%Lines
+		\draw[->, thick] (in1.south) to node[right] {$1$} 			(s1.north);
+		\draw[->, thick] (s2.south)  to node[left]  {$\frac{1}{6}$} (out2.north);
+		\draw[->, thick] (s3.south)  to node[left]  {$\frac{1}{6}$} (out5.north);
+		
+		\draw[r] (s1.west) -| node[left]   {$\frac{1}{2}$} (s2.north);
+		\draw[r] (s1.east) -| node[right]  {$\frac{1}{2}$} (s3.north);
+		\draw[r] (s2.west) -| node[above]  {$\frac{1}{6}$} (out1.north);
+		\draw[r] (s2.east) -| node[above]  {$\frac{1}{6}$} (out3.north);
+		\draw[r] (s3.west) -| node[above]  {$\frac{1}{6}$} (out4.north);
+		\draw[r] (s3.east) -| node[above]  {$\frac{1}{6}$} (out6.north);
+		
+	\end{tikzpicture}
+\end{minipage}
+\hspace{50pt}
+\begin{minipage}{0.4\textwidth}
+	\begin{tikzpicture}[
+		s/.style={rectangle, draw=blue!60, fill=blue!5, thick, minimum size=20},
+		a/.style={rectangle, draw=red!60, fill=red!5, thick, minimum size=20},
+		o/.style={rectangle, draw=green!60, fill=green!5, thick, minimum size=20},
+		r1/.style = {->, thick, rounded corners=10pt},
+		r/.style = {->, thick, rounded corners=4.5pt}
+		]
+		
+		%Nodes
+		\node[o]	(in1)	at (0, 2)		{in};
+		\node[s]	(s1)	at (0, 0)		{s};
+		\node[s]	(s2)	at (-2, -2)		{s};
+		\node[s]	(s3)    at (0, -2)		{s};
+		\node[s]	(s4)    at (2, -2)		{s};
+		\node[o]	(out1)	at (-2.5, -4)	{out};
+		\node[o]	(out2)	at (-1.5, -4)	{out};
+		\node[o]	(out3)	at (-0.5, -4)	{out};
+		\node[o]	(out4)	at (0.5, -4)	{out};
+		\node[o]	(out5)	at (1.5, -4)	{out};
+		\node[o]	(out6)	at (2.5, -4)	{out};
+		
+		%Lines
+		\draw[->, thick] (in1.south) to node[right] {$1$} 			(s1.north);
+		\draw[r1] 		 (s1.west) 	 -| node[left]  {$\frac{1}{3}$} (s2.north);
+		\draw[->, thick] (s1.south)  to node[right] {$\frac{1}{3}$} (s3.north);
+		\draw[r1] 		 (s1.east)   -| node[right] {$\frac{1}{3}$} (s4.north);
+		
+		\draw[r] (s2.west) -| node[left]  {$\frac{1}{6}$} (out1.north);
+		\draw[r] (s2.east) -| node[right] {$\frac{1}{6}$} (out2.north);
+		\draw[r] (s3.west) -| node[left]  {$\frac{1}{6}$} (out3.north);
+		\draw[r] (s3.east) -| node[right] {$\frac{1}{6}$} (out4.north);
+		\draw[r] (s4.west) -| node[left]  {$\frac{1}{6}$} (out5.north);
+		\draw[r] (s4.east) -| node[right] {$\frac{1}{6}$} (out6.north);
+		
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Как можем заметить, дробь одна, а варианта её воспроизводства -- два. Отсюда сформулируем теорему:
+
+\section{Теорема о числе перестановок}
+
+Любую стандартную дробь, инициализированную числом  $\prod_{i=1}^n t_i^{a_i}$ можно построить числом способов, равным числу перестановок с повторениями:
+
+$$
+	\text{P}\left[ \sum_{i=1}^{n} a_i \right] \left( a_1, a_2, \ldots, a_n \right) 
+	=
+	\dfrac{\left[ \sum\limits_{i=1}^{n} a_i \right]!}{\prod\limits_{i=1}^{n} a_i!}
+$$
+
+
+
+
+
+% теорема о числе перестановок
+
+
+
+
+
+
+
+

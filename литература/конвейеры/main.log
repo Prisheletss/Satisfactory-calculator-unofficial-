@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.7.28)  30 JUL 2026 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.7.28)  31 JUL 2026 20:31
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -846,6 +846,10 @@ ryplotmarks.code.tex
 File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )))
 (C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz
+/libraries\tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz
 /libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
@@ -856,14 +860,14 @@ File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: twoside 
 * h-part:(L,W,R)=(108.405pt, 451.6875pt, 54.2025pt)
-* v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
+* v-part:(T,H,B)=(18.06749pt, 758.835pt, 18.06749pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=451.6875pt
-* \textheight=686.56499pt
+* \textheight=758.835pt
 * \oddsidemargin=36.13501pt
 * \evensidemargin=-18.06749pt
-* \topmargin=-55.06749pt
+* \topmargin=-91.2025pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -882,25 +886,25 @@ File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
  (main.aux
-(С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux))
+(С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux) (Р±С‹СЃС‚СЂС‹Рµ_СЃРёСЃС‚РµРјС‹.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
 
 (C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
 i
@@ -936,14 +940,14 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: twoside 
 * h-part:(L,W,R)=(108.405pt, 451.6875pt, 54.2025pt)
-* v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
+* v-part:(T,H,B)=(18.06749pt, 758.835pt, 18.06749pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=451.6875pt
-* \textheight=686.56499pt
+* \textheight=758.835pt
 * \oddsidemargin=36.13501pt
 * \evensidemargin=-18.06749pt
-* \topmargin=-55.06749pt
+* \topmargin=-91.2025pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -965,24 +969,34 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
 your preamble.
- on input line 28.
+ on input line 29.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 29.
+<РѕР±Р»РѕР¶РєР°.png, id=4, 933.4875pt x 1320.43312pt>
+File: РѕР±Р»РѕР¶РєР°.png Graphic file (type png)
+<use РѕР±Р»РѕР¶РєР°.png>
+Package pdftex.def Info: РѕР±Р»РѕР¶РєР°.png  used on input line 37.
+(pdftex.def)             Requested size: 614.32318pt x 794.986pt.
 
-(C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+
+[1
+
+
+ <./РѕР±Р»РѕР¶РєР°.png>]
+
+[2]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+
+ (C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 
 
 (C:\Users\HOME\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-[1
-
-
-{C:/Users/HOME/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+[1{C:/Users/HOME/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 [2
 
@@ -1000,30 +1014,123 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  (С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.tex
 Chapter 1.
 
-Overfull \hbox (8.0058pt too wide) in paragraph at lines 27--28
+Overfull \hbox (10.7829pt too wide) in paragraph at lines 26--27
 \T2A/cmr/m/n/10 стрелки для указания направления движения, а рядом может подпис
-ываться пропускная способность 
+ываться пропускная способность: 
  []
 
-)
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 47.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 47.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 48.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 48.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 49.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 49.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 50.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 50.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 51.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 51.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 52.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 52.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 53.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 53.
+
+
+
+LaTeX Font Warning: Command \boldmath invalid in math mode on input line 54.
+
+
+LaTeX Font Warning: Command \mathversion invalid in math mode on input line 54.
+
+
+
 
 [4
 
 
-] (main.aux (С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux))
+]
+
+[5])
+
+[6]
+\openout2 = `Р±С‹СЃС‚СЂС‹Рµ_СЃРёСЃС‚РµРјС‹.aux'.
+
+ (Р±С‹СЃС‚СЂС‹Рµ_СЃРёСЃС‚РµРјС‹.tex
+Chapter 2.
+
+Overfull \hbox (0.23605pt too wide) in paragraph at lines 65--66
+[]\T2A/cmr/m/n/10 Возврат -- сначала отделение некоторой части потока, а затем 
+соединение этой части с началом
+ []
+
+
+
+[7
+
+
+
+
+]
+Overfull \hbox (9.57686pt too wide) in paragraph at lines 107--108
+\T2A/cmr/m/n/10 стандартному может быть получено, как отделение от конвейера в 
+1 при помощи смеси $\OML/cmm/m/it/10 t[]$\T2A/cmr/m/n/10 -арного, ... , и
+ []
+
+
+Overfull \hbox (8.2244pt too wide) in paragraph at lines 211--212
+\T2A/cmr/m/n/10 Любую стандартную дробь, инициализированную числом $[][] \OML/c
+mm/m/it/10 t[]$ \T2A/cmr/m/n/10 можно построить числом способов,
+ []
+
+)
+
+[8] (main.aux (С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux) (Р±С‹СЃС‚СЂС‹Рµ_СЃРёСЃС‚РµРјС‹.aux
+))
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 24679 strings out of 468148
- 637583 string characters out of 5431545
- 1252268 words of memory out of 5000000
- 52867 multiletter control sequences out of 15000+600000
+ 24957 strings out of 468148
+ 643610 string characters out of 5431545
+ 1274268 words of memory out of 5000000
+ 53135 multiletter control sequences out of 15000+600000
  643215 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,8n,91p,796b,675s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,8n,91p,796b,780s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\HOME\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm070
 0.pk> <C:\Users\HOME\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 rm1000.pk> <C:\Users\HOME\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600
@@ -1036,15 +1143,16 @@ h/lh-t2a/dpi600\larm1200.pk> <C:\Users\HOME\AppData\Local\MiKTeX\fonts/pk/ljfou
 r/lh/lh-t2a/dpi600\larm1728.pk><C:/Users/HOME/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/HOME/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/HOME/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/HOME/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/HOME/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/HO
-ME/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
-Users/HOME/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/ms
-bm10.pfb>
-Output written on main.pdf (4 pages, 126131 bytes).
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/HOME/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/HOME/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/H
+OME/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/U
+sers/HOME/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Users/HOME/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb>
+Output written on main.pdf (10 pages, 192085 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
+ 324 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

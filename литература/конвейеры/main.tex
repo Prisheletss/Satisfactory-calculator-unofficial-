@@ -6,18 +6,19 @@
 \usepackage{lipsum}
 \usepackage{amsmath, amsthm, amsfonts}
 \usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
 
 \usetikzlibrary{positioning}
 
 
-\title{Анализ задачи распределения ресурсов в Satisfactory при помощи конвейеров и маршрутизаторов}
+\title{Анализ задачи распределения ресурсов при помощи конвейеров и маршрутизаторов}
 \author{Prishelets}
-\date{}
+\date{Москва, 2026}
 
 
 \newgeometry{
-	top=0.75in,
-	bottom=0.75in,
+	top=0.25in,
+	bottom=0.25in,
 	outer=0.75in,
 	inner = 1.5in,
 }
@@ -26,6 +27,23 @@
 
 
 \begin{document}
+
+\begin{titlepage}
+	%\includegraphics[width=1\linewidth]{обложка.png}
+	
+	\begin{tikzpicture}[remember picture, overlay]
+		% Картинка растягивается на весь лист впритык к краям
+		\node[inner sep=0pt, anchor=center] at (current page.center) {%
+			\includegraphics[width=\paperwidth, height=\paperheight]{обложка.png}%
+		};
+	\end{tikzpicture}
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
 \maketitle
 
 \chapter*{Введение}
@@ -38,6 +56,8 @@
 
 
 \include{терминология.tex}
+
+\include{быстрые_системы.tex}
 
 
 
