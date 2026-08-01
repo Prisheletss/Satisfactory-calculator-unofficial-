@@ -5,3 +5,10 @@
 \contentsline {chapter}{\numberline {2}Быстрые системы}{7}{}%
 \contentsline {section}{\numberline {2.1}Введение}{7}{}%
 \contentsline {section}{\numberline {2.2}Теорема о числе перестановок}{8}{}%
+\contentsline {section}{\numberline {2.3}Теорема о делимости}{9}{}%
+\contentsline {section}{\numberline {2.4}Теорема об упрощении}{9}{}%
+\contentsline {chapter}{\numberline {3}Вычисления в быстрых системах}{10}{}%
+\contentsline {section}{\numberline {3.1}Примеры}{10}{}%
+\contentsline {subsection}{\numberline {3.1.1}Упрощение}{10}{}%
+\contentsline {subsection}{\numberline {3.1.2}Рекурсия}{10}{}%
+\contentsline {subsection}{\numberline {3.1.3}Вариативность}{11}{}%

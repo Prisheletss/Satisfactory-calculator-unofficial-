@@ -1,4 +1,4 @@
-\documentclass[twoside]{report}
+\documentclass[twoside, a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage{graphicx}
@@ -7,6 +7,7 @@
 \usepackage{amsmath, amsthm, amsfonts}
 \usepackage{tikz, pgfplots}
 \usetikzlibrary{calc}
+\usepackage{titlesec}
 
 \usetikzlibrary{positioning}
 
@@ -18,10 +19,14 @@
 
 \newgeometry{
 	top=0.25in,
-	bottom=0.25in,
-	outer=0.75in,
+	bottom=0.75in,
+	outer=0.5in,
 	inner = 1.5in,
 }
+
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
 
 
 
@@ -29,19 +34,17 @@
 \begin{document}
 
 \begin{titlepage}
-	%\includegraphics[width=1\linewidth]{обложка.png}
-	
 	\begin{tikzpicture}[remember picture, overlay]
-		% Картинка растягивается на весь лист впритык к краям
-		\node[inner sep=0pt, anchor=center] at (current page.center) {%
-			\includegraphics[width=\paperwidth, height=\paperheight]{обложка.png}%
+		\node[inner sep=0pt, anchor=center] at (current page.center) {
+			\includegraphics[width=\paperwidth, height=\paperheight]{обложка.png}
 		};
 	\end{tikzpicture}
 \end{titlepage}
 
-\newpage
-\thispagestyle{empty}
-\mbox{}
+% Для удобного чтения закомментил, но при печати надо разкоментить, чтобы страницы легли как надо (наверное, а может и нет... хз)
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
 \newpage
 
 \maketitle
@@ -58,6 +61,8 @@
 \include{терминология.tex}
 
 \include{быстрые_системы.tex}
+
+\include{вычисления_быстро.tex}
 
 
 

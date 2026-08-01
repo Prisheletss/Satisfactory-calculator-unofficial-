@@ -1,0 +1,351 @@
+\chapter{Вычисления в быстрых системах}
+
+\section{Примеры}
+
+\noindent Рассмотрим $\mathbb{T} = \{2, 3\}$
+
+
+
+
+
+
+\subsection{Упрощение}
+
+\noindent От конвейера в 60 требуется отделить 15 и 45:
+
+\vspace{0.1in}
+
+$\frac{15}{60} = \frac{1}{4} = \frac{1}{2}\cdot\frac{1}{2} \ , \ \frac{45}{60} = \frac{3}{4} = 3 \cdot \frac{1}{2}\cdot\frac{1}{2}$
+
+\vspace{0.5in}
+
+
+
+
+\begin{minipage}{0.4\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=20},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=20},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=20},
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt},
+		!/.style = {->, ultra thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 4)		{in \newline 60};
+		\node[s]	(s1)	at	(0, 2)		{s};
+		\node[s]	(s2)	at	(-2, 0)		{s};
+		\node[s]	(s3)	at	(2, 0)		{s};
+		\node[t]	(t1)	at	(-3, -2)	{15};
+		\node[t]	(t2)	at	(-1, -2)	{15};
+		\node[t]	(t3)	at	(1, -2)		{15};
+		\node[t]	(t4)	at	(3, -2)		{15};
+		\node[a]	(a)		at	(1, -4)		{a};
+		\node[o]	(out1)	at	(-3, -6)	{out \newline 15};
+		\node[o]	(out2)	at	(1, -6)		{out \newline 45};
+		
+		%Lines
+		\draw[r]	(in.south) 	to	node[right]	{$1$}			(s1.north);
+		\draw[r]	(s1.west)	-|	node[left]	{$\frac{1}{2}$}	(s2.north);
+		\draw[!]	(s1.east)	-|	node[right]	{$\frac{1}{2}$}	(s3.north);
+		\draw[r]	(s2.west)	-|	node[left]	{$\frac{1}{4}$}	(t1.north);
+		\draw[r]	(s2.east)	-|	node[right]	{$\frac{1}{4}$}	(t2.north);
+		\draw[!]	(s3.west)	-|	node[left]	{$\frac{1}{4}$}	(t3.north);
+		\draw[!]	(s3.east)	-|	node[right]	{$\frac{1}{4}$}	(t4.north);
+		\draw[r]	(t1.south)	to	node[left]	{$\frac{1}{4}$}	(out1.north);
+		\draw[r]	(t2.south)	|-	node[left]	{$\frac{1}{4}$}	(a.west);
+		\draw[!]	(t3.south)	to	node[right]	{$\frac{1}{4}$}	(a.north);
+		\draw[!]	(t4.south)	|-	node[right]	{$\frac{1}{4}$}	(a.east);
+		\draw[r]	(a.south)	to	node[right]	{$\frac{3}{4}$}	(out2.north);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 1}$$
+\end{minipage}
+\hspace{37.5pt}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\hspace{12.5pt}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=20},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=20},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt},
+		!/.style = {->, ultra thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 4)	{in};
+		\node[s]	(s1)	at	(0, 2)	{s};
+		\node[s]	(s2)	at	(0, 0)	{s};
+		\node[a]	(a)		at	(2, 0)	{a};
+		\node[o]	(out1)	at	(0, -2)	{out};
+		\node[o]	(out2)	at	(2, -2)	{out};
+		
+		%Lines
+		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
+		\draw[!]	(s1.east)	-|	node[above]	{$30$}	(a.north);
+		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
+		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
+		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 2}$$
+\end{minipage}
+
+\vspace{0.3in}
+
+Заметим, что на рис. 1 имеется \textbf{область}, в которой разделение безсмысленно, ведь отделённые друг от друга конвейеры затем вновь соединяются. Тогда можно убрать данный разделитель, оставив целиковый \textbf{конвейер}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\subsection{Рекурсия}
+
+\noindent От конвейера в 60 требуется отделить 12
+
+\vspace{0.1in}
+
+$\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac{1}{3} - \frac{1}{2}\cdot\frac{1}{3} \ , \ \frac{60-12}{60} = \frac{48}{60} = \frac{4}{5} = \frac{4}{6} - \frac{1}{6} = \frac{2}{3} - \frac{1}{2}\cdot\frac{1}{3}$
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=20},
+	a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=20},
+	o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=20},
+	r/.style = {->, thick, rounded corners=10pt},
+	!/.style = {->, ultra thick, rounded corners=10pt}
+	]
+	
+	%Nodes
+	\node[o]	(in)	at	(0, 4)	{in};
+	\node[a]	(a1)	at	(0, 2)	{a};
+	\node[s]	(s1)	at	(0, 0)	{s};
+	\node[s]	(s2)	at	(2, 0)	{s};
+	\node[a]	(a2)	at	(0, -2)	{a};
+	\node[o]	(out1)	at	(0, -4)	{out};
+	\node[o]	(out2)	at	(2, -4)	{out};
+	
+	%Lines
+	\draw[r]	(in.south) 	to			node[right]	{$60$}	(a1.north);
+	\draw[r]	(a1.south)	to			node[right]	{$72$}	(s1.north);
+	\draw[r]	(s1.east)	to			node[above]	{$24$}	(s2.west);
+	\draw[!]	(s2.north)	|-			node[right]	{$12$}	(a1.east);
+	\draw[r]	(s1.west)	-| (-1, -1) node[left]	{$24$} |- (a2.west);
+	\draw[r]	(s1.south)	to			node[right]	{$24$}	(a2.north);
+	\draw[r]	(a2.south)	to			node[right]	{$48$}	(out1.north);
+	\draw[r]	(s2.south)	to			node[right]	{$12$}	(out2.north);
+\end{tikzpicture}
+
+\vspace{0.3in}
+
+% После соединителя представленна схема отделения $\frac16$, которая возвращается себе в зад. На вход всей системе поступает 60 рес/мин, тогда если предположить, что на один круг по этой схеме уходит ровно минута -- то к началу успеют прийти $\frac{60}{6}=10$ ресурсов, и после соединителя пойдёт уже 70 рес/мин. Ещё минуту спустя, на начало прийдёт уже $\frac{70}{6} \approx 11.667$ рес/мин, и после разделителя пойдёт 71.667 рес/мин. Спустя бесконечно долгое время, на участке после разделителя стабилизируется значение в 72 рес/мин. Наконец, отделив от 72, $\frac16$ -- получим требуемые 12, и на остаток 48.
+
+Пускай, в систему импульсами подаётся по одному ресурсу раз в некоторое время%
+\footnote{Такая аппроксимация возможна в связи с тем, что конвейер имеет большую скорость, и ресурсы внутри системы друг с другом не взаимодействуют},
+тогда внутри делителя на 6 у каждого ресурса будет 6 различных выходов. Положим, первые 5 ресурсов ушли на свои 5 выходов, и как-то распределились в дальнейшей части конструкции. Тогда они поменяли данные, хранящиеся в памяти делителей таким образом, что 6-ой ресурс может уйти только на 6-ой выход. Но этот выход возвращён в начало системы, и тогда 6-ой ресурс становится 1-ым, так как все настройки делителей сбросились%
+\footnote{Данная система является примером группы $\mathbb{Z}_2 \times \mathbb{Z}_3 = \mathbb{Z}_6$, в которой 6-ой элемент является и 0-ым}.
+Таким образом, данный ресурс снова уходит на один из 5-ти допустимых выходов. Притом получается так, что порядок выходов одинаков, так что данная система является равносильной делителю на 5.
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\subsection{Вариативность}
+
+\noindent От конвейера в 60 требуется отделить 6. Рассмотрим все (сокращённые) варианты такой схемы:
+
+$\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{3} - \frac{1}{6}$
+
+\vspace{0.5in}
+
+
+
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 3)		{$\downarrow$};
+		\node[a]	(a1)	at	(0, 2)		{a};
+		\node[s]	(s1)	at	(0, 1)		{s};
+		\node[s]	(s2)	at	(0, 0)		{s};
+		\node[s]	(s3)	at	(0, -1)		{s};
+		\node[a]	(a2)	at	(-1, 0)		{a};
+		\node[o]	(out1)	at	(0, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(-1, -2)	{$\uparrow$};
+		
+		%Lines
+		\draw[r]	(in.south)	to	node[right]	{$60$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[right]	{$72$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[right]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	-| (1, 1) node[right] {$12$} |- (a1.east);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 1}$$
+\end{minipage}
+\hspace{15pt}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 4)	{in};
+		\node[s]	(s1)	at	(0, 2)	{s};
+		\node[s]	(s2)	at	(0, 0)	{s};
+		\node[a]	(a)		at	(2, 0)	{a};
+		\node[o]	(out1)	at	(0, -2)	{out};
+		\node[o]	(out2)	at	(2, -2)	{out};
+		
+		%Lines
+		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
+		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
+		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
+		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
+		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 2}$$
+\end{minipage}
+\hspace{15pt}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 4)	{in};
+		\node[s]	(s1)	at	(0, 2)	{s};
+		\node[s]	(s2)	at	(0, 0)	{s};
+		\node[a]	(a)		at	(2, 0)	{a};
+		\node[o]	(out1)	at	(0, -2)	{out};
+		\node[o]	(out2)	at	(2, -2)	{out};
+		
+		%Lines
+		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
+		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
+		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
+		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
+		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 3}$$
+\end{minipage}
+\hspace{15pt}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 4)	{in};
+		\node[s]	(s1)	at	(0, 2)	{s};
+		\node[s]	(s2)	at	(0, 0)	{s};
+		\node[a]	(a)		at	(2, 0)	{a};
+		\node[o]	(out1)	at	(0, -2)	{out};
+		\node[o]	(out2)	at	(2, -2)	{out};
+		
+		%Lines
+		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
+		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
+		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
+		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
+		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+	\end{tikzpicture}
+	
+	\
+	
+	$$\text{Рис. 4}$$
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
