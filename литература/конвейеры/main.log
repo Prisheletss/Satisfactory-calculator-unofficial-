@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.28)  1 AUG 2026 13:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.28)  1 AUG 2026 19:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1101,30 +1101,45 @@ Chapter 2.
 
 
 ] [8]
-Overfull \hbox (19.69814pt too wide) in paragraph at lines 259--260
+Overfull \hbox (19.69814pt too wide) in paragraph at lines 265--266
 []\T2A/cmr/m/n/10 Теорема: любой единичный конвейер можно разделить на любые дв
 а положительных рациональных,
  []
 
 
-Overfull \hbox (12.27962pt too wide) in paragraph at lines 259--260
+Overfull \hbox (12.27962pt too wide) in paragraph at lines 265--266
 \T2A/cmr/m/n/10 в сумме дающих единицу, как рациональные доли входного конвейер
 а при помощи операций отделения
  []
 
 
-Overfull \hbox (8.56444pt too wide) in paragraph at lines 311--312
+Overfull \hbox (8.56444pt too wide) in paragraph at lines 317--318
 []\T2A/cmr/m/n/10 Система, реализующая единичную дробь, инициализированную данн
 ым числом, будет банально
  []
 
 
-Overfull \hbox (0.48308pt too wide) in paragraph at lines 313--314
+Overfull \hbox (0.48308pt too wide) in paragraph at lines 319--320
 []\T2A/cmr/m/n/10 Возможных способов реализации такой системы тоже будет много,
  что значительно усложняет
  []
 
-) [9]
+[9]
+Overfull \hbox (24.1499pt too wide) in paragraph at lines 434--435
+[][] 
+ []
+
+
+Overfull \hbox (25.82977pt too wide) in paragraph at lines 456--457
+[][] 
+ []
+
+
+Overfull \hbox (48.33006pt too wide) in paragraph at lines 343--480
+[]$[]$   $[]$ $[]$   $[]$ $[]$ 
+ []
+
+) [10]
 \openout2 = `РІС‹С‡РёСЃР»РµРЅРёСЏ_Р±С‹СЃС‚СЂРѕ.aux'.
 
  (РІС‹С‡РёСЃР»РµРЅРёСЏ_Р±С‹СЃС‚СЂРѕ.tex
@@ -1134,7 +1149,7 @@ Overfull \hbox (19.53387pt too wide) in paragraph at lines 61--62
 [][] 
  []
 
-[10
+[11
 
 
 
@@ -1142,8 +1157,8 @@ Overfull \hbox (19.53387pt too wide) in paragraph at lines 61--62
 ])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-[12] (main.aux (С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux)
+ [12]
+[13] (main.aux (С‚РµСЂРјРёРЅРѕР»РѕРіРёСЏ.aux)
 (Р±С‹СЃС‚СЂС‹Рµ_СЃРёСЃС‚РµРјС‹.aux) (РІС‹С‡РёСЃР»РµРЅРёСЏ_Р±С‹СЃС‚СЂРѕ.aux))
  ***********
 LaTeX2e <2025-11-01>
@@ -1151,10 +1166,10 @@ L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 25352 strings out of 467870
- 650202 string characters out of 5418839
- 1278327 words of memory out of 5000000
- 53795 multiletter control sequences out of 15000+600000
+ 25511 strings out of 467870
+ 652488 string characters out of 5418839
+ 1279327 words of memory out of 5000000
+ 53954 multiletter control sequences out of 15000+600000
  645728 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,10n,104p,1089b,780s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1175,18 +1190,20 @@ iKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/User/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/User/AppData/
 Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/User/A
 ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users
-/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
-:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.
-pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmr7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmsy7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/User/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (13 pages, 280327 bytes).
+/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C
+:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10
+.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr5.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/User/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/User/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/User/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (14 pages, 306402 bytes).
 PDF statistics:
- 457 PDF objects out of 1000 (max. 8388607)
+ 473 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
