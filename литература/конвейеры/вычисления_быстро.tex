@@ -196,7 +196,7 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
 		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
 		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
-		r/.style = {->, thick, rounded corners=10pt}
+		r/.style = {->, thick, rounded corners=5pt}
 		]
 		
 		%Nodes
@@ -206,14 +206,20 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 		\node[s]	(s2)	at	(0, 0)		{s};
 		\node[s]	(s3)	at	(0, -1)		{s};
 		\node[a]	(a2)	at	(-1, 0)		{a};
-		\node[o]	(out1)	at	(0, -2)		{$\uparrow$};
-		\node[o]	(out2)	at	(-1, -2)	{$\uparrow$};
+		\node[o]	(out1)	at	(-1.5, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(0, -2)	{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south)	to	node[right]	{$60$}	(a1.north);
-		\draw[r]	(a1.south)	to	node[right]	{$72$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[right]	{$36$}	(s2.north);
-		\draw[r]	(s2.east)	-| (1, 1) node[right] {$12$} |- (a1.east);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[left]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	-| (0.5, 1) node[right] {$12$} |- (a1.east);
+		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
+		\draw[r]	(s1.west)	-|	node[left]	{$36$}	(a2.north);
+		\draw[r]	(s2.west)	to	node[below]	{$12$}	(a2.east);
+		\draw[r]	(s3.west)	-|	node[above right]	{$6$}	(a2.south);
+		\draw[r]	(a2.west)	-|	node[left]	{$54$}	(out1.north);
+		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
 	\end{tikzpicture}
 	
 	\
@@ -223,28 +229,33 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 \hspace{15pt}
 \begin{minipage}{0.2\textwidth}
 	\begin{tikzpicture}[
-		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
-		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
-		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
-		r/.style = {->, thick, rounded corners=10pt}
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt}
 		]
 		
 		%Nodes
-		\node[o]	(in)	at	(0, 4)	{in};
-		\node[s]	(s1)	at	(0, 2)	{s};
-		\node[s]	(s2)	at	(0, 0)	{s};
-		\node[a]	(a)		at	(2, 0)	{a};
-		\node[o]	(out1)	at	(0, -2)	{out};
-		\node[o]	(out2)	at	(2, -2)	{out};
+		\node[o]	(in)	at	(0, 3)	{$\downarrow$};
+		\node[a]	(a1)	at	(0, 2)	{a};
+		\node[s]	(s1)	at	(0, 1)	{s};
+		\node[a]	(a2)	at	(0, 0)	{a};
+		\node[s]	(s2)	at	(1, 1)	{s};
+		\node[s]	(s3)	at	(1, 0)	{s};
+		\node[o]	(out1)	at	(0, -1)	{$\uparrow$};
+		\node[o]	(out2)	at	(1, -1)	{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
-		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
-		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
-		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
-		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
+		\draw[r]	(s1.east)	to	node[above]	{$24$}	(s2.west);
+		\draw[r]	(s2.north)	|-	node[right]	{$12$}	(a1.east);
+		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
+		\draw[r]	(s1.south)	to	node[right]	{$24$}	(a2.north);
+		\draw[r]	(s1.west)	-| (-0.5, 0.5) node[left] {$24$} |- (a2.west);
+		\draw[r]	(s3.west)	to	node[above]	{$6$}	(a2.east);
+		\draw[r]	(a2.south)	to	node[left]	{$54$}	(out1.north);
+		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
 	\end{tikzpicture}
 	
 	\
@@ -254,28 +265,33 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 \hspace{15pt}
 \begin{minipage}{0.2\textwidth}
 	\begin{tikzpicture}[
-		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
-		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
-		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
-		r/.style = {->, thick, rounded corners=10pt}
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt}
 		]
 		
 		%Nodes
-		\node[o]	(in)	at	(0, 4)	{in};
-		\node[s]	(s1)	at	(0, 2)	{s};
-		\node[s]	(s2)	at	(0, 0)	{s};
-		\node[a]	(a)		at	(2, 0)	{a};
-		\node[o]	(out1)	at	(0, -2)	{out};
-		\node[o]	(out2)	at	(2, -2)	{out};
+		\node[o]	(in)	at	(0, 3)		{$\downarrow$};
+		\node[a]	(a1)	at	(0, 2)		{a};
+		\node[s]	(s1)	at	(0, 1)		{s};
+		\node[s]	(s2)	at	(0, 0)		{s};
+		\node[s]	(s3)	at	(0, -1)		{s};
+		\node[a]	(a2)	at	(-1, 0)		{a};
+		\node[o]	(out1)	at	(-1.5, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(0, -2)	{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
-		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
-		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
-		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
-		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[left]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	-| (0.5, 1) node[right] {$12$} |- (a1.east);
+		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
+		\draw[r]	(s1.west)	-|	node[left]	{$36$}	(a2.north);
+		\draw[r]	(s2.west)	to	node[below]	{$12$}	(a2.east);
+		\draw[r]	(s3.west)	-|	node[above right]	{$6$}	(a2.south);
+		\draw[r]	(a2.west)	-|	node[left]	{$54$}	(out1.north);
+		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
 	\end{tikzpicture}
 	
 	\
@@ -285,28 +301,33 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 \hspace{15pt}
 \begin{minipage}{0.2\textwidth}
 	\begin{tikzpicture}[
-		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
-		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
-		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
-		r/.style = {->, thick, rounded corners=10pt}
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt}
 		]
 		
 		%Nodes
-		\node[o]	(in)	at	(0, 4)	{in};
-		\node[s]	(s1)	at	(0, 2)	{s};
-		\node[s]	(s2)	at	(0, 0)	{s};
-		\node[a]	(a)		at	(2, 0)	{a};
-		\node[o]	(out1)	at	(0, -2)	{out};
-		\node[o]	(out2)	at	(2, -2)	{out};
+		\node[o]	(in)	at	(0, 3)		{$\downarrow$};
+		\node[a]	(a1)	at	(0, 2)		{a};
+		\node[s]	(s1)	at	(0, 1)		{s};
+		\node[s]	(s2)	at	(0, 0)		{s};
+		\node[s]	(s3)	at	(0, -1)		{s};
+		\node[a]	(a2)	at	(-1, 0)		{a};
+		\node[o]	(out1)	at	(-1.5, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(0, -2)	{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south) 	to	node[right]	{$60$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[right]	{$30$}	(s2.north);
-		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a.north);
-		\draw[r]	(s2.east)	to	node[above]	{$15$}	(a.west);
-		\draw[r]	(s2.south)	to	node[left]	{$15$}	(out1.north);
-		\draw[r]	(a.south)	to	node[right]	{$45$}	(out2.north);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
+		\draw[r]	(s1.south)	to	node[left]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	-| (0.5, 1) node[right] {$12$} |- (a1.east);
+		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
+		\draw[r]	(s1.west)	-|	node[left]	{$36$}	(a2.north);
+		\draw[r]	(s2.west)	to	node[below]	{$12$}	(a2.east);
+		\draw[r]	(s3.west)	-|	node[above right]	{$6$}	(a2.south);
+		\draw[r]	(a2.west)	-|	node[left]	{$54$}	(out1.north);
+		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
 	\end{tikzpicture}
 	
 	\
