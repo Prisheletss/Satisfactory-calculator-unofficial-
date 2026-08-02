@@ -56,9 +56,9 @@
 \noindent В быстрых системах определён следующий набор действий:
 
 \begin{itemize}
-	\item Разделение -- разделение одного конвейера на $t$ равных частей
+	\item Разделение -- разделение одного конвейера на $n$ равных частей
 	
-	\item Соединение -- соединение $n \in \mathbb{N}$ конвейеров в один
+	\item Соединение -- соединение $n$ конвейеров в один
 	
 	\item Отделение -- набор из последовательных и параллельных соединений с целью отделения $q_1$ ресурсов от конвейерной ленты, перевозящей $q_0$ ресурсов ($q_1 < q_0$)
 	
@@ -258,15 +258,18 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 
 \noindent Обозначим операцию преобразования дроби $\frac{a}{s}$ в дробь $\frac{a}{b} \ (b \le s)$ за:
 
-$$\frac{a}{s} - \frac{s-b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{s-b}{s}} = \frac{a}{b}$$
+\begin{align*}
+	&\frac{a}{s} - \frac{s-b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{s-b}{s}} = \frac{a}{b} \\	
+	&\frac{a}{s} - \frac{b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{b}{s}} = \frac{a}{s-b}
+\end{align*}
 
 \vspace{0.3in}
 
 Теорема: любой единичный конвейер можно разделить на любые два положительных рациональных, в сумме дающих единицу, как рациональные доли входного конвейера при помощи операций отделения и возврата
 
 \begin{align*}
-	&\forall \ q_1 , q_2 \in \mathbb{Q} \ (q_1 + q_2 = q_0) \ : \\
-	&\exists \ a, b, s \in \mathbb{N} \ (a, b \le s) \ (s - \text{standart}) \ | \\
+	&\forall \ q_0, q_1, q_2 \in \mathbb{Q}^+_0 \ (q_1 + q_2 = q_0) \ : \\
+	&\exists \ a, b, s \in \mathbb{N}_0 \ (a, b \le s) \ (s - \text{standart}) \ | \\
 	&q_1 = \frac{a}{s} - \frac{b}{s} \ , \ q_2 = \frac{s-a-b}{s} - \frac{b}{s}
 \end{align*}
 
@@ -488,30 +491,10 @@ $$\frac{a}{s} - \frac{s-b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{s-b}{s}} =
 
 Тогда наше обозначение $\frac{a}{s} - \frac{b}{s} := \frac{a}{s-b}$ приобретает новый смысл: мы из периода $s$ нашей циклической группы вычитаем $b$:
 
-$$\frac{a}{s} - \frac{b}{s} := \frac{a}{s-b} \ \equiv \ C[s] - C[b] := C[s-b]$$
+$$\frac{a}{s} - \frac{b}{s} := \frac{a}{s-b} \ \equiv \ aC[s] - bC[s] := aC[s-b]$$
 
 \
 
-\noindent Тогда нетрудно заметить, что выполняется линейность:
-
-$$C[\alpha x + \beta y] = \alpha C[x] + \beta C[y]$$
-
-\
-
-А в связи с \underline{теоремой о делимости}, множество $\mathbb{C}$ всех циклических групп, которые мы можем построить: $\mathbb{C} = \{ C[n] \ | \ n \in \mathbb{N} \}$
-
-\
-
-\noindent Тогда:
-
-\begin{align*}
-	&\forall k \in \mathbb{N} \ : \ C[n] \in \mathbb{C} \ \Longrightarrow \ k\cdot C[n] \in \mathbb{C} \\
-	&\forall C[a], C[b] \in \mathbb{C} \ : \ C[a] + C[b] \in \mathbb{C}
-\end{align*}
-
-\
-
-\noindent Стало быть, $\mathbb{C}$ -- векторное пространство над полем $\mathbb{N}$, а все $C[n]$ -- вектора
 
 
 

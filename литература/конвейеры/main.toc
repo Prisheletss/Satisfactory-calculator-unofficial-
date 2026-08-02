@@ -8,8 +8,8 @@
 \contentsline {section}{\numberline {2.3}Теорема о делимости}{9}{}%
 \contentsline {section}{\numberline {2.4}Теорема об упрощении}{9}{}%
 \contentsline {section}{\numberline {2.5}Алгебра задачи}{10}{}%
-\contentsline {chapter}{\numberline {3}Вычисления в быстрых системах}{11}{}%
-\contentsline {section}{\numberline {3.1}Примеры}{11}{}%
-\contentsline {subsection}{\numberline {3.1.1}Упрощение}{11}{}%
-\contentsline {subsection}{\numberline {3.1.2}Рекурсия}{11}{}%
-\contentsline {subsection}{\numberline {3.1.3}Вариативность}{12}{}%
+\contentsline {chapter}{\numberline {3}Вычисления в быстрых системах}{12}{}%
+\contentsline {section}{\numberline {3.1}Примеры}{12}{}%
+\contentsline {subsection}{\numberline {3.1.1}Упрощение}{12}{}%
+\contentsline {subsection}{\numberline {3.1.2}Рекурсия}{12}{}%
+\contentsline {subsection}{\numberline {3.1.3}Вариативность}{13}{}%
