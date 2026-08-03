@@ -107,6 +107,63 @@ $\frac{15}{60} = \frac{1}{4} = \frac{1}{2}\cdot\frac{1}{2} \ , \ \frac{45}{60} =
 
 
 
+\vspace{0.3in}
+
+Для рассмотрения алгебраической картины данной задачи, нам потребуется ввести обозначение: за ответвления в стороны, с припиской в виде числа будем обозначать, что столько-то конвейеров уходят в новую ветку схемы:
+
+
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(2)		at	(0, 2)		{$30$};
+		\node[t]	(e)		at	(0, 0)		{$15$};
+		\node[t]	(out1)	at	(-1, -2)	{$15$};
+		\node[t]	(out2)	at	(1, -2)		{$45$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_2$}	(2.north);
+		\draw[r]	(2.south)	to	node[right]	{$\times C_2$}	(e.north);
+		\draw[r]	(e.west)	-|	node[left]	{$1$}			(out1.north);
+		\draw[r]	(e.east)	-|	node[right]	{$3$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(2)		at	(0, 2)		{$30$};
+		\node[t]	(4)		at	(0, 0)		{$15$};
+		\node[t]	(out1)	at	(-1, -2)	{$15$};
+		\node[t]	(out2)	at	(1, -2)		{$45$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[left]	{$\times C_2$}	(2.north);
+		\draw[r]	(2.south)	to	node[left]	{$\times C_2$}	(4.north);
+		\draw[r]	(4.west)	-|	node[left]	{$1$}			(out1.north);
+		\draw[r]	(2.east)	-|	node[right]	{$1$}			(out2.north);
+		\draw[r]	(4.east)	-|	node[above left]	{$1$}		(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.3in}
+
+Как видим, при упрощении схемы мы получим, что число конвейеров, идущих на соединение не превышает период циклической группы последнего сплиттера: это будет важным моментом, когда мы будем писать программное решение к задаче.
+
+
+
+
 
 
 
@@ -168,6 +225,66 @@ $\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac
 тогда внутри делителя на 6 у каждого ресурса будет 6 различных выходов. Положим, первые 5 ресурсов ушли на свои 5 выходов, и как-то распределились в дальнейшей части конструкции. Тогда они поменяли данные, хранящиеся в памяти делителей таким образом, что 6-ой ресурс может уйти только на 6-ой выход. Но этот выход возвращён в начало системы, и тогда 6-ой ресурс становится 1-ым, так как все настройки делителей сбросились%
 \footnote{Данная система является примером группы $C_2 \times C_3 = C_6$, в которой 6-ой элемент является и 0-ым}.
 Таким образом, данный ресурс снова уходит на один из 5-ти допустимых выходов. Притом получается так, что порядок выходов одинаков, так что данная система является равносильной делителю на 5.
+
+
+
+\vspace{0.3in}
+
+\noindent Рассмотрим же теперь алгебраическую картину данной задачи:
+
+\vspace{0.3in}
+
+
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(5)		at	(0, -2)		{$12$};
+		\node[t]	(out1)	at	(-1, -4)	{$12$};
+		\node[t]	(out2)	at	(1, -4)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
+		\draw[r]	(3.south)	to	node[right]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[right]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(5.west)	-|	node[left]	{$1$}			(out1.north);
+		\draw[r]	(5.east)	-|	node[right]	{$4$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(5)		at	(0, -2)		{$12$};
+		\node[t]	(out2)	at	(1, -2)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.3in}
+
+Забавно, что граф можнт разбиваться на несколько, казалось бы независимых ветвей, но применив операцию возврата в одной ветви -- автоматически меняется значение и во всех других ветвях.
+
 
 
 
@@ -273,25 +390,25 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 		
 		%Nodes
 		\node[o]	(in)	at	(0, 3)		{$\downarrow$};
-		\node[a]	(a1)	at	(0, 2)		{a};
-		\node[s]	(s1)	at	(0, 1)		{s};
-		\node[s]	(s2)	at	(0, 0)		{s};
-		\node[s]	(s3)	at	(0, -1)		{s};
-		\node[a]	(a2)	at	(-1, 0)		{a};
-		\node[o]	(out1)	at	(-1.5, -2)		{$\uparrow$};
-		\node[o]	(out2)	at	(0, -2)	{$\uparrow$};
+		\node[s]	(s1)	at	(0, 2)		{s};
+		\node[a] 	(a1)	at	(1, 1)		{a};
+		\node[s]	(s2)	at	(1, 0)		{s};
+		\node[s]	(s3)	at	(2, -1)		{s};
+		\node[a]	(a2)	at	(1, -1)		{a};
+		\node[o]	(out1)	at	(1, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(2, -2)		{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
-		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[left]	{$36$}	(s2.north);
-		\draw[r]	(s2.east)	-| (0.5, 1) node[right] {$12$} |- (a1.east);
-		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
-		\draw[r]	(s1.west)	-|	node[left]	{$36$}	(a2.north);
-		\draw[r]	(s2.west)	to	node[below]	{$12$}	(a2.east);
-		\draw[r]	(s3.west)	-|	node[above right]	{$6$}	(a2.south);
-		\draw[r]	(a2.west)	-|	node[left]	{$54$}	(out1.north);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(s1.north);
+		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	-|	node[above]	{$18$}	(s3.north);
+		\draw[r]	(s1.south)	|-	node[left]	{$30$}	(a2.west);
+		\draw[r]	(s2.south)	to	node[left]	{$18$}	(a2.north);
+		\draw[r]	(s3.west)	to	node[above]	{$6$}	(a2.east);
+		\draw[r]	(a2.south)	to	node[left]	{$54$}	(out1.north);
 		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
+		\draw[r]	(s3.east)	to (2.5, -1) |- node[right] {$6$} (a1.east);
 	\end{tikzpicture}
 	
 	\
@@ -309,25 +426,25 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 		
 		%Nodes
 		\node[o]	(in)	at	(0, 3)		{$\downarrow$};
-		\node[a]	(a1)	at	(0, 2)		{a};
-		\node[s]	(s1)	at	(0, 1)		{s};
-		\node[s]	(s2)	at	(0, 0)		{s};
-		\node[s]	(s3)	at	(0, -1)		{s};
-		\node[a]	(a2)	at	(-1, 0)		{a};
-		\node[o]	(out1)	at	(-1.5, -2)		{$\uparrow$};
-		\node[o]	(out2)	at	(0, -2)	{$\uparrow$};
+		\node[s]	(s1)	at	(0, 2)		{s};
+		\node[a] 	(a1)	at	(1, 1)		{a};
+		\node[s]	(s2)	at	(1, 0)		{s};
+		\node[s]	(s3)	at	(2, 0)		{s};
+		\node[a]	(a2)	at	(0, -1)		{a};
+		\node[o]	(out1)	at	(0, -2)		{$\uparrow$};
+		\node[o]	(out2)	at	(2, -2)		{$\uparrow$};
 		
 		%Lines
-		\draw[r]	(in.south)	to	node[left]	{$60$}	(a1.north);
-		\draw[r]	(a1.south)	to	node[left]	{$72$}	(s1.north);
-		\draw[r]	(s1.south)	to	node[left]	{$36$}	(s2.north);
-		\draw[r]	(s2.east)	-| (0.5, 1) node[right] {$12$} |- (a1.east);
-		\draw[r]	(s2.south)	to	node[right]	{$12$}	(s3.north);
-		\draw[r]	(s1.west)	-|	node[left]	{$36$}	(a2.north);
-		\draw[r]	(s2.west)	to	node[below]	{$12$}	(a2.east);
-		\draw[r]	(s3.west)	-|	node[above right]	{$6$}	(a2.south);
-		\draw[r]	(a2.west)	-|	node[left]	{$54$}	(out1.north);
+		\draw[r]	(in.south)	to	node[left]	{$60$}	(s1.north);
+		\draw[r]	(s1.east)	-|	node[above]	{$30$}	(a1.north);
+		\draw[r]	(a1.south)	to	node[left]	{$36$}	(s2.north);
+		\draw[r]	(s2.east)	to	node[above]	{$12$}	(s3.west);
+		\draw[r]	(s1.west)	to (-0.5, 2) |-	node[left]	{$30$}	(a2.west);
+		\draw[r]	(s2.south)	|-	node[below]	{$12$}	(a2.east);
+		\draw[r]	(s2.west)	-|	node[above]	{$12$}	(a2.north);
+		\draw[r]	(a2.south)	to	node[left]	{$54$}	(out1.north);
 		\draw[r]	(s3.south)	to	node[right]	{$6$}	(out2.north);
+		\draw[r]	(s3.north)	|- 	node[right] {$6$}	(a1.east);
 	\end{tikzpicture}
 	
 	\
