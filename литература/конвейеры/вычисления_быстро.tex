@@ -256,6 +256,10 @@ $\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac
 		\draw[r]	(5.west)	-|	node[left]	{$1$}			(out1.north);
 		\draw[r]	(5.east)	-|	node[right]	{$4$}			(out2.north);
 	\end{tikzpicture}
+	
+	\
+	
+	Рис. 1
 \end{minipage}
 \begin{minipage}{0.1\textwidth}
 	$$\equiv$$
@@ -279,11 +283,47 @@ $\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac
 		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
 		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
 	\end{tikzpicture}
+	
+	\
+	
+	Рис. 2
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(a)		at	(1, 0)		{$40$};
+		\node[t]	(out1)	at	(0, -2)		{$12$};
+		\node[t]	(out2)	at	(1, -2)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}		(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}		(6.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}				(a.north);
+		\draw[r]	(a.south)	to	(out2.north);
+		\draw[r]	(6.south)	to	(out1.north);
+		
+		\draw		(-0.5, -1)	--	(1.5, -1);
+		\node[right] at (1.5, -1) {$* \frac16$};
+	\end{tikzpicture}
+	
+	\
+	
+	Рис. 3
 \end{minipage}
 
 \vspace{0.3in}
 
-Забавно, что граф можнт разбиваться на несколько, казалось бы независимых ветвей, но применив операцию возврата в одной ветви -- автоматически меняется значение и во всех других ветвях.
+Забавно, что граф можнт разбиваться на несколько, казалось бы независимых ветвей, но применив операцию возврата в одной ветви -- автоматически меняется значение и во всех других ветвях. Поэтому давайте введём ещё однообозначение, указанное на рис. 3.
 
 
 
@@ -454,9 +494,182 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 
 
 
+\vspace{0.3in}
+
+Заметим, что в во всех схемах, являющихся сокращёнными вариациями реализации одного и того же решения, число соединителей и разъединителей -- инвариантно относительно топологии графа. Притом сохраняется ещё и число входов/выходов конкретного узла, а так же сохраняются подструктуры по типу циклов:
 
 
 
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=20},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		\node[s]	(s1)	at	(-6, 0)		{s};
+		\draw[r]	(-6, 1)	to	(s1.north);
+		\draw[r]	(s1.west)	-|	(-7, -1);
+		\draw[r]	(s1.east)	-|	(-5, -1);
+		\node (x) at (-5.25, 0.75) {X2};
+		
+		\node[s]	(s2)	at	(-3, 0)		{s};
+		\draw[r]	(-3, 1)		to	(s2.north);
+		\draw[r]	(s2.west)	-|	(-4, -1);
+		\draw[r]	(s2.east)	-|	(-2, -1);
+		\draw[r]	(s2.south)	to	(-3, -1);
+		
+		\node[a]	(a1)	at	(0, 0)		{a};
+		\draw[r]	(-1, 1)		|-	(a1.west);
+		\draw[r]	(1, 1)		|-	(a1.east);
+		\draw[r]	(a1.south)	to	(0, -1);
+		
+		\node[a]	(a2)	at	(3, 0)		{a};
+		\draw[r]	(2, 1)		|-	(a2.west);
+		\draw[r]	(4, 1)		|-	(a2.east);
+		\draw[r]	(3, 1)		to	(a2.north);
+		\draw[r]	(a2.south)	to	(3, -1);
+		
+		
+		
+		\node[a]	(a3)	at	(-2, -3)	{a};
+		\node[s]	(s4)	at	(-2, -5)	{s};
+		\node[s]	(s5)	at	(0, -5)		{s};	
+		\draw[r]	(a3.south)	to	(s4.north);
+		\draw[r]	(s4.east)	to	(s5.west);
+		\draw[r]	(s5.north)	|-	(a3.east);		
+\end{tikzpicture}
+
+
+
+\vspace{0.5in}
+
+Так же важно помнить, что это всё было только одно решерние: $s = 12$, а ведь можно было взять первые пару ближайших стандартных чисел $(12, 16, 18, \ldots)$, или стандартные числа, являющиеся чисто степенями $(16, 32, 27, \ldots)$. Так же в решении можно было использоавть нетривиальные разложения по типу: $\frac56 = \frac12 + \frac13$
+
+
+
+\vspace{0.3in}
+
+\noindent Рассмотрим же теперь алгебраическую картину данной задачи:
+
+\vspace{0.3in}
+
+
+
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 3)		{$30$};
+		\node[t]	(6)		at	(0, 2)		{$15$};
+		\node[t]	(5)		at	(0, 1)		{$12$};
+		\node[t]	(out2)	at	(1, 0)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_2$}	(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(5)		at	(0, -2)		{$12$};
+		\node[t]	(out2)	at	(1, -2)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(5)		at	(0, -2)		{$12$};
+		\node[t]	(out2)	at	(1, -2)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(1)		at	(0, 4)		{$60$};
+		\node[t]	(3)		at	(0, 2)		{$20$};
+		\node[t]	(6)		at	(0, 0)		{$10$};
+		\node[t]	(5)		at	(0, -2)		{$12$};
+		\node[t]	(out2)	at	(1, -2)		{$48$};
+		
+		%Lines
+		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
+		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
+		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
+	\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.3in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\subsection{Большие схемы}
+
+\noindent Рассмотрим схему побольше: отделить $\frac17$, $\frac15$ и $\frac13$ одновременно от одного конвейера.
+
+$\text{lcm}(3, 5, 7) = 105$
+
+\begin{align*}
+	&\frac{1}{7} = \frac{15}{105} = \frac{15}{2^2 3^3} * \frac{3}{108} = \frac{5}{36} * \frac{1}{36} = \frac{1}{36} + \frac{1}{9} * \frac{1}{36} \\
+	&\frac{1}{5} = \frac{21}{105} = \frac{21}{2^2 3^3} * \frac{3}{108} = \frac{7}{36} * \frac{1}{36} = \frac{1}{36} + \frac{1}{6} * \frac{1}{36} \\
+	&\frac{1}{3} = \frac{35}{105} = \frac{35}{2^2 3^3} * \frac{3}{108} = \frac{1}{36} + \frac{2}{27} + \frac{2}{9} * \frac{1}{36}
+\end{align*}
 
 
 
