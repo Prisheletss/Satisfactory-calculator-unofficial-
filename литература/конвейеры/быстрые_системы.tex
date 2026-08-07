@@ -259,8 +259,8 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 \noindent Обозначим операцию преобразования дроби $\frac{a}{s}$ в дробь $\frac{a}{b} \ (b \le s)$ за:
 
 \begin{align*}
-	&\frac{a}{s} * \frac{s-b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{s-b}{s}} = \frac{a}{b} \\	
-	&\frac{a}{s} * \frac{b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{b}{s}} = \frac{a}{s-b}
+	&\frac{a}{s} - \frac{s-b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{s-b}{s}} = \frac{a}{b} \\	
+	&\frac{a}{s} - \frac{b}{s} := \frac{a}{s} \cdot \frac{1}{1 - \frac{b}{s}} = \frac{a}{s-b}
 \end{align*}
 
 \vspace{0.3in}
@@ -270,7 +270,7 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 \begin{align*}
 	&\forall \ q_0, q_1, q_2 \in \mathbb{Q}^+_0 \ (q_1 + q_2 = q_0) \ : \\
 	&\exists \ a, b, s \in \mathbb{N}_0 \ (a, b \le s) \ (s - \text{standart}) \ | \\
-	&q_1 = \frac{a}{s} * \frac{b}{s} \ , \ q_2 = \frac{s-a-b}{s} * \frac{b}{s}
+	&q_1 = \frac{a}{s} - \frac{b}{s} \ , \ q_2 = \frac{s-a-b}{s} - \frac{b}{s}
 \end{align*}
 
 
@@ -639,7 +639,7 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 		\draw[r]	(1.south)	to	node[right]	{$\times C[t_{i_1}]$}	(2.north);
 		\draw[r]	(2.south)	to	node[right]	{$\times C[\ldots]$}	(e.north);
 		\draw[r]	(e.south)	to	node[right]	{$\times C[\ldots]$}	(n.north);
-		\draw[r]	(n.south)	to	node[right]	{$* \frac{b}{\prod\limits_{j} t_{i_j}}$}	(*.north);
+		\draw[r]	(n.south)	to	node[right]	{$- \frac{b}{\prod\limits_{j} t_{i_j}}$}	(*.north);
 	\end{tikzpicture}
 \end{minipage}
 
@@ -655,6 +655,14 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 
 Схемы, приведённые справа являются биективными для любой неупрощённой диаграммы разделения, но как мы увидим далее, многие, первоначально кажущиеся сложными и громоздкими схемы -- можно довольно сильно сокращать, но тогда мы не сможем рисовать к ним данные схемы так просто. Тем более, такие схемы можно рисовать только для схем \textit{разделениея}, но не \textit{отделения}.
 
+
+
+
+
+
+\vspace{1in}
+
+Также хочется отметить, что, поскольку каждая схема является графом -- то её можно описывать не в виде чертежа, а, например, в виде матрицы смежности для невзвешенного орграфа:
 
 
 

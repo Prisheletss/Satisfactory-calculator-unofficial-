@@ -252,14 +252,10 @@ $\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac
 		%Lines
 		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
 		\draw[r]	(3.south)	to	node[right]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[right]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(6.south)	to	node[right]	{$- \frac{1}{6}$}	(5.north);
 		\draw[r]	(5.west)	-|	node[left]	{$1$}			(out1.north);
 		\draw[r]	(5.east)	-|	node[right]	{$4$}			(out2.north);
 	\end{tikzpicture}
-	
-	\
-	
-	Рис. 1
 \end{minipage}
 \begin{minipage}{0.1\textwidth}
 	$$\equiv$$
@@ -280,50 +276,14 @@ $\frac{12}{60} = \frac{1}{5} = \frac{1}{6} - \frac{1}{6} = \frac{1}{2}\cdot\frac
 		%Lines
 		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
 		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
+		\draw[r]	(6.south)	to	node[left]	{$- \frac{1}{6}$}	(5.north);
 		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
 	\end{tikzpicture}
-	
-	\
-	
-	Рис. 2
-\end{minipage}
-\begin{minipage}{0.1\textwidth}
-	$$\equiv$$
-\end{minipage}
-\begin{minipage}{0.2\textwidth}
-	\begin{tikzpicture}[
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
-		r/.style = {->, thick, rounded corners=10pt}
-		]
-		
-		%Nodes
-		\node[t]	(1)		at	(0, 4)		{$60$};
-		\node[t]	(3)		at	(0, 2)		{$20$};
-		\node[t]	(6)		at	(0, 0)		{$10$};
-		\node[t]	(a)		at	(1, 0)		{$40$};
-		\node[t]	(out1)	at	(0, -2)		{$12$};
-		\node[t]	(out2)	at	(1, -2)		{$48$};
-		
-		%Lines
-		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}		(2.north);
-		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}		(6.north);
-		\draw[r]	(3.east)	-|	node[right]	{$2$}				(a.north);
-		\draw[r]	(a.south)	to	(out2.north);
-		\draw[r]	(6.south)	to	(out1.north);
-		
-		\draw		(-0.5, -1)	--	(1.5, -1);
-		\node[right] at (1.5, -1) {$* \frac16$};
-	\end{tikzpicture}
-	
-	\
-	
-	Рис. 3
 \end{minipage}
 
 \vspace{0.3in}
 
-Забавно, что граф можнт разбиваться на несколько, казалось бы независимых ветвей, но применив операцию возврата в одной ветви -- автоматически меняется значение и во всех других ветвях. Поэтому давайте введём ещё однообозначение, указанное на рис. 3.
+Забавно, что граф можнт разбиваться на несколько, казалось бы независимых ветвей, но применив операцию возврата в одной ветви -- автоматически меняется значение и во всех других ветвях. 
 
 
 
@@ -554,94 +514,7 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 
 \vspace{0.3in}
 
-\noindent Рассмотрим же теперь алгебраическую картину данной задачи:
 
-\vspace{0.3in}
-
-
-
-\begin{minipage}{0.25\textwidth}
-	\begin{tikzpicture}[
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=10},
-		r/.style = {->, thick, rounded corners=5pt}
-		]
-		
-		%Nodes
-		\node[t]	(1)		at	(0, 4)		{$60$};
-		\node[t]	(3)		at	(0, 3)		{$30$};
-		\node[t]	(6)		at	(0, 2)		{$15$};
-		\node[t]	(5)		at	(0, 1)		{$12$};
-		\node[t]	(out2)	at	(1, 0)		{$48$};
-		
-		%Lines
-		\draw[r]	(1.south)	to	node[right]	{$\times C_2$}	(2.north);
-		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
-		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
-	\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.25\textwidth}
-	\begin{tikzpicture}[
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
-		r/.style = {->, thick, rounded corners=10pt}
-		]
-		
-		%Nodes
-		\node[t]	(1)		at	(0, 4)		{$60$};
-		\node[t]	(3)		at	(0, 2)		{$20$};
-		\node[t]	(6)		at	(0, 0)		{$10$};
-		\node[t]	(5)		at	(0, -2)		{$12$};
-		\node[t]	(out2)	at	(1, -2)		{$48$};
-		
-		%Lines
-		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
-		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
-		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
-	\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.25\textwidth}
-	\begin{tikzpicture}[
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
-		r/.style = {->, thick, rounded corners=10pt}
-		]
-		
-		%Nodes
-		\node[t]	(1)		at	(0, 4)		{$60$};
-		\node[t]	(3)		at	(0, 2)		{$20$};
-		\node[t]	(6)		at	(0, 0)		{$10$};
-		\node[t]	(5)		at	(0, -2)		{$12$};
-		\node[t]	(out2)	at	(1, -2)		{$48$};
-		
-		%Lines
-		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
-		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
-		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
-	\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.25\textwidth}
-	\begin{tikzpicture}[
-		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
-		r/.style = {->, thick, rounded corners=10pt}
-		]
-		
-		%Nodes
-		\node[t]	(1)		at	(0, 4)		{$60$};
-		\node[t]	(3)		at	(0, 2)		{$20$};
-		\node[t]	(6)		at	(0, 0)		{$10$};
-		\node[t]	(5)		at	(0, -2)		{$12$};
-		\node[t]	(out2)	at	(1, -2)		{$48$};
-		
-		%Lines
-		\draw[r]	(1.south)	to	node[right]	{$\times C_3$}	(2.north);
-		\draw[r]	(3.south)	to	node[left]	{$\times C_2$}	(6.north);
-		\draw[r]	(6.south)	to	node[left]	{$* \frac{1}{6}$}	(5.north);
-		\draw[r]	(3.east)	-|	node[right]	{$2$}			(out2.north);
-	\end{tikzpicture}
-\end{minipage}
-
-\vspace{0.3in}
 
 
 
@@ -666,10 +539,277 @@ $\frac{6}{60} = \frac{1}{10} = \frac{1}{12} - \frac{2}{12} = \frac{1}{2}\cdot\fr
 $\text{lcm}(3, 5, 7) = 105$
 
 \begin{align*}
-	&\frac{1}{7} = \frac{15}{105} = \frac{15}{2^2 3^3} * \frac{3}{108} = \frac{5}{36} * \frac{1}{36} = \frac{1}{36} + \frac{1}{9} * \frac{1}{36} \\
-	&\frac{1}{5} = \frac{21}{105} = \frac{21}{2^2 3^3} * \frac{3}{108} = \frac{7}{36} * \frac{1}{36} = \frac{1}{36} + \frac{1}{6} * \frac{1}{36} \\
-	&\frac{1}{3} = \frac{35}{105} = \frac{35}{2^2 3^3} * \frac{3}{108} = \frac{1}{36} + \frac{2}{27} + \frac{2}{9} * \frac{1}{36}
+	&\frac{1}{7} = \frac{15}{105} = \frac{15}{2^2 3^3} - \frac{3}{108} = \frac{5}{36} - \frac{1}{36} = \frac{1}{36} + \frac{1}{9} - \frac{1}{36} \\
+	&\frac{1}{5} = \frac{21}{105} = \frac{21}{2^2 3^3} - \frac{3}{108} = \frac{7}{36} - \frac{1}{36} = \frac{1}{36} + \frac{1}{6} - \frac{1}{36} \\
+	&\frac{1}{3} = \frac{35}{105} = \frac{35}{2^2 3^3} - \frac{3}{108} = \frac{1}{36} + \frac{2}{27} + \frac{2}{9} - \frac{1}{36}
 \end{align*}
+
+Остаток: $\frac{34}{105}$
+
+
+
+
+
+
+\vspace{0.5in}
+
+
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt}
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 5)		{$\downarrow$};
+		\node[a]	(a1)	at	(0, 4)		{a};
+		\node[s]	(s1)	at	(0, 3)		{s};
+		
+		\node[s]	(s2-l)	at	(-4, 2)		{s};
+		\node[s]	(s2-c)	at	(0, 2)		{s};
+		\node[s]	(s2-r)	at	(4, 2)		{s};
+		\node[a]	(a2-l)	at	(-3, 1)		{a};
+		\node[a]	(a2-c)	at	(-2, 0)		{a};
+		\node[s]	(s2-2)	at	(-1, 1)		{s};
+		\node[a]	(a2-r)	at	(1, 1)		{a};
+		
+		\node[s]	(s3)	at	(0, -2)		{s};
+		\node[s]	(s4-l)	at	(-1, -3)	{s};
+		\node[s]	(s4-r)	at	(2, -3)		{s};
+		\node[a]	(a3-l)	at	(-5, -3)	{a};
+		\node[a]	(a3-c)	at	(-2, -4)	{a};
+		\node[a]	(a3-r)	at	(5, -4)		{a};
+		
+		\node[o]	(out1)	at	(-5, -6)	{$\frac{1}{7}$};
+		\node[o]	(out2)	at	(-2, -6)	{$\frac{1}{3}$};
+		\node[o]	(out3)	at	(1, -6)		{$\frac{34}{105}$};
+		\node[o]	(out4)	at	(5, -6)		{$\frac{1}{5}$};
+		
+		
+		
+		%Lines
+		\draw[r]	(in.south)		to	node[left]			{$\frac{35}{36}$}	(a1.north);
+		\draw[r]	(a1.south)		to	node[left]			{$1$}				(s1.north);
+		\draw[r]	(s1.west)		-|	node[above]			{$\frac13$}			(s2-l.north);
+		\draw[r]	(s1.south)		to	node[left]			{$\frac13$}			(s2-c.north);
+		\draw[r]	(s1.east)		-|	node[above]			{$\frac13$}			(s2-r.north);
+		
+		\draw[r]	(s2-l.south)	|-	node[left]			{$\frac19$}			(a2-l.west);
+		\draw[r]	(s2-l.east)		-|	node[right]			{$\frac19$}			(a2-l.north);
+		\draw[r]	(s2-c.west)		-|	node[left]			{$\frac19$}			(s2-2.north);
+		\draw[r]	(s2-2.west)		-|	node[above]			{$\frac1{27}$}		(a2-c.north);
+		\draw[r]	(s2-2.south)	|-	node[below]			{$\frac1{27}$}		(a2-c.east);
+		\draw[r]	(a2-l.south)	|-	node[left]			{$\frac29$}			(a2-c.west);
+		\draw[r]	(s2-c.east)		-|	node[right]			{$\frac19$}			(a2-r.north);
+		
+		\draw[r] (s2-r.west) to (3, 2) |- node[above left] {$\frac16$} (a2-r.east);
+		\draw[thick] (s2-2.east) -- (-0.3, 1);
+		\draw[thick, rounded corners=7.5pt] (-0.3, 1) |- (0, 1.3);
+		\draw[thick, rounded corners=7.5pt] (0, 1.3) -| (0.3, 1);
+		\draw[r] (0.3, 1) to node[above] {$\frac{1}{27}$} (a2-r.west);
+		
+		\draw[r]	(s2-c.south)	to	node[below right]	{$\frac{1}{9}$}		(s3.north);
+		\draw[r]	(s3.west)		-|	node[above]			{$\frac{1}{18}$}	(s4-l.north);
+		\draw[r]	(s3.east)		-|	node[above]			{$\frac{1}{18}$}	(s4-r.north);
+		\draw[r]	(s4-l.south)	|-	node[right]			{$\frac{1}{36}$}	(a3-c.east);
+		\draw[r]	(a2-c.south)	to	node[left]			{$\frac{8}{27}$}	(a3-c.north);
+		\draw[r]	(s4-r.south)	|-	node[below right]	{$\frac{1}{36}$}	(a3-r.west);
+		\draw[r]	(s2-r.east)		-|	node[right]			{$\frac16$}			(a3-r.north);
+		\draw[r]	(s2-l.west)		-|	node[left]			{$\frac19$}			(a3-l.north);
+		
+		\draw[r]	(a3-l.south)	to	node[below right]	{$\frac{15}{108}$}		(out1.north);
+		\draw[r]	(a3-c.south)	to	node[right]			{$\frac{35}{108}$}	(out2.north);
+		\draw[r]	(a3-r.south)	to	node[right]			{$\frac{21}{108}$}		(out4.north);
+		\node (n1) at (1.5, -5) {$\frac{34}{108}$};
+		
+		\draw[thick] (a2-r.south) -- (1, -1.7);
+		\draw[thick, rounded corners=7.5pt] (1, -1.7) -| (1.3, -2);
+		\draw[thick, rounded corners=7.5pt] (1.3, -2) |- (1, -2.3);
+		\draw[r] (1, -2.3) to (out3.north);
+		
+		\draw[thick] (s4-r.east) -- (4.7, -3);
+		\draw[thick, rounded corners=7.5pt] (4.7, -3) |- (5, -2.7);
+		\draw[thick, rounded corners=7.5pt] (5, -2.7) -| (5.3, -3);
+		\draw[r] (5.3, -3) to (6, -3) |- node[above left] {$\frac1{36}$} (a1.east);
+		
+		\draw[thick] (s4-l.west) -- (-1.7, -3);
+		\draw[thick, rounded corners=7.5pt] (-1.7, -3) |- (-2, -2.7);
+		\draw[thick, rounded corners=7.5pt] (-2, -2.7) -| (-2.3, -3);
+		\draw[r] (-2.3, -3) to node[above left] {$\frac1{36}$} (a3-l.east);
+		
+		
+		
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Как мы можем заметить, на схемах побольше появляются две интересные вещи: \\ \underline{пересечеиния конвейеров}%
+\footnote{Смотреть: проблема перекрёстков (brick factory problem)}
+и разная периодичность параллельных ветвей:
+
+
+
+
+
+
+\vspace{0.3in}
+
+\begin{minipage}{0.4\textwidth}
+	\begin{tikzpicture}[
+		t/.style = {rectangle, draw=black!60, fill=black!5, thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt}
+		]
+		
+		%Nodes
+		\node[t]	(0)		at	(0, 6)	{$C_1$};
+		\node[t]	(1)		at	(0, 4)	{$C_3$};
+		\node[t]	(1-l)	at	(-2, 2)	{$C_3$};
+		\node[t]	(1-c)	at	(0, 2)	{$C_3$};
+		\node[t]	(1-r)	at	(2, 2)	{$C_3$};
+		\node[t]	(2-l)	at	(-2, 0)	{$\vdots$};
+		\node[t]	(2-c)	at	(0, 0)	{$C_9$};
+		\node[t]	(2-r)	at	(2, 0)	{$C_6$};
+		
+		
+		%Lines
+		\draw[r]	(0.south)	to	node[right]	{$\times C_3$}	(1.north);
+		\draw[r]	(1.west)	-|	node[above]	{$1$}			(1-l.north);
+		\draw[r]	(1.south)	to	node[right]	{$1$}			(1-c.north);
+		\draw[r]	(1.east)	-|	node[above]	{$1$}			(1-r.north);
+		\draw[r]	(1-l.south)	to								(2-l.north);
+		\draw[r]	(1-c.south)	to	node[right]	{$\times C_3$}	(2-c.north);
+		\draw[r]	(1-r.south)	to	node[right]	{$\times C_2$}	(2-r.north);
+		
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+\vspace{0.3in}
+
+Как мы видим, циклические группы $C_9$ и $C_6$ находятся в дереве деления на одинаковых уровнях. Это и есть пример применения нетривиальных разложений. Давайте же тогда рассмотрим некоторые разбиения, например, дроби $\frac{34}{108}$:
+
+
+\begin{align*}
+	\frac{34}{108} = \frac{17}{54} = &\frac{1}{54} + \frac{8}{27} = \frac{1}{54} + \frac{2}{27} + \frac{2}{9} \\
+	&\frac{1}{27} + \frac{5}{18} = \frac{1}{27} + \frac{1}{18} + \frac{2}{9} \\
+	&\quad\quad\quad\quad\quad\frac{1}{27} + \frac{1}{9} + \frac{1}{6}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\subsection{Иные множества}
+
+\
+
+В завершение, давайте рассмотрим другое множество, например: $\mathbb{T} = \{ 3, 4, 7 \}$, но давайте не будем зарание пытаться что-то отделить, а просто нарисуем схему, и посмотрим, что она делает:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
