@@ -1079,7 +1079,7 @@ $A_b^a = O_b^a - R_b$, где:
 
 \newpage
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}[title={C\#}, language={[Sharp]C}]
 public static int hig_closest(int number, int x = 0, int y = 0, int branch = 1)
 {
 	int answer = -1;
@@ -1186,9 +1186,84 @@ public static int hig_closest(int number, int x = 0, int y = 0, int branch = 1)
 
 \noindent Нетрудно модифицировать данный алгоритм для произвольных $\mathbb{T}$:
 
+\newpage
+
+\begin{lstlisting}[title={Python}, language={Python}]
+def hig_closest(target, powers, branch=max(T)):
+	answer = -1
+	num = 1
+	for i in range(0, T.len()):
+		num *= T[i]^powers[i]
+	
+	if num >= target: return num
+	
+	answers = []
+	for i in T:
+		if i <= branch>:
+			answers.append(hig_closest(target, powers.increace(i), i))
+	
+	answer = min(answers)
+	
+	return answer
+\end{lstlisting}
+
+\vspace{0.5in}
 
 
 
+
+Вот нашли мы $s(b)$, а как теперь искать $O_s^a$? Ответ прост: брутфорс. Требуется перебрать все возможные способы разбиения числа $a$ на суммы всевозможных натуральных%
+\footnote{Вцелом, можно и не натуральных, а просто рациональных: $\frac23 = \frac{1.5}3 + \frac{0.5}3 = \frac12 + \frac16$ -- такое разбиение вполне подойдёт для $\mathbb{T} = \{2, 6\}$. Однако, такой алгоритм слишком сложен, ведь перебирать придётся \textbf{значительно} больше вариантов}
+чисел, после чего соответствующие дроби (если это возможно) мы сокрращаем дроби, а затем объединяем все дроби с одинаковыми знаменателями. Для каждого отдельного знаменателя $s_i = \prod_{j=0}^n t_j^{a_j}$ должно быть выполненно: $s_i < t_j \ \forall j$
+
+\
+
+\noindent Алгоритм для поиска одного варианта разбиения:
+
+\
+
+\begin{lstlisting}[title={Python}, language={Python}]
+def spliter(numerator, denominator):
+	d_c = hig_closest(denominator)
+	d_g = gcd(d_c, numerator)
+	d_d = numerator // d_g
+	d_f = d_c // d_g
+	
+	d_p0 = low_closest(d_d, d_f)
+	
+	if d_p0 == d_d:
+		return [[d_d, d_f]]
+	
+	else:
+		g1 = gcd(d_d-d_p0, d_f)
+		g2 = gcd(d_p0, d_f)
+		d_parts = [[(d_d-d_p0)//g1, d_f//g1], [d_p0//g2, d_f//g2]]
+	
+	while 1:
+		d_parts_ = []
+	
+		for fractions in d_parts:
+			x, y = fractions[0], fractions[1]
+			p = low_closest(x, y)
+		
+			if p != x:
+				g1 = gcd(x-p, y)
+				g2 = gcd(p, y)
+				d_parts_.append([(x-p)//g1, y//g1])
+				d_parts_.append([p//g2, y//g2])
+			
+			else: d_parts_.append(fractions)
+		
+		if len(d_parts) == len(d_parts_): break
+		else: d_parts = d_parts_[0::]
+	return d_parts[0::]
+\end{lstlisting}
+
+
+
+\vspace{0.5in}
+
+\noindent Полноценный алгоритм на C\# приведён в satisfactory\_conveyor\_calc.sln
 
 
 
