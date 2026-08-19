@@ -655,7 +655,7 @@ $\text{lcm}(3, 5, 7) = 105$
 \vspace{0.5in}
 
 Как мы можем заметить, на схемах побольше появляются две интересные вещи: \\ \underline{пересечеиния конвейеров}%
-\footnote{Смотреть: проблема перекрёстков (brick factory problem)}
+\footnote{Смотреть приложение \ref{appendix:a}: проблема перекрёстков (brick factory problem)}
 и разная периодичность параллельных ветвей:
 
 
@@ -734,7 +734,7 @@ $\text{lcm}(3, 5, 7) = 105$
 
 Можно пойти двумя путями: по \underline{принципу чайника}%
 \footnote{Как физик заваривает чай, если чайник пустой? Наливает воду, кипитит воду, заваривает чай. \\ Как математик заваривает чай, если чайник пустой? Наливает воду, кипитит воду, заваривает чай. \\ Как физик заваривает чай, если в чайнике есть вода? Кипитит воду, заваривает чай. \\ Как математик заваривает чай, если в чайнике есть вода? Выливает воду, наливает воду, кипитит воду, заваривает чай. \\ Принцип чайника: сведи задачу к предыдущей.}
-: соединить все входные конвейеры, и работать с тем, что получим; или  поиграться с отделениями в самих конвейерах:
+: соединить все входные конвейеры, и работать с тем, что получим; или  поиграться с отделениями в самих конвейерах. Рассматривать мы будем второй метод, так как он является обобщением первого.
 
 \
 
@@ -1193,7 +1193,7 @@ def hig_closest(target, powers, branch=max(T)):
 	answer = -1
 	num = 1
 	for i in range(0, T.len()):
-		num *= T[i]^powers[i]
+		num *= T[i]**powers[i]
 	
 	if num >= target: return num
 	
@@ -1216,6 +1216,11 @@ def hig_closest(target, powers, branch=max(T)):
 \footnote{Вцелом, можно и не натуральных, а просто рациональных: $\frac23 = \frac{1.5}3 + \frac{0.5}3 = \frac12 + \frac16$ -- такое разбиение вполне подойдёт для $\mathbb{T} = \{2, 6\}$. Однако, такой алгоритм слишком сложен, ведь перебирать придётся \textbf{значительно} больше вариантов}
 чисел, после чего соответствующие дроби (если это возможно) мы сокрращаем дроби, а затем объединяем все дроби с одинаковыми знаменателями. Для каждого отдельного знаменателя $s_i = \prod_{j=0}^n t_j^{a_j}$ должно быть выполненно: $s_i < t_j \ \forall j$
 
+% \
+%
+% !!!!! Нужно раздеять не до единиц, а только на: !!!!!
+% $$a = \sum_{a_i < b \ \forall b \in \mathbb{T}} a_i$$
+
 \
 
 \noindent Алгоритм для поиска одного варианта разбиения:
@@ -1224,38 +1229,42 @@ def hig_closest(target, powers, branch=max(T)):
 
 \begin{lstlisting}[title={Python}, language={Python}]
 def spliter(numerator, denominator):
-	d_c = hig_closest(denominator)
-	d_g = gcd(d_c, numerator)
-	d_d = numerator // d_g
-	d_f = d_c // d_g
+	s = hig_closest(denominator)
+	reduce_coef = gcd(s, numerator)
+	numerator //= reduce_coef
+	denominator = s // reduce_coef
 	
-	d_p0 = low_closest(d_d, d_f)
+	s = low_closest(numerator, denominator)
 	
-	if d_p0 == d_d:
-		return [[d_d, d_f]]
+	if s == numerator:
+		return [[numerator, denominator]]
 	
 	else:
-		g1 = gcd(d_d-d_p0, d_f)
-		g2 = gcd(d_p0, d_f)
-		d_parts = [[(d_d-d_p0)//g1, d_f//g1], [d_p0//g2, d_f//g2]]
+		cdg1 = gcd(numerator-s, denominator)
+		gcd2 = gcd(s, denominator)
+		d_parts = [
+			[(numerator-s)//gcd1, denominator//gcd1], 
+			[s//gcd2, denominator//gdc2]
+		]
 	
 	while 1:
-		d_parts_ = []
+		memory = []
 	
 		for fractions in d_parts:
 			x, y = fractions[0], fractions[1]
-			p = low_closest(x, y)
+			s = low_closest(x, y)
 		
 			if p != x:
-				g1 = gcd(x-p, y)
-				g2 = gcd(p, y)
-				d_parts_.append([(x-p)//g1, y//g1])
-				d_parts_.append([p//g2, y//g2])
+				gcd1 = gcd(x-s, y)
+				gcd2 = gcd(s, y)
+				memory.append([(x-s)//gcd1, y//gcd1])
+				memory.append([s//gcd2, y//gcd2])
 			
-			else: d_parts_.append(fractions)
+			else: memory.append(fractions)
 		
-		if len(d_parts) == len(d_parts_): break
-		else: d_parts = d_parts_[0::]
+		if len(d_parts) == len(memory): break
+		else: d_parts = memory[0::]
+		
 	return d_parts[0::]
 \end{lstlisting}
 
@@ -1299,6 +1308,621 @@ def spliter(numerator, denominator):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{1in}
+
+\section{Построение схемы}
+
+\subsection{Степенное дерево}
+
+\
+
+Самый простой способ: если известно решение $A_b^a = O_b^a - R_b$ -- то можно просто в лоб реализовать дерево на $s$ листьев, $s-b$ из них вернуть в начало, $a$ соединить, и отправить на выход; а оставшиеся $b-a$ тоже соединить, и тоже на выход.
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	t/.style = {rectangle, draw=black!60, fill=black!15, thick, minimum size=15},
+	r/.style = {->, thick, rounded corners=10pt}
+	]
+	
+	%Nodes
+	\node[t]	(1)		at	(-4, 0)		{$C[1]$};
+	\node[t]	(2)		at	(-2, 0)		{$C[t_{i_1}]$};
+	\node[t]	(e)		at	(0, 0)		{$\ldots$};
+	\node[t]	(s)		at	(2, 0)		{$C[s]$};
+	\node[t]	(b)		at	(4, 0)		{$C[b]$};
+	
+	\node		(t1)	at	(-3, 0.75)	{$\times C[t_{i_1}]$};
+	\node		(t2)	at	(-1, 0.75)	{$\times C[\ldots]$};
+	\node		(t3)	at	(1, 0.75)	{$\times C[\ldots]$};
+	\node		(t4)	at	(3, 0.75)	{$- (s-b)$};
+
+	\node[t]	(A)		at	(6, 1)		{$a$};
+	\node[t]	(B)		at	(6, -1)		{$b-a$};
+	
+	
+	
+	%Lines
+	\draw[r]	(1.east)	to	(2.west);
+	\draw[r]	(2.east)	to	(e.west);
+	\draw[r]	(e.east)	to	(s.west);
+	\draw[r]	(s.east)	to	(b.west);
+	\draw[r]	(b.north)	|-	node[above right]	{$a$}	(A.west);
+	\draw[r]	(b.south)	|-	(B.west);
+\end{tikzpicture}
+
+
+
+
+
+\vspace{0.5in}
+
+\noindent Аналогично можно реализовать схему для отделения $a_1$, $a_2$, ..., $a_n$ от $b$:
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	t/.style = {rectangle, draw=black!60, fill=black!15, thick, minimum size=15},
+	r/.style = {->, thick, rounded corners=10pt}
+	]
+	
+	%Nodes
+	\node[t]	(1)		at	(-4, 0)		{$C[1]$};
+	\node[t]	(2)		at	(-2, 0)		{$C[t_{i_1}]$};
+	\node[t]	(e)		at	(0, 0)		{$\ldots$};
+	\node[t]	(s)		at	(2, 0)		{$C[s]$};
+	\node[t]	(b)		at	(4, 0)		{$C[b]$};
+	
+	\node		(t1)	at	(-3, 0.75)	{$\times C[t_{i_1}]$};
+	\node		(t2)	at	(-1, 0.75)	{$\times C[\ldots]$};
+	\node		(t3)	at	(1, 0.75)	{$\times C[\ldots]$};
+	\node		(t4)	at	(3, 0.75)	{$- (s-b)$};
+	
+	\node[t]	(A1)	at	(6, 2)		{$a_1$};
+	\node[t]	(A2)	at	(6, 1)		{$a_2$};
+	\node[t]	(Ae)	at	(6, 0)		{$\vdots$};
+	\node[t]	(An)	at	(6, -1)		{$a_n$};
+	\node[t]	(B)		at	(6, -2)		{$b - \sum_{i=1}^n a_i$};
+	
+	
+	
+	%Lines
+	\draw[r]	(1.east)	to	(2.west);
+	\draw[r]	(2.east)	to	(e.west);
+	\draw[r]	(e.east)	to	(s.west);
+	\draw[r]	(s.east)	to	(b.west);
+	\draw[r]	(b.north)	|-	node[above right]	{$a_1$}	(A1.west);
+	\draw[r]	(b.north)	|-	node[above right]	{$a_2$}	(A2.west);
+	\draw[r]	(b.east)	to	(Ae.west);
+	\draw[r]	(b.south)	|-	node[above right]	{$a_n$}	(An.west);
+	\draw[r]	(b.south)	|-	(B.west);
+\end{tikzpicture}
+
+
+
+
+\vspace{0.5in}
+
+\noindent Однако, если $s = \prod_{i=1}^k t_{j_i}^{\alpha_i}$ -- то такое решение займёт:
+
+$$
+\left( 
+k 
+\ ; \ 
+\prod_{i=1}^k t_{j_i}^{\alpha_i} 
+\right)
+$$
+
+
+\noindent Если требуется показать суть зависимости -- то масштабы можно редуцировать до: 
+
+$$\left(x; e^x\right)$$
+
+\
+
+В общем: площадь растёт экспоненциально в зависимости от сложности схемы, что очень неудобно, особенно для сложных базисов.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{1in}
+
+\subsection{Ёлочка}
+
+\
+
+Однако, как мы уже знаем, схемы предыдущего вида можно сократить. первым уровнем аппроксимации упрощения является "ёлочка". Рассмотрим ситуацию $S(b) = b$:
+
+$$\frac{a}{b} = \sum_{i=1}^n \frac{a_i}{s_i} 
+\quad \quad
+s_i = s_{i-1} \cdot \prod_{j=1}^{k_i} t_{ij}^{\alpha_{ij}}
+\quad \quad
+s_0 = 1
+\quad \quad
+a_i < \text{min}(t_{ij})
+$$
+
+\
+
+\noindent Пускай, каждый $t_i$ повторяется ровно $\alpha_i$ раз внутри одного $s_i$. Будем реализовывать $s_i$ один за другим:
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	thick, minimum size=15},
+	t/.style = {rectangle, draw=black!60, 	fill=black!5, 	thick, minimum size=15},
+	r/.style = {->, thick, rounded corners=10pt}
+	]
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(11)	at	(-4, 0)		{$C[1]$};
+	\node[t]	(12)	at	(-2, 0)		{$C[t_{i_{11}}]$};
+	\node[t]	(1e)	at	(0, 0)		{$\ldots$};
+	\node[t]	(1s)	at	(2, 0)		{$C[s_1]$};
+	
+	\node		(1t1)	at	(-3, 0.5)	{$\times C[t_{11}]$};
+	\node		(1t2)	at	(-1, 0.5)	{$\times C[\ldots]$};
+	\node		(1t3)	at	(1, 0.5)	{$\times C[\ldots]$};
+	
+	\node[t]	(1B)	at	(4, 1)		{$s_1-a_1-1$};
+	\node[t]	(1A)	at	(4, 0)		{$a_1$};
+	
+	
+	
+	% Lines
+	\draw[r]	(11.east)	to	(12.west);
+	\draw[r]	(12.east)	to	(1e.west);
+	\draw[r]	(1e.east)	to	(1s.west);
+	\draw[r]	(1s.north)	|-	(1B.west);
+	\draw[r]	(1s.east)	to	node[above]	{$a_1$}	(1A.west);
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(21)	at	(-4, -3)	{$C[1]$};
+	\draw[r] (1s.south) |- (-4, -1) to node[left] {$1$} (21.north);
+	
+	\node[t]	(22)	at	(-2, -3)	{$C[t_{21}]$};
+	\node[t]	(2e)	at	(0, -3)		{$\ldots$};
+	\node[t]	(2s)	at	(2, -3)		{$C[s_2]$};
+	
+	\node		(2t1)	at	(-3, -2.5)	{$\times C[t_{21}]$};
+	\node		(2t2)	at	(-1, -2.5)	{$\times C[\ldots]$};
+	\node		(2t3)	at	(1, -2.5)	{$\times C[\ldots]$};
+	
+	\node[t]	(2B)	at	(4, -2)		{$s_2-a_2-1$};
+	\node[t]	(2A)	at	(4, -3)		{$a_2$};
+	
+	
+	
+	% Lines
+	\draw[r]	(21.east)	to	(22.west);
+	\draw[r]	(22.east)	to	(2e.west);
+	\draw[r]	(2e.east)	to	(2s.west);
+	\draw[r]	(2s.north)	|-	(2B.west);
+	\draw[r]	(2s.east)	to	node[above]	{$a_2$}	(2A.west);
+	
+	
+	
+	% ===== ===== ===== ===== ===== 
+	\draw[draw=black!60, fill=black!5] (-5, -5) rectangle node {$\textbf{\vdots}$} (5, -6);
+	\draw[r] (2s.south) |- (-4, -4) to node[left] {$1$} (-4, -5);
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(n1)	at	(-4, -9)	{$C[1]$};
+	\draw[r] (4, -6) |- (-4, -7) to node[left] {$1$} (n1.north);
+	
+	\node[t]	(n2)	at	(-2, -9)	{$C[t_{n1}]$};
+	\node[t]	(ne)	at	(0, -9)		{$\ldots$};
+	\node[t]	(ns)	at	(2, -9)		{$C[s_n]$};
+	
+	\node		(nt1)	at	(-3, -8.5)	{$\times C[t_{n1}]$};
+	\node		(nt2)	at	(-1, -8.5)	{$\times C[\ldots]$};
+	\node		(nt3)	at	(1, -8.5)	{$\times C[\ldots]$};
+	
+	\node[t]	(nB)	at	(4, -8)		{$s_n-a_n$};
+	\node[t]	(nA)	at	(4, -9)		{$a_n$};
+	
+	
+	
+	% Lines
+	\draw[r]	(n1.east)	to	(n2.west);
+	\draw[r]	(n2.east)	to	(ne.west);
+	\draw[r]	(ne.east)	to	(ns.west);
+	\draw[r]	(ns.north)	|-	(nB.west);
+	\draw[r]	(ns.east)	to	node[above]	{$a_n$}	(nA.west);
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[o]	(out1)	at	(6, -11)	{$a$};
+	\node[o]	(out2)	at	(7, -11)	{$b-a$};
+	
+	% Lines
+	\draw[r]	(1A.east)	-|	(out1.north);
+	\draw[r]	(2A.east)	-|	(out1.north);
+	\draw[r]	(5, -5.75)	-|	(out1.north);
+	\draw[r]	(nA.east)	-|	(out1.north);
+	
+	\draw[r]	(1B.east)	-|	(out2.north);
+	
+	\draw[thick] (2B.east) to (5.7, -2);
+	\draw[thick, rounded corners=5pt] (5.7, -2) |- (6, -1.7) -| (6.3, -2);
+	\draw[thick, rounded corners=5pt] (6.3, -2) -| (out2.north);
+	
+	\draw[thick] (5, -5.25) to (5.7, -5.25);
+	\draw[thick, rounded corners=5pt] (5.7, -5.25) |- (6, -4.95) -| (6.3, -5.25);
+	\draw[thick, rounded corners=5pt] (6.3, -5.25) -| (out2.north);
+	
+	\draw[thick] (nB.east) to (5.7, -8);
+	\draw[thick, rounded corners=5pt] (5.7, -8) |- (6, -7.7) -| (6.3, -8);
+	\draw[thick, rounded corners=5pt] (6.3, -8) -| (out2.north);
+	
+\end{tikzpicture}
+
+
+
+
+\vspace{0.5in}
+
+Казалось бы, почему "ёлочка", если это "змейка" какая-то? Дело в том, что следует рассмотреть граф, а не алгебраическую схему. Рассмотрим же возможный вид контуров графа:
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	rotate=-90,
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	thick, minimum size=15},
+	r/.style = {->, thin, rounded corners=10pt},
+	b/.style = {ultra thick, rounded corners=10pt},
+	g/.style = {ultra thick, green}
+	]
+	
+	\begin{axis}[clip = false, 
+		hide axis, 
+		x=1cm, y=1cm,
+		]
+		
+		\addplot[domain=0:1, g] {3.25^x-1};
+		\addplot[domain=1:2, g] {1.25^(x-1)*3.25-1};
+		\addplot[domain=0:1, g] {-3.25^x+1};
+		\addplot[domain=1:2, g] {-1.25^(x-1)*3.25+1};
+		
+		\draw[b, green] (axis cs: 2, 3.0625) -- (axis cs:2, -3.0625);
+		\draw[b, brown] (axis cs: 2, 0) -- (axis cs: 3, 0);
+		
+		
+		
+		\addplot[domain=3:5, g] {1.5^(x-3)-1};
+		\addplot[domain=5:6, g] {2^(x-5)*2.25-1};
+		\addplot[domain=3:5, g] {-1.5^(x-3)+1};
+		\addplot[domain=5:6, g] {-2^(x-5)*2.25+1};
+		
+		\draw[b, green] (axis cs: 6, 3.5) -- (axis cs:6, -3.5);
+		\draw[b, brown] (axis cs: 6, 0) -- (axis cs: 7, 0);
+		
+		\addplot[domain=7:7.5, g] {1.5^(x-7)-1};
+		\addplot[domain=7.5:8, g] {4^(x-7.5)*1.5^0.5-1};
+		\addplot[domain=8:8.5, g] {2^(x-8)*1.5^0.5*4^0.5-1};
+		\addplot[domain=8.5:9, g] {1.1^(x-8.5)*1.5^0.5*4^0.5*2^0.5-1};
+		\addplot[domain=7:7.5, g] {-1.5^(x-7)+1};
+		\addplot[domain=7.5:8, g] {-4^(x-7.5)*1.5^0.5+1};
+		\addplot[domain=8:8.5, g] {-2^(x-8)*1.5^0.5*4^0.5+1};
+		\addplot[domain=8.5:9, g] {-1.1^(x-8.5)*1.5^0.5*4^0.5*2^0.5+1};
+		
+		\draw[b, green] (axis cs: 9, 2.6332) -- (axis cs: 9, -2.6332);
+		
+		
+		
+		\node[o]	(out1)	at	(axis cs: 11, 1)	{$a$};
+		\node[o]	(out2)	at	(axis cs: 11, -1)	{$b-a$};
+		
+		
+		
+		\draw[b, brown] (axis cs: 9, 1)  to (out1.west);
+		\draw[b, brown] (axis cs: 9, -1) to (out2.west);
+		\draw[r] (axis cs: 2, 0) -| (axis cs: 2.5, 4)  -- (axis cs: 10, 4)  |- (out1.west);
+		\draw[r] (axis cs: 2, 0) -| (axis cs: 2.5, -4) -- (axis cs: 10, -4) |- (out2.west);
+		\draw[r] (axis cs: 6, 0) -| (axis cs: 6.5, 4)  -- (axis cs: 10, 4)  |- (out1.west);
+		\draw[r] (axis cs: 6, 0) -| (axis cs: 6.5, -4) -- (axis cs: 10, -4) |- (out2.west);
+		
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+\vspace{0.5in}
+
+И действительно: теперь проглядываются "ствол", и крона, которая сначала нарастает-нарастает-нарастает, а затем резко убывает в ноль, и оголяет ствол. И картинка становится похожа на ёлку. 
+
+\
+
+\noindent Так же, такой тип схем занимает меньше места, чем простое дерево: 
+
+$$ 
+\sum_{i=1}^{n} 
+\left( 
+k_i
+\ ; \ 
+\prod_{j=1}^{k_i} t_{ij}^{\alpha_{ij}} 
+\right)
+$$
+
+\
+
+\noindent Или, если очень грубо округлять:
+
+$$
+\left(
+k
+\ ; \ 
+\text{max}\left(
+	\prod_{j=1}^{k_i} t_{ij}^{\alpha_{ij}}
+	\right)
+\right)
+$$
+
+\
+
+Работает это за счёт того, что мы поочерёдно реализуем небольшие степенные деревья, и предварительно успеваем их обрезать, предотвращая экспоненциальный взрыв. Таким образом, редуцировать размер можно до: 
+
+$$\left(x, e^{x/k}\right)$$
+
+\
+
+Так же, такую схему очень удобно реализовывать в 3D играх: каждую отдельную крону можно выносить на отдельный этаж, что позволит сильно сэкономить вплощади ценой высоты. Однако нарисовать общую схему под произвольное число выходов будет сложно, хотя реализовывать отдельно ничто не запрещает.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{1in}
+
+\subsection{Палочка}
+
+\
+
+При всём при этом, можно сократить даже ёлочку: раз у нас $a_i < \text{min}(t_{ij})$ -- то никто нам не гарантирует, что это верно идля остатка -- так что остаток мы и будем скращать. Выберем любое $t_{ij} \ | \ a_i < t_{ij}$, и поставим его в конец очереди для $s_i$:
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	thick, minimum size=15},
+	t/.style = {rectangle, draw=black!60, 	fill=black!5, 	thick, minimum size=15},
+	g/.style = {rectangle, draw=green!60, 	fill=green!5, 	thick, minimum size=15},
+	r/.style = {->, thick, rounded corners=10pt}
+	]
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(11)	at	(-4, 0)		{$C[1]$};
+	\node[t]	(12)	at	(-2, 0)		{$C[t_{i_{11}}]$};
+	\node[t]	(1e)	at	(0, 0)		{$\ldots$};
+	\node[t]	(1s)	at	(2, 0)		{$C[s_1]$};
+	
+	\node		(1t1)	at	(-3, 0.5)	{$\times C[t_{11}]$};
+	\node		(1t2)	at	(-1, 0.5)	{$\times C[\ldots]$};
+	\node		(1t3)	at	(1, 0.5)	{$\times C[\ldots]$};
+	
+	\node[g]	(1A)	at	(4, 0)		{$a_1$};
+	\node[t]	(1B)	at	(4, 1.5)	{$r_1$};
+	
+	
+	
+	% Lines
+	\draw[r, red]	(11.east)	to	node[below]	{$1$}	(12.west);
+	\draw[r, red]	(12.east)	to	node[below]	{$1$}	(1e.west);
+	\draw[r, red]	(1e.east)	to	node[below]	{$1$}	(1s.west);
+	\draw[r, green]	(1s.east)	to	node[below]	{$a_1$}	(1A.west);
+	\draw[r]	(11.north)	|-	(1B.west);
+	\draw[r]	(12.north)	|-	(1B.west);
+	\draw[r]	(1e.north)	|-	(1B.west);
+	\draw[r]	(1s.north)	|-	(1B.west);
+	
+	
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(21)	at	(-4, -3)	{$C[1]$};
+	\draw[r, red] (1s.south) |- (-5, -1) |- node[above left] {$1$} (21.west);
+	
+	\node[t]	(22)	at	(-2, -3)	{$C[t_{i_{21}}]$};
+	\node[t]	(2e)	at	(0, -3)		{$\ldots$};
+	\node[t]	(2s)	at	(2, -3)		{$C[s_2]$};
+	
+	\node		(2t1)	at	(-3, -2.5)	{$\times C[t_{21}]$};
+	\node		(2t2)	at	(-1, -2.5)	{$\times C[\ldots]$};
+	\node		(2t3)	at	(1, -2.5)	{$\times C[\ldots]$};
+	
+	\node[g]	(2A)	at	(4, -3)		{$a_2$};
+	\node[t]	(2B)	at	(4, -1.5)	{$r_2$};
+	
+	
+	
+	% Lines
+	\draw[r, red]	(21.east)	to	node[below]	{$1$}	(22.west);
+	\draw[r, red]	(22.east)	to	node[below]	{$1$}	(2e.west);
+	\draw[r, red]	(2e.east)	to	node[below]	{$1$}	(2s.west);
+	\draw[r, green]	(2s.east)	to	node[below]	{$a_2$}	(2A.west);
+	\draw[r]	(21.north)	|-	(2B.west);
+	\draw[r]	(22.north)	|-	(2B.west);
+	\draw[r]	(2e.north)	|-	(2B.west);
+	\draw[r]	(2s.north)	|-	(2B.west);
+	
+	
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	\draw[draw=black!60, fill=black!5] (-4.5, -5) rectangle node {$\textbf{\vdots}$} (4.5, -6);
+	\draw[r, red] (2s.south) |- (-5, -4) |- node[above left] {$1$} (-4.5, -5.5);
+	
+	
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[t]	(n1)	at	(-4, -9)	{$C[1]$};
+	\draw[r, red] (2, -6) |- (-5, -7) |- node[above left] {$1$} (n1.west);
+	
+	\node[t]	(n2)	at	(-2, -9)	{$C[t_{i_{n1}}]$};
+	\node[t]	(ne)	at	(0, -9)		{$\ldots$};
+	\node[t]	(ns)	at	(2, -9)		{$C[s_n]$};
+	
+	\node		(nt1)	at	(-3, -8.5)	{$\times C[t_{n1}]$};
+	\node		(nt2)	at	(-1, -8.5)	{$\times C[\ldots]$};
+	\node		(nt3)	at	(1, -8.5)	{$\times C[\ldots]$};
+	
+	\node[g]	(nA)	at	(4, -9)		{$a_n$};
+	\node[t]	(nB)	at	(4, -7.5)	{$r_n$};
+	
+	
+	
+	% Lines
+	\draw[r, red]	(n1.east)	to	node[below]	{$1$}	(n2.west);
+	\draw[r, red]	(n2.east)	to	node[below]	{$1$}	(ne.west);
+	\draw[r, red]	(ne.east)	to	node[below]	{$1$}	(ns.west);
+	\draw[r, green]	(ns.east)	to	node[below]	{$a_2$}	(nA.west);
+	\draw[r]	(n1.north)	|-	(nB.west);
+	\draw[r]	(n2.north)	|-	(nB.west);
+	\draw[r]	(ne.north)	|-	(nB.west);
+	\draw[r]	(ns.north)	|-	(nB.west);
+	
+	
+	
+	
+	
+	% ===== ===== ===== ===== =====
+	
+	% Nodes
+	\node[o]	(out1)	at	(6, -11)	{$a$};
+	\node[o]	(out2)	at	(7, -11)	{$b-a$};
+	
+	% Lines
+	\draw[r, green]	(1A.east)	-|	(out1.north);
+	\draw[r, green]	(2A.east)	-|	(out1.north);
+	\draw[r, green]	(4.5, -5.75)-|	(out1.north);
+	\draw[r, green]	(nA.east)	-|	(out1.north);
+	
+	\draw[r]	(1B.east)	-|	(out2.north);
+	
+	\draw[thick] (2B.east) to (5.7, -1.5);
+	\draw[thick, rounded corners=5pt] (5.7, -1.5) |- (6, -1.2) -| (6.3, -1.5);
+	\draw[thick, rounded corners=5pt] (6.3, -1.5) -| (out2.north);
+	
+	\draw[thick] (4.5, -5.25) to (5.7, -5.25);
+	\draw[thick, rounded corners=5pt] (5.7, -5.25) |- (6, -4.95) -| (6.3, -5.25);
+	\draw[thick, rounded corners=5pt] (6.3, -5.25) -| (out2.north);
+	
+	\draw[thick] (nB.east) to (5.7, -7.5);
+	\draw[thick, rounded corners=5pt] (5.7, -7.5) |- (6, -7.2) -| (6.3, -7.5);
+	\draw[thick, rounded corners=5pt] (6.3, -7.5) -| (out2.north);
+	
+\end{tikzpicture}
+
+\vspace{0.5in}
+
+
+
+
+Забавно, что площадь схем уменьшается, то есть, казалось бы, схемы -- упрощаются -- а наше алгебраическое отоброжение только усложняется... Всё по тому, что увеличивается концентрация решений, а стало быть -- и сложность. Собственно, площадь, занимаемая палочными схемами элементарна:
+
+$$
+\left(
+k
+\ ; \
+2
+\right)
+$$
+
+\
+
+Вау! Линейная площадь! А была ведь экспоненциальная! В чём же подвох? А подвох в том, что данная схема абсолютно не масштабируема. Такие схемы можно реализовывать \textbf{только} для отделения одной величины в случае $S(b) = b$. Если $S(b) \ne b$ -- То палочковую схему построить невозможно... По крайней мере в том виде, что подан в схеме: если повезёт -- придётся избирательно выбирать порядок сплиттеров, а затем избирательно от них забирать конвейеры для возврата. А возможно придётся даже вести несколько параллельных линий, возможно даже с разными порядками действий, или вообще разными сплиттерами впринципе. Если же требуется отделить несколько значений -- то предсказать уже невозможно ничего.
 
 
 

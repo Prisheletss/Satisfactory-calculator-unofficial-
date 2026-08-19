@@ -5,7 +5,7 @@
 \noindent Рассмотрим следующую систему:
 
 \begin{itemize}
-	\item Конвейеры имеют всюду равномерную скорость $v$, притом достаточно большую
+	\item Конвейеры имеют всюду равномерную скорость $v$, притом достаточно большую, чтобы можно было пренебречь взаимодействием между ресурсами, и преодолеваемыми ими расстояниями (а соответственно -- и временем)
 	
 	\item Конвейерные разъединители работают по следующим правилам:
 		\begin{itemize}
@@ -39,7 +39,7 @@
 				
 		\end{itemize}
 		
-	\item Конвейерный соединитель может принимать любое число ресурсов, и мгновенно объединяет их в один конвейер
+	\item Конвейерный соединитель может принимать любое число ресурсов, и мгновенно объединяет их в один конвейер (очерёдность не важна, т.к. ресурсы друг с другом не взаимодействуют)
 	
 \end{itemize}
 
@@ -56,13 +56,33 @@
 \noindent В быстрых системах определён следующий набор действий:
 
 \begin{itemize}
-	\item Разделение -- разделение одного конвейера на $n$ равных частей
+	\item Разделение (англ: splitting/chopping) -- разделение одного конвейера на $n$ равных частей
 	
-	\item Соединение -- соединение $n$ конвейеров в один
+		%\begin{tikzpicture}[
+		%	o/.style={rectangle, draw=green!60, fill=green!5, thick, minimum size=20},
+		%	s/.style={rectangle, draw=blue!60,  fill=blue!5,  thick, minimum size=20},
+		%	r/.style = {->, thick, rounded corners=10pt}
+		%	]
+		%	
+		%	%Nodes
+		%	\node[o]	(in)	at	(-2, 0)	{in};
+		%	\draw[draw=blue!60,	fill=blue!5] (-0.5, 1) rectangle node {$s$} (0.5, -1);
+		%	\node[o]	(out1)	at	(2, 2)	{$1$};
+		%	\node[o]	(oute)	at	(2, 0)	{$\ldots$};
+		%	\node[o]	(outn)	at	(2, -2)	{$n$};
+		%	
+		%	%Lines
+		%	\draw[r]	(in.east)	to	node[above]			{$n$}	(-0.5, 0);
+		%	\draw[r]	(0, 1) 		|-	node[below right]	{$1$}	(out1.west);
+		%	\draw[r]	(0.5, 0) 	to	node[above]			{$1$}	(oute.west);
+		%	\draw[r]	(0, -1) 	|-	node[above right]	{$1$}	(outn.west);
+		%	
+		%\end{tikzpicture}
+		
 	
-	\item Отделение -- набор из последовательных и параллельных соединений с целью отделения $q_1$ ресурсов от конвейерной ленты, перевозящей $q_0$ ресурсов ($q_1 < q_0$)
-	
-	\item Возврат -- сначала отделение некоторой части потока, а затем соединение этой части с началом самого потока
+	\item Соединение (англ: merging) -- соединение $n$ конвейеров в один
+		
+	\item Возврат (англ: re-looping/re-cycling) -- сначала отделение некоторой части потока, а затем соединение этой части с началом самого потока
 	
 		Пример:
 		
@@ -92,6 +112,10 @@
 			\draw[->, thin] (s2.north)  to node[left]	 			  {$\frac{1}{5}$} (out2.south);
 		\end{tikzpicture}
 		
+	\item Отделение%
+	\footnote{\textbf{Раз}деление и \textbf{от}деление отличаются тем, что \textbf{Раз}деление -- это построение n-арного дерева; а \textbf{от}деление -- это построение второй ветви, по которой едет заданное число ресурсов. Более заметно это различие в английской терминологии, а в русской различие заключается лишь приставкой...}
+	(англ: separating) -- набор из последовательных и параллельных разделений, соединений и возвратов, с целью отделения заданой части $q_1$ ресурсов от изначальной конвейерной ленты, перевозящей $q_0$ ресурсов ($q_1 < q_0$)
+		
 		
 \end{itemize}
 
@@ -109,6 +133,7 @@
 
 
 \vspace{0.5in}
+
 
 Назовём все числа вида $s = \prod_{i=1}^n t_i^{a_i}$ , где $a_i \in \mathbb{N}_0$ "стандартными". Тогда каждое число, \underline{обратное стандартному}%
 \footnote{Будем называть такие числа единичными стандартными, или просто единичными. А если в числителе стоит не единица -- то будем называть их стандартными долями.} 
@@ -294,10 +319,16 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 
 \begin{itemize}
 	\item "простыми", если: $\forall \ t_i \in \mathbb{T} \ : \ t_i$ -- простое
+		
+		Пример: $\mathbb{T} = \{2, 3\}$, $\mathbb{T} = \{11, 23, 41\}$, $\mathbb{T} \subseteq \{2, 3, 5, 7, 11, 13, \ldots\}$
 	
 	\item "полупростыми", если: $\forall t_i, t_j \in \mathbb{T} \ : \ \gcd(t_i; \ t_j) = 1$
 	
-	\item "дублирующими", если: $\exists \ t, a, b \in \mathbb{T} \ , \ \exists \ x, y \in \mathbb{N}_0 \ , \ t = a^x b^y$
+		Пример: $\mathbb{T} = \{2, 3\}$, $\mathbb{T} = \{4, 9\}$, $\mathbb{T} = \{6, 7, 25\}$
+	
+	\item "дублирующими", если: $\exists \ t, a, b \in \mathbb{T} \ ; \ x \in \mathbb{N}_0 \ ; \ y, z \in \mathbb{N} \ | \ t^z = a^x b^y$
+	
+		Пример: $\mathbb{T} = \{2, 3, 6\}$, $\mathbb{T} = \{2, 4\}$, $\mathbb{T} = \{4, 6, 9\}$
 \end{itemize}
 
 \
@@ -305,8 +336,8 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 Теорема: любую дублирующую систему можно упростить:
 
 \begin{align*}
-	&\forall \ \mathbb{T} \ | \ \exists \ t, a, b \in \mathbb{T} \ , \ \exists x, y \in \mathbb{N}_0 \ , \ t = a^x b^y \ : \\
-	&\exists \ \mathbb{T}' = \mathbb{T} \setminus \{t \ : \ \exists \ a, b \in \mathbb{T} \ , \ \exists \ x, y \in \mathbb{N}_0 \ | \ t = a^x b^y \} \ne \emptyset \\
+	&\forall \ \mathbb{T} \ | \ \exists \ t, a, b \in \mathbb{T} \ ; \ x \in \mathbb{N}_0 \ ; \ y, z \in \mathbb{N} \ | \ t^z = a^x b^y \ : \\
+	&\exists \ \mathbb{T}' = \mathbb{T} \setminus \{t \ : \ \exists \ t, a, b \in \mathbb{T} \ ; \ x \in \mathbb{N}_0 \ ; \ y, z \in \mathbb{N} \ | \ t^z = a^x b^y \} \ne \emptyset \\
 	&\mathbb{T}' - \text{prime, or half-prime}
 \end{align*}
 
@@ -324,7 +355,7 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 
 
 
-\vspace{0.5in}
+\newpage
 
 \section{Алгебра задачи}
 
@@ -547,7 +578,7 @@ $$\sum_{i=0}^{\infty} q_0 \cdot \left( \frac{a}{s} \right)^i = q_0 \cdot \frac{1
 		\node[t]	(te2)	at	(2.5, -10)	{$\vdots$};
 		\node[t]	(tn)	at	(2.6, -12)	{$\prod\limits_{j} t_{i_j}$};
 		
-		\node[a]	(a2)	at	(3, -3.6)	{a};
+		\node[a]	(a2)	at	(3, -3)		{a};
 		\node[t]	(t1`)	at	(4.5, 0)	{$1$};
 		\node[t]	(t2`)	at	(4.5, -4)	{$2$};
 		\node[t]	(te`)	at	(4.5, -8)	{$\ldots$};
