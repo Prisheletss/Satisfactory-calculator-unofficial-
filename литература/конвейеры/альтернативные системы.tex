@@ -525,13 +525,381 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
+
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}
+	\begin{axis}[clip = false,
+		xmin = -0.5, xmax = 9, ymin = -0.5, ymax = 4.5, xlabel=$q_1$, x=1cm, y=1cm,
+		axis lines = middle, xtick = {4},
+		xticklabels = {$2q_0$},
+		xticklabel style = {anchor=south west}, 
+		xmajorgrids = true,
+		ytick = {0}, 
+		yticklabels = {},
+		grid style = dashed]
+		
+		
+		\addplot[domain=0:4, red, very thick]{x/2};
+		\addplot[domain=4:8, red, very thick]{2} node[above, pos=1] {$x$};
+		
+		\addplot[domain=0:4, blue, very thick]{2-x/2};
+		\addplot[domain=4:8, blue, very thick]{0} node[above, pos=1] {$y$};
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
 \vspace{0.5in}
 
 Таким образом приоритетный соединитель работает по следующему алгоритму: когда во вход приходит первый ресурс-- он сразу выходит на конвейер $q$. После этого запускается таймер на $1/q$, на протяжении которого никакие ресурсы не выходят, а просто выстраиваютсяв приоритетную очередь. Когда таймер кончается -- ресурс с бóльшим приоритетом выходит, и заново запускается таймер.
 
 \
 
-При этом так же можно добавить приорететный соединитель, который пускает ресурсы только в рамках заданного соотношения $x:y$ по следующему принципу: выходная скорость $q$ делится на $x+y$. если суммарно с левого $q_1$ и правого $q_2$ входа приходит не больше, чем $q$ -- то
+\noindent По схожему принципу можно реализовать и другие порядки приоретета, если входов больше двух:
+
+\vspace{0.5in}
+
+\begin{minipage}{0.08\textwidth}
+	\begin{tikzpicture}[
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt},
+		]
+		
+		
+		% === === Nodes === ===				
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.8cm
+			] 
+			(tri) at (-0.4, 0) {};
+		\node				at	(-0.5, 0)		{$1$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=180, minimum size=0.8cm
+			] 
+			(tri) at (0, 0.4) {};
+		\node				at	(0, 0.5)		{$2$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=90, minimum size=0.8cm
+			] 
+			(tri) at (0.4, 0) {};
+		\node				at	(0.5, 0)		{$3$};
+		
+		
+		
+		\node[a]	(a)		at	(0, 0)			{p};
+		
+		
+		
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.05\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.333\textwidth}
+	\begin{tikzpicture}[
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=15},
+		r/.style = {->, thick, rounded corners=7.5pt},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri1)	at	(-0.3, 0)		{};
+		\node				at	(-0.35, 0)		{$1$};
+		\node[a]	(a1)	at	(0, 0)			{p};
+		
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri2)	at	(-0.3, -1)		{};
+		\node				at	(-0.35, -1)		{$1$};
+		\node[a]	(a2)	at	(0, -1)			{p};
+		
+		
+		\node[o]	(in1)	at	(-1, 1)			{3};
+		\node[o]	(in2)	at	(-1, 0)			{2};
+		\node[o]	(in3)	at	(-1, -1)		{1};
+		\node[o]	(out)	at	(0, -2)			{out};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)		-|	(a1.north);
+		\draw[r]	(in2)		to	(tri1.south);
+		\draw[r]	(a1.south)	to	(a2.north);
+		\draw[r]	(in3)		to	(tri2.south);
+		\draw[r]	(a2.south)	to	(out.north);
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.08\textwidth}
+	\begin{tikzpicture}[
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt},
+		]
+		
+		
+		% === === Nodes === ===				
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.8cm
+			] 
+			(tri) at (-0.4, 1.5) {};
+		\node				at	(-0.45, 1.5)	{$1$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.8cm
+			] 
+			(tri) at (-0.4, 0.5) {};
+		\node				at	(-0.45, 0.5)	{$2$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.8cm
+			] 
+			(tri) at (-0.4, -0.5) {};
+		\node				at	(-0.45, -0.45)	{$\vdots$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.8cm
+			] 
+			(tri) at (-0.4, -1.5) {};
+		\node				at	(-0.45, -1.5)	{$n$};
+		
+		
+		
+		\draw[draw=red!60, fill=red!5] (-0.333, 2) rectangle node {a} (0.333, -2);
+		
+		
+		
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.05\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	\begin{tikzpicture}[
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=15},
+		r/.style = {->, thick, rounded corners=7.5pt},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri1)	at	(-0.3, 0)		{};
+		\node				at	(-0.35, 0)		{$1$};
+		\node[a]	(a1)	at	(0, 0)			{p};
+		
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri2)	at	(-0.3, -1)		{};
+		\node				at	(-0.35, -1)		{$1$};
+		\node[a]	(a2)	at	(0, -1)			{p};
+		
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri3)	at	(-0.3, -2)		{};
+		\node				at	(-0.35, -2)		{$1$};
+		\node[a]	(a3)	at	(0, -2)			{p};
+		
+		
+		\node[o]	(in1)	at	(-1, 1)			{$n$};
+		\node[o]	(in2)	at	(-1, 0)			{$\vdots$};
+		\node[o]	(in3)	at	(-1, -1)		{2};
+		\node[o]	(in4)	at	(-1, -2)		{1};
+		\node[o]	(out)	at	(0, -3)			{out};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)	-|	(a1);
+		\draw[r]	(in2)	to	(tri1);
+		\draw[r]	(a1)	to	(a2);
+		\draw[r]	(in3)	to	(tri2);
+		\draw[r]	(a2)	to	(a3);
+		\draw[r]	(in4)	to	(tri3);
+		\draw[r]	(a3)	to	(out);
+		
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+При этом так же можно добавить приорететный соединитель, который пускает ресурсы только в рамках заданного соотношения $x:y$ по следующему принципу: без ограничений общности положим, что самый первый ресурс зашёл во вход x. Тогда в этом входе запускается таймер на $\frac{x}{x+y} \cdot \frac1{q}$, а на втором, соответственно -- $\frac{y}{x+y} \cdot \frac1{q}$, на время действия которого данный вход превращается в тупик.
+
+\
+
+\noindent Данную схему также можно реализовать при помощи более простых видов соединителей:
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=15},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=15},
+		r/.style = {->, thick, rounded corners=7.5pt},
+		r2/.style = {
+			line width=1pt, 
+			double distance=1pt, 
+			arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+			rounded corners=7.5pt,
+			red
+		},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[o]	(in1)	at	(-1.5, 1.5)		{$120$};
+		\node[o]	(in2)	at	(1.5, 1.5)		{$120$};
+		\node[s]	(s1)	at	(-1.5, 0)		{s};
+		\node[s]	(s2)	at	(1.5, 0)		{s};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri1)	at	(-0.3, 0)		{};
+		\node				at	(-0.35, 0)		{$2$};
+		
+		\node[
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=90, minimum size=0.2cm
+			] 
+					(tri2)	at	(0.3, 0)		{};
+		\node				at	(0.35, 0)		{$1$};
+		
+		\node[a]	(a)		at	(0, 0)			{:};
+		
+		\node[o]	(out1)	at	(-1.5, -1.5)	{$80$};
+		\node[o]	(out2)	at	(0, -1.5)		{$60$};
+		\node[o]	(out3)	at	(1.5, -1.5)		{$100$};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)	to	node[right]	{$120$}		(s1);
+		\draw[r]	(in2)	to	node[right]	{$120$}		(s2);
+		\draw[r]	(s1)	to	node[right]	{$80$}		(out1);
+		\draw[r]	(s2)	to	node[right]	{$100$}		(out3);
+		\draw[r]	(s1)	to	node[above]	{$40$}		(tri1);
+		\draw[r]	(s2)	to	node[above]	{$20$}		(tri2);
+		\draw[r2]	(a)		to	node[right]	{$60$}		(out2);
+		
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.333\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt},
+		r2/.style = {
+			line width=1pt, 
+			double distance=1pt, 
+			arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+			rounded corners=7.5pt,
+			red
+		},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[o]	(in1)	at	(-2, 1.5)	{$120$};
+		\node[o]	(in2)	at	(1, 1.5)	{$120$};
+		\node[s]	(s1)	at	(-2, 0)		{s};
+		\node[s]	(s2)	at	(1, 0)		{s};
+		\node[s] 	(sa)	at	(-1, 0)		{s};
+		
+		\node[a]	(a)		at	(0, 0)		{a};
+		
+		\node[o]	(out1)	at	(-2, -1.5)	{$80$};
+		\node[o]	(out2)	at	(0, -1.5)	{$60$};
+		\node[o]	(out3)	at	(1, -1.5)	{$100$};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)	to	node[right]	{$120$}		(s1);
+		\draw[r]	(in2)	to	node[right]	{$120$}		(s2);
+		\draw[r]	(s1)	to	node[right]	{$80$}		(out1);
+		\draw[r]	(s2)	to	node[right]	{$100$}		(out3);
+		\draw[r]	(s1)	to	node[above]	{$40$}		(sa);
+		\draw[r]	(sa)	to	node[above]	{$20$}		(a);
+		
+		\draw[r]	(sa)	|-	(-0.5, 0.5)	-|	node[above left]	{$20$}	(a);
+		
+		\draw[r]	(s2)	to	node[above]	{$20$}		(a);
+		\draw[r2]	(a)		to	node[right]	{$60$}		(out2);
+		
+		
+	\end{tikzpicture}
+\end{minipage}
 
 
 
@@ -542,10 +910,116 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
+\vspace{0.5in}
 
-
-
-
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=15},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=15},
+		r/.style = {->, thick, rounded corners=7.5pt},
+		r2/.style = {
+			line width=1pt, 
+			double distance=1pt, 
+			arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+			rounded corners=7.5pt,
+			red
+		},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[o]	(in1)	at	(-2, 2)		{$q_1$};
+		\node[o]	(in2)	at	(2, 2)		{$q_2$};
+		\node[s]	(s1)	at	(-2, 0)		{s};
+		\node[s]	(s2)	at	(2, 0)		{s};
+		
+		\node[
+		draw=red!60, fill=red!5, very thick,
+		regular polygon, regular polygon sides=3, 
+		rotate=-90, minimum size=0.2cm
+		] 
+		(tri1)	at	(-0.3, 0)		{};
+		\node				at	(-0.35, 0)		{$x$};
+		
+		\node[
+		draw=red!60, fill=red!5, very thick,
+		regular polygon, regular polygon sides=3, 
+		rotate=90, minimum size=0.2cm
+		] 
+		(tri2)	at	(0.3, 0)		{};
+		\node				at	(0.35, 0)		{$y$};
+		
+		\node[a]	(a)		at	(0, 0)			{:};
+		
+		\node[o]	(out1)	at	(-2, -2)	{$q_1-x$};
+		\node[o]	(out2)	at	(0, -2)		{$x+y$};
+		\node[o]	(out3)	at	(2, -2)		{$q_2-y$};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)	to	node[right]	{$q_1$}		(s1);
+		\draw[r]	(in2)	to	node[right]	{$a_2$}		(s2);
+		\draw[r]	(s1)	to	node[right]	{$q_1-x$}	(out1);
+		\draw[r]	(s2)	to	node[right]	{$q_2-y$}	(out3);
+		\draw[r]	(s1)	to	node[above]	{$x$}		(tri1);
+		\draw[r]	(s2)	to	node[above]	{$y$}		(tri2);
+		\draw[r2]	(a)		to	node[right]	{$x+y$}		(out2);
+		
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+	$$\equiv$$
+\end{minipage}
+\begin{minipage}{0.333\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt},
+		r2/.style = {
+			line width=1pt, 
+			double distance=1pt, 
+			arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+			rounded corners=7.5pt,
+			red
+		},
+		]
+		
+		
+		% === === Nodes === ===
+		\node[o]	(in1)	at	(-2, 1.5)	{$120$};
+		\node[o]	(in2)	at	(1, 1.5)	{$120$};
+		\node[s]	(s1)	at	(-2, 0)		{s};
+		\node[s]	(s2)	at	(1, 0)		{s};
+		\node[s] 	(sa)	at	(-1, 0)		{s};
+		
+		\node[a]	(a)		at	(0, 0)		{a};
+		
+		\node[o]	(out1)	at	(-2, -1.5)	{$80$};
+		\node[o]	(out2)	at	(0, -1.5)	{$60$};
+		\node[o]	(out3)	at	(1, -1.5)	{$100$};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in1)	to	node[right]	{$120$}		(s1);
+		\draw[r]	(in2)	to	node[right]	{$120$}		(s2);
+		\draw[r]	(s1)	to	node[right]	{$80$}		(out1);
+		\draw[r]	(s2)	to	node[right]	{$100$}		(out3);
+		\draw[r]	(s1)	to	node[above]	{$40$}		(sa);
+		\draw[r]	(sa)	to	node[above]	{$20$}		(a);
+		
+		\draw[r]	(sa)	|-	(-0.5, 0.5)	-|	node[above left]	{$20$}	(a);
+		
+		\draw[r]	(s2)	to	node[above]	{$20$}		(a);
+		\draw[r2]	(a)		to	node[right]	{$60$}		(out2);
+		
+		
+	\end{tikzpicture}
+\end{minipage}
 
 
 
