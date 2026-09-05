@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\Satisfactory-calculator-unofficial-\\satisfactory conveyor calc\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2AE6854F-970B-4B91-9246-F9964DCDE699}|satisfactory conveyor calc.csproj|d:\\github\\satisfactory-calculator-unofficial-\\satisfactory conveyor calc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AE6854F-970B-4B91-9246-F9964DCDE699}|satisfactory conveyor calc.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Satisfactory-calculator-unofficial-\\satisfactory conveyor calc\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\GitHub\\Satisfactory-calculator-unofficial-\\satisfactory conveyor calc\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADsCAAAAAAAAAAAAADsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-03T12:04:53.784Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
