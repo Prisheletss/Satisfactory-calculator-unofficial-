@@ -2,7 +2,7 @@
 
 \
 
-Возьмём известную нам "быструю систему", и добавим ограничение на скорость конвейера: введём множество $\mathbb{V}$  допустимых скоростей $v_i$, каждая из которых является вполне конечной. Тогда необходимо помимо абстрактной площади начать учитывать и длину конвейеров. А так же необходимо начать учитывать взаимодействие ресурсов.
+Возьмём известную нам "быструю систему", и добавим ограничение на скорость конвейера: введём множество $\mathbb{V}$  допустимых скоростей $v_i$, каждая из которых является вполне конечной. Тогда необходимо помимо абстрактной площади начать учитывать и длину конвейеров. А так же необходимо начать учитывать взаимодействие ресурсов и время этого взаимодействия.
 
 \
 
@@ -52,7 +52,19 @@ $$
 
 
 
-\vspace{0.5in}
+
+
+
+\vspace{0.25in}
+\section{Тупики}
+
+
+
+
+
+
+
+\
 
 \begin{minipage}{0.5\textwidth}
 	\begin{tikzpicture}[
@@ -158,7 +170,19 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
+
+
+
 \vspace{0.25in}
+\section{Избыток на выход}
+
+\
+
+
+
+
+
+
 
 \noindent Рассмотрим теперь вторую ситуацию: $q^{\text{res}} > q_i$:
 
@@ -1194,11 +1218,8 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 \
 
-Нетрудно понять, что если $\mathbb{A} \ne \mathbb{T}$ -- то можно просто рассмотреть $\mathbb{T}' = \mathbb{A}$, и в этом базисе и построить схему, и уже затем инвертировать её.
+Нетрудно понять, что если $\mathbb{A} \not\supset \mathbb{T}$ -- то такое преобразование в прямом виде -- невозможно. Но на основе этого принципа можно построить искомую схему: реализуем схему для соединения $x+y$ конвейеров, а затем реализуем подсхемы для разделения на $x$, $y$ и $b$ независимо. Так же понадобится промежуточно реализоавть схему для разделения на $2$ (если $2 \not\in \mathbb{T}$):
 
-\
-
-\noindent Получим общую схему (обозначим: $s = s(x+y)$, $b = s(x+y) - (x+y)$):
 
 
 
@@ -1207,124 +1228,168 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 \vspace{0.5in}
 
 \begin{tikzpicture}[
-	s/.style = {rectangle,	draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
-	a/.style = {rectangle,	draw=red!60,	fill=red!5,		very thick, minimum size=10},
-	o/.style = {rectangle,	draw=green!60,	fill=green!5,	very thick, minimum size=10},
-	t/.style = {rectangle,	draw=black!60,	fill=black!5,	thick, 		minimum size=10, inner sep=1pt},
-	r/.style = {->, thick, rounded corners=5pt}
+	s`/.style =	{rectangle,	draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
+	s/.style =	{rectangle,	draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+	a/.style =	{rectangle,	draw=red!60,	fill=red!5,		very thick, minimum size=10},
+	o/.style =	{rectangle,	draw=green!60,	fill=green!5,	very thick, minimum size=10},
+	t/.style =	{rectangle,	draw=black!60,	fill=black!5,	thick, 		minimum size=10, inner sep=1pt},
+	r`/.style =	{<-, thick, rounded corners=5pt},
+	r/.style =	{->, thick, rounded corners=5pt},
+	r2/.style = {
+		line width=1pt, 
+		double distance=1pt, 
+		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+		rounded corners=7.5pt,
+		red
+	},
 	]
 	
 	% === === Nodes === ===
-	\node[o]	(in)	at	(-3.25, 0)	{in};
-	\node[a]	(a1)	at	(-2.5, 0)	{a};
+	\node[o]	(in)	at	(-6, 0)		{$x+y$};
+	\node[s`]	(a1)	at	(-3, 0)		{S[$2$]};
 	
-	\node[s]	(s1)	at	(-1.75, 0)	{s};
+	\node[a]	(s1)	at	(-1.75, 0)	{a};
 	\node[t]	(t11)	at	(-0.75, 0)	{$1$};
 	\node[t]	(t12)	at	(-0.75, -4)	{$2$};
-	\node[t]	(t1i)	at	(-0.75, -9)	{$t_{i_1}$};
+	\node[t]	(t1i)	at	(-0.75, -9)	{$a_{i_1}$};
 	
-	\node[s]	(s11)	at	(0, 0)		{s};
+	\node[a]	(s11)	at	(0, 0)		{a};
 	\node[t]	(t121)	at	(1, 0)		{$1$};
 	\node[t]	(t122)	at	(1, -1)		{$2$};
 	\node[t]	(t12e)	at	(1, -2)		{$\vdots$};
-	\node[t]	(t12i)	at	(1, -3)		{$t_{i_2}$};
+	\node[t]	(t12i)	at	(1, -3)		{$a_{i_2}$};
 	
-	\node[s]	(s21)	at	(0, -4)		{s};
+	\node[a]	(s21)	at	(0, -4)		{a};
 	\node[t]	(t221)	at	(1, -4)		{$1$};
 	\node[t]	(t222)	at	(1, -5)		{$2$};
 	\node[t]	(t22e)	at	(1, -6)		{$\vdots$};
-	\node[t]	(t22i)	at	(1, -7)		{$t_{i_2}$};
+	\node[t]	(t22i)	at	(1, -7)		{$a_{i_2}$};
 	
-	\node[s]	(si1)	at	(0, -9)		{s};
+	\node[a]	(si1)	at	(0, -9)		{a};
 	\node[t]	(ti21)	at	(1, -9)		{$1$};
 	\node[t]	(ti22)	at	(1, -10)	{$2$};
 	\node[t]	(ti2e)	at	(1, -11)	{$\vdots$};
-	\node[t]	(ti2i)	at	(1, -12)	{$t_{i_2}$};		
+	\node[t]	(ti2i)	at	(1, -12)	{$a_{i_2}$};		
 	
 	% === === etc === ===
-	\draw[draw=blue!60,		fill=blue!5]	(1.5, 0.5)	rectangle node {$\ldots$} (2, -12.5);
+	\draw[draw=red!60,		fill=red!5]		(1.5, 0.5)	rectangle node {$\ldots$} (2, -12.5);
 	\draw[draw=black!60,	fill=black!5]	(-1, -7.75)	rectangle node {$\ldots$} (1.25, -8.25);
 	
-	\node[t]	(t1)	at	(2.5, 0)	{$1$};
-	\node[t]	(t2)	at	(2.5, -2)	{$2$};
-	\node[t]	(te1)	at	(2.5, -4)	{$\vdots$};
-	\node[t]	(tb)	at	(2.5, -6)	{$b$};
-	\node[t]	(tb+)	at	(2.6, -8)	{$b+1$};
-	\node[t]	(te2)	at	(2.5, -10)	{$\vdots$};
-	\node[t]	(tn)	at	(2.5, -12)	{$s$};
+	\node[t]	(t1)	at	(2.5, 0)		{$1$};
+	\node[t]	(t2)	at	(2.5, -2)		{$2$};
+	\node[t]	(te1)	at	(2.5, -4)		{$\vdots$};
+	\node[t]	(tb)	at	(2.5, -6)		{$b$};
+	\node[t]	(tb+)	at	(2.7, -8)		{$b+1$};
+	\node[t]	(te2)	at	(2.5, -10.2)	{$\vdots$};
+	\node[t]	(tn)	at	(2.5, -12)		{$s$};
 	
-	\node[a]	(a2)	at	(3, -3)		{a};
-	\node[t]	(t1`x)	at	(4.5, 0)	{$1$};
-	\node[t]	(t2`x)	at	(4.5, -1.7)	{$2$};
-	\node[t]	(te`x)	at	(4.5, -3.4)	{$\ldots$};
-	\node[t]	(tx)	at	(4.5, -5.1)	{$x$};
-	\node[t]	(t1`y)	at	(4.5, -6.8)	{$1$};
-	\node[t]	(t2`y)	at	(4.5, -8.5)	{$2$};
-	\node[t]	(te`y)	at	(4.5, -10.2)	{$\ldots$};
-	\node[t]	(ty)	at	(4.5, -12)	{$y$};
+	\node[s`]	(a2)	at	(3, -3)			{S[$b$]};
+	\node[t]	(t1`x)	at	(5.5, 0)		{$1$};
+	\node[t]	(t2`x)	at	(5.5, -1.7)		{$2$};
+	\node[t]	(te`x)	at	(5.5, -3.4)		{$\ldots$};
+	\node[t]	(tx)	at	(5.5, -5.1)		{$x$};
+	\node[t]	(t1`y)	at	(5.5, -6.8)		{$1$};
+	\node[t]	(t2`y)	at	(5.5, -8.5)		{$2$};
+	\node[t]	(te`y)	at	(5.5, -10.2)	{$\ldots$};
+	\node[t]	(ty)	at	(5.5, -12)		{$y$};
+	
+	\node[s`]	(ax)	at	(6.5, -2.55)	{S[$x$]};
+	\node[s`]	(ay)	at	(6.5, -9.35)	{S[$y$]};
+	
+	\node[s]	(sx)	at	(8, -2.55)		{s};
+	\node[s]	(sy)	at	(8, -9.35)		{s};
+	
+	\node[o]	(outx)	at	(-6, 2)			{$x+q_1$};
+	\node[o]	(outy)	at	(-6, -2)		{$y+q_2$};
+	
+	\node[o]	(inx)	at	(9.5, -2.55)	{$2x+q_1$};
+	\node[o]	(iny)	at	(9.5, -9.35)	{$2y+q_2$};
 	
 	
 	
 	% === === Lines === ===
-	\draw[r]	(in.east)	to	(a1.west);
-	\draw[r]	(a1.east)	to	(s1.west);
+	\draw[r2]	(a1)		to	node[above]	{$x+y$}	(in);
+	\draw[r`]	(a1)		to	(s1);
 	
-	\draw[r]	(s1.east)	to	(t11.west);
-	\draw[r]	(s1.east)	to	(-1.25, 0)	|-	(t12.west);
-	\draw[r]	(s1.east)	to	(-1.25, 0)	|-	(-1, -8);
-	\draw[r]	(s1.east)	to	(-1.25, 0)	|-	(t1i.west);
+	\draw[r`]	(s1)		to	(t11);
+	\draw[r`]	(s1)		|-	(t12);
+	\draw[r`]	(s1)		|-	(-1, -8);
+	\draw[r`]	(s1)		|-	(t1i);
 	
-	\draw[r]	(t11.east)	to	(s11.west);
-	\draw[r]	(s11.east)	to	(t121.west);
-	\draw[r]	(s11.east)	to	(0.5, 0)	|-	(t122.west);
-	\draw[r]	(s11.east)	to	(0.5, 0)	|-	(t12e.west);
-	\draw[r]	(s11.east)	to	(0.5, 0)	|-	(t12i.west);
+	\draw[r`]	(t11)		to	(s11);
+	\draw[r`]	(s11)		to	(t121);
+	\draw[r`]	(s11)		|-	(t122);
+	\draw[r`]	(s11)		|-	(t12e);
+	\draw[r`]	(s11)		|-	(t12i);
 	
-	\draw[r]	(t12.east)	to	(s21.west);
-	\draw[r]	(s21.east)	to	(t221.west);
-	\draw[r]	(s21.east)	to	(0.5, -4)	|-	(t222.west);
-	\draw[r]	(s21.east)	to	(0.5, -4)	|-	(t22e.west);
-	\draw[r]	(s21.east)	to	(0.5, -4)	|-	(t22i.west);
+	\draw[r`]	(t12)		to	(s21);
+	\draw[r`]	(s21)		to	(t221);
+	\draw[r`]	(s21)		|-	(t222);
+	\draw[r`]	(s21)		|-	(t22e);
+	\draw[r`]	(s21)		|-	(t22i);
 	
-	\draw[r]	(t1i.east)	to	(si1.west);
-	\draw[r]	(si1.east)	to	(ti21.west);
-	\draw[r]	(si1.east)	to	(0.5, -9)	|-	(ti22.west);
-	\draw[r]	(si1.east)	to	(0.5, -9)	|-	(ti2e.west);
-	\draw[r]	(si1.east)	to	(0.5, -9)	|-	(ti2i.west);
+	\draw[r`]	(t1i)		to	(si1);
+	\draw[r`]	(si1)		to	(ti21);
+	\draw[r`]	(si1)		|-	(ti22);
+	\draw[r`]	(si1)		|-	(ti2e);
+	\draw[r`]	(si1)		|-	(ti2i);
 	
-	\draw[r]	(t121.east)	to	(1.5, 0);
-	\draw[r]	(t122.east)	to	(1.5, -1);
-	\draw[r]	(t12e.east)	to	(1.5, -2);
-	\draw[r]	(t12i.east)	to	(1.5, -3);
-	\draw[r]	(t221.east)	to	(1.5, -4);
-	\draw[r]	(t222.east)	to	(1.5, -5);
-	\draw[r]	(t22e.east)	to	(1.5, -6);
-	\draw[r]	(t22i.east)	to	(1.5, -7);
-	\draw[r]	(1.25, -8)	to	(1.5, -8);
-	\draw[r]	(ti21.east)	to	(1.5, -9);
-	\draw[r]	(ti22.east)	to	(1.5, -10);
-	\draw[r]	(ti2e.east)	to	(1.5, -11);
-	\draw[r]	(ti2i.east)	to	(1.5, -12);
+	\draw[r`]	(t121)		to	(1.5, 0);
+	\draw[r`]	(t122)		to	(1.5, -1);
+	\draw[r`]	(t12e)		to	(1.5, -2);
+	\draw[r`]	(t12i)		to	(1.5, -3);
+	\draw[r`]	(t221)		to	(1.5, -4);
+	\draw[r`]	(t222)		to	(1.5, -5);
+	\draw[r`]	(t22e)		to	(1.5, -6);
+	\draw[r`]	(t22i)		to	(1.5, -7);
+	\draw[r`]	(1.25, -8)	to	(1.5, -8);
+	\draw[r`]	(ti21)		to	(1.5, -9);
+	\draw[r`]	(ti22)		to	(1.5, -10);
+	\draw[r`]	(ti2e)		to	(1.5, -11);
+	\draw[r`]	(ti2i)		to	(1.5, -12);
 	
-	\draw[r]	(2, 0)	to	(t1.west);
-	\draw[r]	(2, -2)	to	(t2.west);
-	\draw[r]	(2, -4)	to	(te1.west);
-	\draw[r]	(2, -6)	to	(tb.west);
-	\draw[r]	(2, -8)	to	(tb+.west);
-	\draw[r]	(2, -10)	to	(te2.west);
-	\draw[r]	(2, -12)	to	(tn.west);
+	\draw[r`]	(2, 0)		to	(t1);
+	\draw[r`]	(2, -2)		to	(t2);
+	\draw[r`]	(2, -4)		to	(te1);
+	\draw[r`]	(2, -6)		to	(tb);
+	\draw[r`]	(2, -8)		to	(tb+);
+	\draw[r`]	(2, -10.2)	to	(te2);
+	\draw[r`]	(2, -12)	to	(tn);
 	
-	\draw[r]	(t1.east) 	-| 	(a2.north);
-	\draw[r]	(t2.east) 	-| 	(a2.north);
-	\draw[r]	(te1.east)	-| 	(a2.south);
-	\draw[r]	(tb.east)	-| 	(a2.south);
+	\draw[r`]	(t1) 		-| 	(a2);
+	\draw[r`]	(t2) 		-| 	(a2);
+	\draw[r`]	(te1)		-| 	(a2);
+	\draw[r`]	(tb)		-| 	(a2);
 	
-	\draw[r]	(tb+.east)	to (3.75, -8) |- (t1`x.west);
-	\draw[r]	(te2.east)	to (4, -10) |- (t2`x.west);
-	\draw[r]	(te2.east)	to (4, -10) |- (te`x.west);
-	\draw[r]	(tn.east)	to	(tn`.west);
+	\draw[r`] 	(a2)		-| 	(4, 1) 		-| (a1);
 	
-	\draw[r] 	(a2.east)	-| (3.5, 1) -| (a1.north);
+	\draw[r`]	(tb+)		to 	(4.5, -8) 	|- 	(t1`x);
+	\draw[r`]	(te2)		to 	(5, -10.2)	|- 	(t2`x);
+	\draw[r`]	(te2)		to	(5, -10.2)	|- 	(te`x);
+	\draw[r`]	(te2)		to	(5, -10.2)	|-	(tx);
+	\draw[r`]	(te2)		to 	(5, -10.2) 	|- 	(t1`y);
+	\draw[r`]	(te2)		to 	(5, -10.2)	|- 	(t2`y);
+	\draw[r`]	(te2)		to	(te`y);
+	\draw[r`]	(tn)		to	(ty);
+	
+	\draw[r`]	(t1`x)		-|	(ax);
+	\draw[r`]	(t2`x)		-|	(ax);
+	\draw[r`]	(te`x)		-|	(ax);
+	\draw[r`]	(tx)		-|	(ax);
+	\draw[r`]	(t1`y)		-|	(ay);
+	\draw[r`]	(t2`y)		-|	(ay);
+	\draw[r`]	(te`y)		-|	(ay);
+	\draw[r`]	(ty)		-|	(ay);
+	
+	\draw[r`]	(ax)		to	node[above]	{$x$}	(sx);
+	\draw[r`]	(ay)		to	node[above]	{$y$}	(sy);
+	
+	\draw[r]	(inx)		to	(sx);
+	\draw[r]	(iny)		to	(sy);
+	
+	\draw[r]	(sx)		|-	(outx);
+	\draw[r]	(sy)		|-	(6.5, -13)	-|	(-3, -2)	to	(outy);
+	
 \end{tikzpicture}
 
 
@@ -1334,7 +1399,7 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
-
+\vspace{0.5in}
 
 
 
