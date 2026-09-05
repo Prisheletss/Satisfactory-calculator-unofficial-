@@ -910,9 +910,9 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
-\vspace{0.5in}
+\vspace{0.667in}
 
-\begin{minipage}{0.3\textwidth}
+\begin{minipage}{0.34\textwidth}
 	\begin{tikzpicture}[
 		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=15},
 		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
@@ -935,49 +935,51 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 		\node[s]	(s2)	at	(2, 0)		{s};
 		
 		\node[
-		draw=red!60, fill=red!5, very thick,
-		regular polygon, regular polygon sides=3, 
-		rotate=-90, minimum size=0.2cm
-		] 
-		(tri1)	at	(-0.3, 0)		{};
-		\node				at	(-0.35, 0)		{$x$};
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=-90, minimum size=0.2cm
+			] 
+					(tri1)	at	(-0.3, 0)	{};
+		\node				at	(-0.35, 0)	{$x$};
 		
 		\node[
-		draw=red!60, fill=red!5, very thick,
-		regular polygon, regular polygon sides=3, 
-		rotate=90, minimum size=0.2cm
-		] 
-		(tri2)	at	(0.3, 0)		{};
-		\node				at	(0.35, 0)		{$y$};
+			draw=red!60, fill=red!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=90, minimum size=0.2cm
+			] 
+					(tri2)	at	(0.3, 0)	{};
+		\node				at	(0.35, 0)	{$y$};
 		
-		\node[a]	(a)		at	(0, 0)			{:};
+		\node[a]	(a)		at	(0, 0)		{:};
 		
-		\node[o]	(out1)	at	(-2, -2)	{$q_1-x$};
-		\node[o]	(out2)	at	(0, -2)		{$x+y$};
-		\node[o]	(out3)	at	(2, -2)		{$q_2-y$};
+		\node[o]	(out1)	at	(-2, -2)	{$q_1-\frac{x}{x+y} \cdot q$};
+		\node[o]	(out2)	at	(0, -2)		{$q$};
+		\node[o]	(out3)	at	(2, -2)		{$q_2-\frac{y}{x+y} \cdot q$};
 		
 		
 		
 		% === === Lines === ===
-		\draw[r]	(in1)	to	node[right]	{$q_1$}		(s1);
-		\draw[r]	(in2)	to	node[right]	{$a_2$}		(s2);
-		\draw[r]	(s1)	to	node[right]	{$q_1-x$}	(out1);
-		\draw[r]	(s2)	to	node[right]	{$q_2-y$}	(out3);
-		\draw[r]	(s1)	to	node[above]	{$x$}		(tri1);
-		\draw[r]	(s2)	to	node[above]	{$y$}		(tri2);
-		\draw[r2]	(a)		to	node[right]	{$x+y$}		(out2);
+		\draw[r]	(in1)	to	node[left]	{$q_1$}		(s1);
+		\draw[r]	(in2)	to	node[right]	{$q_2$}		(s2);
+		\draw[r]	(s1)	to	node[left]	{}	(out1);
+		\draw[r]	(s2)	to	node[right]	{}	(out3);
+		\draw[r]	(s1)	to	node[above]	{$\frac{x}{x+y} \cdot q$}		(tri1);
+		\draw[r]	(s2)	to	node[above]	{$\frac{y}{x+y} \cdot q$}		(tri2);
+		\draw[r2]	(a)		to	node[right]	{$q$}		(out2);
 		
 		
 	\end{tikzpicture}
 \end{minipage}
-\begin{minipage}{0.1\textwidth}
+\begin{minipage}{0.05\textwidth}
 	$$\equiv$$
 \end{minipage}
 \begin{minipage}{0.333\textwidth}
 	\begin{tikzpicture}[
 		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+		sx/.style ={rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
 		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
 		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+		t/.style = {rectangle, draw=black!60,	fill=black!5, 	very thick, minimum size=10},
 		r/.style = {->, thick, rounded corners=5pt},
 		r2/.style = {
 			line width=1pt, 
@@ -990,36 +992,205 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 		
 		
 		% === === Nodes === ===
-		\node[o]	(in1)	at	(-2, 1.5)	{$120$};
-		\node[o]	(in2)	at	(1, 1.5)	{$120$};
-		\node[s]	(s1)	at	(-2, 0)		{s};
-		\node[s]	(s2)	at	(1, 0)		{s};
-		\node[s] 	(sa)	at	(-1, 0)		{s};
+		\node[o]	(in1)	at	(-4, 2)		{$q_1$};
+		\node[o]	(in2)	at	(4, 2)		{$q_2$};
+		\node[s]	(s1)	at	(-4, 0)		{s};
+		\node[s]	(s2)	at	(4, 0)		{s};
 		
-		\node[a]	(a)		at	(0, 0)		{a};
+		\node[sx] 	(s3)	at	(-3, 0)		{S[$x$]};
+		\node[t]	(t11)	at	(-2, 2)		{$1$};
+		\node[t]	(t12)	at	(-2, 1)		{$2$};
+		\node[t]	(t13)	at	(-2, 0)		{$\vdots$};
+		\node[t]	(t14)	at	(-2, -1)	{$x$};
 		
-		\node[o]	(out1)	at	(-2, -1.5)	{$80$};
-		\node[o]	(out2)	at	(0, -1.5)	{$60$};
-		\node[o]	(out3)	at	(1, -1.5)	{$100$};
+		\node[sx] 	(s4)	at	(3, 0)		{S[$y$]};
+		\node[t]	(t21)	at	(2, 2)		{$1$};
+		\node[t]	(t22)	at	(2, 1)		{$2$};
+		\node[t]	(t23)	at	(2, 0)		{$\vdots$};
+		\node[t]	(t24)	at	(2, -1)		{$y$};
+		
+		\draw[draw=red!60, fill=red!5] (-0.333, 2.5) rectangle node {a} (0.333, -1.5);
+		
+		\node[o]	(out1)	at	(-3.5, -3)	{$q_1-\frac{x}{x+y} \cdot q$};
+		\node[o]	(out2)	at	(0, -3)		{$q$};
+		\node[o]	(out3)	at	(3.5, -3)		{$q_2-\frac{y}{x+y} \cdot q$};
 		
 		
 		
 		% === === Lines === ===
-		\draw[r]	(in1)	to	node[right]	{$120$}		(s1);
-		\draw[r]	(in2)	to	node[right]	{$120$}		(s2);
-		\draw[r]	(s1)	to	node[right]	{$80$}		(out1);
-		\draw[r]	(s2)	to	node[right]	{$100$}		(out3);
-		\draw[r]	(s1)	to	node[above]	{$40$}		(sa);
-		\draw[r]	(sa)	to	node[above]	{$20$}		(a);
+		\draw[r]	(in1)	to	node[left]	{$q_1$}				(s1);
+		\draw[r]	(in2)	to	node[right]	{$q_2$}				(s2);
+		\draw[r]	(s1)	to									(-4, -2.667);
+		\draw[r]	(s2)	to									(4, -2.667);
+		\draw[r]	(s1)	to									(s3);
+		\draw[r]	(s2)	to									(s4);
 		
-		\draw[r]	(sa)	|-	(-0.5, 0.5)	-|	node[above left]	{$20$}	(a);
+		\draw[r]	(s3)	|-									(t11);
+		\draw[r]	(t11)	to	node[above]	{$\frac{q}{x+y}$}	(-0.333, 2);
+		\draw[r]	(s3)	|-									(t12);
+		\draw[r]	(t12)	to									(-0.333, 1);
+		\draw[r]	(s3)	to									(t13);
+		\draw[r]	(t13)	to									(-0.333, 0);
+		\draw[r]	(s3)	|-									(t14);
+		\draw[r]	(t14)	to									(-0.333, -1);
 		
-		\draw[r]	(s2)	to	node[above]	{$20$}		(a);
-		\draw[r2]	(a)		to	node[right]	{$60$}		(out2);
+		\draw[r]	(s4)	|-									(t21);
+		\draw[r]	(t21)	to	node[above]	{$\frac{q}{x+y}$}	(0.333, 2);
+		\draw[r]	(s4)	|-									(t22);
+		\draw[r]	(t22)	to									(0.333, 1);
+		\draw[r]	(s4)	to									(t23);
+		\draw[r]	(t23)	to									(0.333, 0);
+		\draw[r]	(s4)	|-									(t24);
+		\draw[r]	(t24)	to									(0.333, -1);
+		
+		\draw[r2]	(0, -1.5)	to	node[right]	{$q$}	(out2);
 		
 		
 	\end{tikzpicture}
 \end{minipage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\section{Теорема об инверсии}
+
+\
+
+Однако интересно, а что если соединитель не может принять неограниченное количество конвейеров? В реальности как раз так и происходит: в сатисфактори множество числа входов $\mathbb{A} = \{ 2, 3 \}$. 
+
+\
+
+\noindent Теорма: схема для соединителя $(x:y)$ строится, как инверсия отделителя $(x:y)$:
+
+\begin{itemize}
+	\item Направление конвейеров реверсируется
+	
+	\item Соединители заменяются на разъединители
+	
+	\item Разъединители заменяются на соединители
+	
+	\item Выходная лента имеет строго ограниченную скорость: $(q < \frac{q_1}2) \land (q < \frac{q_2}2)$
+\end{itemize}
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{minipage}{0.2\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt},
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 2)		{$5x$};
+		\node[a]	(a1)	at	(0, 1)	{a};
+		\node[s]	(s1)	at	(0, 0)		{s};
+		\node[s]	(s2)	at	(1, 0)	{s};
+		\node[a]	(a2)	at	(0, -1)	{a};
+		\node[o]	(out1)	at	(0, -2)		{$4x$};
+		\node[o]	(out2)	at	(1, -2)	{$1x$};
+		
+		%Lines
+		\draw[r]	(in) 	to					node[left]	{$5x$}	(a1);
+		\draw[r]	(a1)	to					node[left]	{$6x$}	(s1);
+		\draw[r]	(s1)	to					node[above]	{$2x$}	(s2);
+		\draw[r]	(s2)	|-					node[right]	{$1x$}	(a1);
+		\draw[r]	(s1)	-| (-0.5, -0.5)		node[left]	{$2x$} 	|-	(a2);
+		\draw[r]	(s1)	to					node[right]	{$2x$}	(a2);
+		\draw[r]	(a2)	to					node[right]	{$4x$}	(out1);
+		\draw[r]	(s2)	to					node[right]	{$1x$}	(out2);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.15\textwidth}
+	\begin{tikzpicture}[
+		r/.style = {->, thick, rounded corners=7pt},
+		]
+		
+		\draw[r] (-0.6, 0) to (-0.3, 0) to (0, 0.375) to (0.6, -0.375) to (0.9, 0) to (1.2, 0);
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60, fill=blue!5, very thick, minimum size=10},
+		a/.style = {rectangle, draw=red!60, fill=red!5, very thick, minimum size=10},
+		o/.style = {rectangle, draw=green!60, fill=green!5, very thick, minimum size=10},
+		r/.style = {->, thick, rounded corners=5pt},
+		]
+		
+		%Nodes
+		\node[o]	(in)	at	(0, 2)		{$5x$};
+		\node[s]	(a1)	at	(0, 1)	{s};
+		\node[a]	(s1)	at	(0, 0)		{a};
+		\node[a]	(s2)	at	(1, 0)	{a};
+		\node[s]	(a2)	at	(0, -1)	{s};
+		\node[s]	(sl)	at	(0, -2)		{s};
+		\node[s]	(sr)	at	(1, -2)	{s};
+		%\node[o]	(in1)	at	()
+		
+		%Lines
+		\draw[r]	(a1) 	to					node[left]	{$5x$}	(in);
+		\draw[r]	(s1)	to					node[left]	{$6x$}	(a1);
+		\draw[r]	(s2)	to					node[above]	{$2x$}	(s1);
+		\draw[r]	(a1)	-|					node[right]	{$1x$}	(s2);
+		\draw[r]	(a2)	-| (-0.5, -0.5)		node[left]	{$2x$} 	|-	(s1);
+		\draw[r]	(a2)	to					node[right]	{$2x$}	(s1);
+		\draw[r]	(sl)	to					node[right]	{$4x$}	(a2);
+		\draw[r]	(sr)	to					node[right]	{$1x$}	(s2);
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
