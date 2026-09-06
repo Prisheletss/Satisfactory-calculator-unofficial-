@@ -2,7 +2,9 @@
 
 \
 
-Возьмём известную нам "быструю систему", и добавим ограничение на скорость конвейера: введём множество $\mathbb{V}$  допустимых скоростей $v_i$, каждая из которых является вполне конечной. Тогда необходимо помимо абстрактной площади начать учитывать и длину конвейеров. А так же необходимо начать учитывать взаимодействие ресурсов и время этого взаимодействия.
+Возьмём известную нам "быструю систему", и добавим ограничение на скорость конвейера: введём множество $\mathbb{V}$  допустимых скоростей $v_i$, каждая из которых является вполне конечной. Например, в Satisfactory: 
+
+\noindent $\mathbb{V} = \{60, 120, 270, 480, 720, 1200\}$. Тогда необходимо помимо абстрактной площади начать учитывать и длину конвейеров. А так же необходимо начать учитывать взаимодействие ресурсов и время этого взаимодействия.
 
 \
 
@@ -727,7 +729,7 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 		
 		
 		
-		\draw[draw=red!60, fill=red!5] (-0.333, 2) rectangle node {a} (0.333, -2);
+		\draw[draw=red!60, fill=red!5] (-0.333, 2) rectangle node {p} (0.333, -2);
 		
 		
 		
@@ -1218,14 +1220,14 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 \
 
-Нетрудно понять, что если $\mathbb{A} \not\supset \mathbb{T}$ -- то такое преобразование в прямом виде -- невозможно. Но на основе этого принципа можно построить искомую схему: реализуем схему для соединения $x+y$ конвейеров, а затем реализуем подсхемы для разделения на $x$, $y$ и $b$ независимо. Так же понадобится промежуточно реализоавть схему для разделения на $2$ (если $2 \not\in \mathbb{T}$):
+Нетрудно понять, что если $\mathbb{A} \not\supset \mathbb{T}$ -- то такое преобразование в прямом виде -- невозможно. Но на основе этого принципа можно построить искомую схему. Обозначим: $s(x+y) = s$, $s - (x+y) = b$, $k\cdot(x+y)$. Реализуем схему для соединения $x+y$ конвейеров, а затем реализуем подсхемы для разделения на $x$, $y$ и $b$ независимо. Так же понадобится промежуточно реализоавть схему для разделения на $2$ (если $2 \not\in \mathbb{T}$):
 
 
 
 
 
 
-\vspace{0.5in}
+\newpage
 
 \begin{tikzpicture}[
 	s`/.style =	{rectangle,	draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
@@ -1245,7 +1247,7 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 	]
 	
 	% === === Nodes === ===
-	\node[o]	(in)	at	(-6, 0)		{$x+y$};
+	\node[o]	(in)	at	(-6, 0)		{$v$};
 	\node[s`]	(a1)	at	(-3, 0)		{S[$2$]};
 	
 	\node[a]	(s1)	at	(-1.75, 0)	{a};
@@ -1299,16 +1301,16 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 	\node[s]	(sx)	at	(8, -2.55)		{s};
 	\node[s]	(sy)	at	(8, -9.35)		{s};
 	
-	\node[o]	(outx)	at	(-6, 2)			{$x+q_1$};
-	\node[o]	(outy)	at	(-6, -2)		{$y+q_2$};
+	\node[o]	(outx)	at	(-6, 2)			{$kx+q_1$};
+	\node[o]	(outy)	at	(-6, -2)		{$ky+q_2$};
 	
-	\node[o]	(inx)	at	(9.5, -2.55)	{$2x+q_1$};
-	\node[o]	(iny)	at	(9.5, -9.35)	{$2y+q_2$};
+	\node[o]	(inx)	at	(9.5, -2.55)	{$2kx+q_1$};
+	\node[o]	(iny)	at	(9.5, -9.35)	{$2ky+q_2$};
 	
 	
 	
 	% === === Lines === ===
-	\draw[r2]	(a1)		to	node[above]	{$x+y$}	(in);
+	\draw[r2]	(a1)		to	node[above]	{$v$}	(in);
 	\draw[r`]	(a1)		to	(s1);
 	
 	\draw[r`]	(s1)		to	(t11);
@@ -1381,8 +1383,8 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 	\draw[r`]	(te`y)		-|	(ay);
 	\draw[r`]	(ty)		-|	(ay);
 	
-	\draw[r`]	(ax)		to	node[above]	{$x$}	(sx);
-	\draw[r`]	(ay)		to	node[above]	{$y$}	(sy);
+	\draw[r`]	(ax)		to	node[above]	{$kx$}	(sx);
+	\draw[r`]	(ay)		to	node[above]	{$ky$}	(sy);
 	
 	\draw[r]	(inx)		to	(sx);
 	\draw[r]	(iny)		to	(sy);
@@ -1401,6 +1403,11 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 \vspace{0.5in}
 
+Казалось бы, что данная схема очень громоздкая, ведь содержит аш 5 различных подсхем... Наделе все 5, включая схему соединителя -- можно сократить по ранее упомянтм же принципам "ёлочки" и "палочки". А если для какого-нибудь $\alpha \in \{ x, y, b \} \ : \ \exists \ t \in \mathbb{T} \ | \ \alpha < t$ -- то такую схему можно реализовать даже без вовзрата, а с уже известными нам тупиками.
+
+\
+
+Хорошо, схема может и не такая уж и большая, как кажется -- но какой всё же в ней смысл, если для каждых $q_1$ и $q_2$ можно реализовать свой разделитель? Вот именно, что \underline{для каждых $q_1$ и $q_2$} нужно будет реализовывать отдельную схему, а тут -- одна для всех. Например, если ресурсы перевозятся поездами с некоторой задержкой с разных производств на другие разные производства -- то одну эту схему можно использовать для разделения обоих случаев, а не строить две независимые схемы -- Нужно лишь в конце тем, или иным методом сделать распределитель на разные заводы (чем мы займёмся в дальнейших главах).
 
 
 
@@ -1411,6 +1418,76 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
+\vspace{0.5in}
+
+\section{Затворы}
+
+\
+
+Однако важно учесть, что может быть так, что $k\cdot(x+y) \not\in \mathbb{V}$. Обозначив $k\cdot(x+y) = v$. Рассмотрим три возможные ситуации:
+
+\
+
+Если $v < \min(\mathbb{V})$ -- запора происходить не будет, и ресурсы будут просто проскальзывать, и соотношение перестанет сохранятся. Можно реализовать затворный механизм: реализуем схему на возврат некоторой доли $\frac{a}{b}$, а оставшиеся конвейеры соеденим. Тогда необходимо, чтобы:
+
+\
+
+$$
+v \cdot \frac{1}{1-\frac{a}{b}} = \min(\mathbb{V})
+\quad \quad
+\frac{v}{\min(\mathbb{V})} = 1 - \frac{a}{b}
+\quad \quad
+\frac{a}{b} = \frac{\min(\mathbb{V}) - v}{\min(\mathbb{V})}
+$$
+
+$$
+a = \frac{\min(\mathbb{V}) - v}{\gcd(\min(\mathbb{V}), v)}
+\ , \
+b = \frac{\min(\mathbb{V})}{\gcd(\min(\mathbb{V}), v)}
+$$
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
+	a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=20},
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=20},
+	r/.style = {->, thick, rounded corners=10pt},
+	r2/.style = {
+		line width=1pt, 
+		double distance=1pt, 
+		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+		rounded corners=10pt,
+		red
+	},
+	]
+	
+	
+	% === === Nodes === ===
+	\node[o]	(in)	at	(-4, 0)		{$10$};
+	\node[a]	(a1)	at	(-2, 0)		{a};
+	\node[s]	(s1)	at	(0, 0)		{s};
+	\node[s]	(s2)	at	(2, 0)		{s};
+	\node[a]	(a2)	at	(2, 2)		{a};
+	\node[o]	(out)	at	(4, -2)		{$10$};
+	
+	
+	
+	% === === Lines === ===
+	\draw[r]	(in)	to	node[above]			{$10$}	(a1);
+	\draw[r2]	(a1)	to	node[above]			{$60$}	(s1);
+	\draw[r]	(s1)	to	node[above]			{$30$}	(s2);
+	\draw[r]	(s1)	|-	node[above right]	{$30$}	(a2);
+	\draw[r]	(s2)	to	node[left]			{$10$}	(a2);
+	
+	\draw[r]	(s2)	-|	(3, 1)	|-	node[below right]	{$10$}	(a2);
+	\draw[r]	(a2)	|-	(0, 3)	-|	node[above right]	{$50$}	(a1);
+	
+	\draw[r]	(s2)	|-	node[below right]	{$10$}	(out);
+	
+\end{tikzpicture}
 
 
 
@@ -1419,7 +1496,87 @@ $$C[t_i] \xrightarrow{\text{deadend}} C[t_i-1]$$
 
 
 
+\vspace{0.5in}
 
+Если же $v > \max(\mathbb{V})$ -- то наоборот будет происходить перезапор: соотношение будет сохраняться, но числа на выходах будут другие. Воспользуемя принципом чайника и аксиомой архимеда, и просто разделим входной конвейер на несколько параллельных частей, в каждой из которых $\exists \ u \in \mathbb{V} \ | \ v < u$, к которому применим затворный механизм:
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=10},
+	a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=10},
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=10},
+	r/.style = {->, thick, rounded corners=5pt},
+	r2/.style = {
+		line width=1pt, 
+		double distance=1pt, 
+		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+		rounded corners=7.5pt,
+		red
+	},
+	]
+	
+	
+	% === === Nodes === ===
+	\node[s]	(s)		at	(-2, -2)	{s};
+	\node[o]	(in)	at	(-4, -2)	{$100$};
+	
+	\node[a]	(a11)	at	(-1, 0)		{a};
+	\node[s]	(s11)	at	(0, 0)		{s};
+	\node[s]	(s21)	at	(1, 0)		{s};
+	\node[a]	(a21)	at	(1, -1)		{a};
+	
+	\node[a]	(a12)	at	(-1, -4)	{a};
+	\node[s]	(s12)	at	(0, -4)		{s};
+	\node[s]	(s22)	at	(1, -4)		{s};
+	\node[a]	(a22)	at	(1, -3)		{a};
+	
+	\node[a]	(a3)	at	(1, -2)		{a};
+	\node[o]	(out)	at	(3, -2)		{$100$};
+		
+	
+	
+	% === === Lines === ===
+	\draw[r]	(in)	to	node[above]			{$100$}	(s);
+	\draw[r]	(s)		|-	node[below left]	{$50$}	(a11);
+	\draw[r]	(s)		|-	node[above left]	{$50$}	(a12);
+	
+	
+	\draw[r2]	(a11)	to	node[above]			{$60$}	(s11);
+	\draw[r]	(s11)	to	node[above]			{$30$}	(s21);
+	\draw[r]	(s11)	|-	node[above right]	{$30$}	(a21);
+	\draw[r]	(s21)	to	node[left]			{$10$}	(a21);
+	
+	\draw[r]	(s21)	-|	(1.5, -0.5)	|-	node[above right]	{$10$}	(a21);
+	\draw[r]	(s21)	|-	(0, 0.5)	-|	node[above right]	{$10$}	(a11);
+	
+	\draw[r]	(a21)	to	node[left]			{$50$}	(a3);
+	
+	
+	\draw[r2]	(a12)	to	node[above]			{$60$}	(s12);
+	\draw[r]	(s12)	to	node[above]			{$30$}	(s22);
+	\draw[r]	(s12)	|-	node[above right]	{$30$}	(a22);
+	\draw[r]	(s22)	to	node[left]			{$10$}	(a22);
+	
+	\draw[r]	(s22)	-|	(1.5, -3.5)	|-	node[below right]	{$10$}	(a22);
+	\draw[r]	(s22)	|-	(0, -4.5)	-|	node[below right]	{$10$}	(a12);
+	
+	
+	\draw[r]	(a22)	to	node[left]			{$50$}	(a3);
+	\draw[r]	(a3)	to	node[above]			{$100$}	(out);
+	
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Последняя ситуация: если $\exists \ m, M \in \mathbb{V} \ | \ m < v < M$ -- то в зависимости от конвретных значений $v$ и $\mathbb{V}$ можно использовать оба предыдущих метода.
 
 
 
