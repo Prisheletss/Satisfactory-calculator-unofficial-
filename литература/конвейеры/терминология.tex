@@ -242,7 +242,8 @@
 
 \vspace{0.4in}
 
-Также существуют специальные объекты, которые не являются ни соединителями ни разъединителями в прямом смысле: они либо имеют по два входа и выхода, либо, формально, не имеют ни одного, а просто ставятся между двумя конвейерами, и по некоторым правилам перекладывают ресурсы между ними (обычно, только в одном направлении):
+Также существуют специальные объекты, которые не являются ни соединителями ни разъединителями в прямом смысле: 
+они как бы перемешивают ресурсы между конвейерами. Имеют они, соответственно по два входа и выхода:
 
 
 
@@ -253,11 +254,10 @@
 
 \begin{minipage}{0.315\textwidth}
 	\begin{tikzpicture}[
-		s/.style={rectangle, draw=purple!100!blue!60, fill=purple!100!blue!5, ultra thick, minimum size=20},
 		r/.style = {->, thin, rounded corners=10pt},
 		]
 		
-		\draw[draw=purple!60!blue!10,	fill=purple!5!blue!5, ultra thick]	(-1, 0.333)	rectangle node {$\rightleftarrows$} (1, -0.333);
+		\draw[draw={rgb:red,255;blue,255},	fill={rgb:red!15,255;blue!15,255}, ultra thick]	(-1, 0.333)	rectangle node {$\rightleftarrows$} (1, -0.333);
 		\draw[r]	(-0.5, -1)		to	(-0.5, -0.333);
 		\draw[r]	(0.5, -1)		to	(0.5, -0.333);
 		\draw[r]	(-0.5, 0.333)	to	(-0.5, 1);
@@ -266,12 +266,8 @@
 \end{minipage}
 \begin{minipage}{0.3\textwidth}
 	\begin{tikzpicture}[
-		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	ultra thick, minimum size=20},
-		a/.style = {rectangle, draw=black!60,	fill=black!5,		  thin,  minimum size=20},
-		o/.style = {rectangle, draw=black!60,	fill=black!5,		  thin,  minimum size=20},
-		q/.style = {rectangle, draw,			fill, 						 minimum size=0.25cm},
+		s/.style = {rectangle, draw={rgb:red,255;blue,255},	fill={rgb:red!15,255;blue!15,255},	ultra thick, minimum size=20},
 		r/.style = {->, thin, rounded corners=10pt},
-		l/.style = {	thin, rounded corners=10pt},
 		]
 		
 		
