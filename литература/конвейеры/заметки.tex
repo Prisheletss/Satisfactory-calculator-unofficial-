@@ -220,8 +220,6 @@ $$
 
 \newpage
 
-
-
 \begin{tikzpicture}
 	\begin{axis}[
 		width=12cm,
@@ -231,23 +229,26 @@ $$
 		colorbar,         % Добавляет легенду цветов
 		colormap/bluered, % Стандартная палитра: синий (минимум) -> красный (максимум)
 		xlabel=$x$, ylabel=$y$,
-		title={Кусочная функция двух переменных},
+		title={$x_1$},
 		enlargelimits=false, % Не добавляет отступы за пределы области определения
 		]
-			
-		% Основная команда отрисовки
+		
 		\addplot3[
-			surf,          % Режим заливки цветом по значению z
-			shader=interp, % Плавные переходы между цветами (интерполяция)
-			domain=-2:2, % Область по x
-			domain y=-2:2, % Область по y
-			samples=81,   % Количество точек сетки (чем больше, тем плавнее круг)
+			surf,
+			shader=interp,
+			domain=-1.5:1.5,
+			domain y=-1.5:1.5,
+			samples=81,
 			samples y=81,
-			point meta=z   % Цвет берется из значения координаты z
-			] (x, y, {(x^2 + y^2 <= 1) ? (x + y) : (sqrt(x^2+y^2))});
-			
+			point meta=z
+			] (x, y, {(x^2 + y^2 <= 1) ? (x^2 + y^2) : (sqrt(x^2+y^2))});
+		
+		\draw[ultra thick, black, dashed]  plot[domain=0:360, samples=200] ({cos(\x)}, {sin(\x)});
+		
 	\end{axis}
 \end{tikzpicture}
+
+
 
 
 
@@ -287,8 +288,263 @@ $$
 			: (0)
 			});
 		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
+		
 	\end{axis}
 \end{tikzpicture}
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}
+	\begin{axis}[
+		width=12cm,
+		height=12cm,
+		axis equal image, % Сохраняет пропорции круга
+		view={0}{90},     % Вид строго сверху (проецирует 3D-поверхность на плоскость)
+		colorbar,         % Добавляет легенду цветов
+		colormap/bluered, % Стандартная палитра: синий (минимум) -> красный (максимум)
+		xlabel=$x$, ylabel=$y$,
+		title={$x_2$},
+		enlargelimits=false, % Не добавляет отступы за пределы области определения
+		xtick = {60, 120, 180, 240, 300, 360, 420}, 
+		xticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		ytick = {60, 120, 180, 240, 300, 360, 420}, 
+		yticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		]
+		
+		% Основная команда отрисовки
+		\addplot3[
+		surf,          % Режим заливки цветом по значению z
+		shader=interp, % Плавные переходы между цветами (интерполяция)
+		domain=0:420, % Область по x
+		domain y=0:420, % Область по y
+		samples=84,   % Количество точек сетки (чем больше, тем плавнее круг)
+		samples y=84,
+		point meta=z   % Цвет берется из значения координаты z
+		] (x, y, {
+			(y <= 120) 
+			? (
+			(x+y <= 120) 
+			? (x/4) % 0
+			: (
+			(x+y <= 180) 
+			? (x/2+y/4-30) % 1
+			: (
+			(2*x+y <= 360) 
+			? (x/2+y/4-30) % 2 
+			: (60) % 3
+			)
+			)
+			) 
+			: (
+			(x+y <= 180) 
+			? (x/2) % 4
+			: (
+			(x <= 120) 
+			? (x/2)  % 5
+			: (60) % 6
+			)
+			)
+		});
+		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}
+	\begin{axis}[
+		width=12cm,
+		height=12cm,
+		axis equal image, % Сохраняет пропорции круга
+		view={0}{90},     % Вид строго сверху (проецирует 3D-поверхность на плоскость)
+		colorbar,         % Добавляет легенду цветов
+		colormap/bluered, % Стандартная палитра: синий (минимум) -> красный (максимум)
+		xlabel=$x$, ylabel=$y$,
+		title={$x_3$},
+		enlargelimits=false, % Не добавляет отступы за пределы области определения
+		xtick = {60, 120, 180, 240, 300, 360, 420}, 
+		xticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		ytick = {60, 120, 180, 240, 300, 360, 420}, 
+		yticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		]
+		
+		% Основная команда отрисовки
+		\addplot3[
+		surf,          % Режим заливки цветом по значению z
+		shader=interp, % Плавные переходы между цветами (интерполяция)
+		domain=0:420, % Область по x
+		domain y=0:420, % Область по y
+		samples=84,   % Количество точек сетки (чем больше, тем плавнее круг)
+		samples y=84,
+		point meta=z   % Цвет берется из значения координаты z
+		] (x, y, {
+			(y <= 120) 
+			? (
+			(x+y <= 120) 
+			? (x/4) % 0
+			: (
+			(x+y <= 180) 
+			? (x/2+y/4-30) % 1
+			: (
+			(2*x+y <= 360) 
+			? (x/2+y/4-30) % 2 
+			: (x+y/2-120) % 3
+			)
+			)
+			) 
+			: (
+			(x+y <= 180) 
+			? (x/2) % 4
+			: (
+			(x <= 120) 
+			? (x/2)  % 5
+			: (x-60) % 6
+			)
+			)
+		});
+		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+
+\begin{tikzpicture}
+	\begin{axis}[
+		width=12cm,
+		height=12cm,
+		axis equal image, % Сохраняет пропорции круга
+		view={0}{90},     % Вид строго сверху (проецирует 3D-поверхность на плоскость)
+		colorbar,         % Добавляет легенду цветов
+		colormap/bluered, % Стандартная палитра: синий (минимум) -> красный (максимум)
+		xlabel=$x$, ylabel=$y$,
+		title={$y_1$},
+		enlargelimits=false, % Не добавляет отступы за пределы области определения
+		xtick = {60, 120, 180, 240, 300, 360, 420}, 
+		xticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		ytick = {60, 120, 180, 240, 300, 360, 420}, 
+		yticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		]
+		
+		% Основная команда отрисовки
+		\addplot3[
+		surf,          % Режим заливки цветом по значению z
+		shader=interp, % Плавные переходы между цветами (интерполяция)
+		domain=0:420, % Область по x
+		domain y=0:420, % Область по y
+		samples=84,   % Количество точек сетки (чем больше, тем плавнее круг)
+		samples y=84,
+		point meta=z   % Цвет берется из значения координаты z
+		] (x, y, {
+			(y <= 120) 
+			? (
+			(x+y <= 120) 
+			? (y/2) % 0
+			: (
+			(x+y <= 180) 
+			? (y/2) % 1
+			: (
+			(2*x+y <= 360) 
+			? (y/2) % 2 
+			: (y/2) % 3
+			)
+			)
+			) 
+			: (
+			(x+y <= 180) 
+			? (60) % 4
+			: (
+			(x <= 120) 
+			? (60)  % 5
+			: (60) % 6
+			)
+			)
+		});
+		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+
+
 
 
 
@@ -305,6 +561,10 @@ $$
 		xlabel=$x$, ylabel=$y$,
 		title={$y_2$},
 		enlargelimits=false, % Не добавляет отступы за пределы области определения
+		xtick = {60, 120, 180, 240, 300, 360, 420}, 
+		xticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		ytick = {60, 120, 180, 240, 300, 360, 420}, 
+		yticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
 		]
 		
 		% Основная команда отрисовки
@@ -320,27 +580,115 @@ $$
 			(y <= 120) 
 			? (
 				(x+y <= 120) 
-				? (y/4) 
+				? (y/4) % 0
 				: (
 					(x+y <= 180) 
-					? (y/4) 
+					? (y/4) % 1
 					: (
 						(2*x+y <= 360) 
-						? (30-x/2-y/4) 
-						: (0)
+						? (90-x/2-y/4) % 2 
+						: (0) % 3
 					)
 				)
 			) 
 			: (
 				(x+y <= 180) 
-				? (y/2-30) 
+				? (y/2-30) % 4
 				: (
 					(x <= 120) 
-					? (60-x/4) 
-					: (0)
+					? (60-x/2)  % 5
+					: (0) % 6
 				)
 			)
 		});
+		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
+		
+	\end{axis}
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}
+	\begin{axis}[
+		width=12cm,
+		height=12cm,
+		axis equal image, % Сохраняет пропорции круга
+		view={0}{90},     % Вид строго сверху (проецирует 3D-поверхность на плоскость)
+		colorbar,         % Добавляет легенду цветов
+		colormap/bluered, % Стандартная палитра: синий (минимум) -> красный (максимум)
+		xlabel=$x$, ylabel=$y$,
+		title={$y_3$},
+		enlargelimits=false, % Не добавляет отступы за пределы области определения
+		xtick = {60, 120, 180, 240, 300, 360, 420}, 
+		xticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		ytick = {60, 120, 180, 240, 300, 360, 420}, 
+		yticklabels = {$60$, $120$, $180$, $240$, $300$, $360$, $420$},
+		]
+		
+		% Основная команда отрисовки
+		\addplot3[
+		surf,          % Режим заливки цветом по значению z
+		shader=interp, % Плавные переходы между цветами (интерполяция)
+		domain=0:420, % Область по x
+		domain y=0:420, % Область по y
+		samples=84,   % Количество точек сетки (чем больше, тем плавнее круг)
+		samples y=84,
+		point meta=z   % Цвет берется из значения координаты z
+		] (x, y, {
+			(y <= 120) 
+			? (
+			(x+y <= 120) 
+			? (y/4) % 0
+			: (
+			(x+y <= 180) 
+			? (y/4) % 1
+			: (
+			(2*x+y <= 360) 
+			? (x/2+3*y/4-90) % 2 
+			: (y/2) % 3
+			)
+			)
+			) 
+			: (
+			(x+y <= 180) 
+			? (y/2-30) % 4
+			: (
+			(x <= 120) 
+			? (x/2+y-120)  % 5
+			: (y-60) % 6
+			)
+			)
+		});
+		
+		
+		
+		\draw[ultra thick, black] 			plot[domain=0:120, samples=84]		({\x}, {120-\x});
+		\draw[ultra thick, black] 			plot[domain=0:180, samples=84]		({\x}, {180-\x});
+		\draw[ultra thick, black] 			plot[domain=120:180, samples=84]	({\x}, {360-2*\x});
+		\draw[ultra thick, black, dashed]	plot[domain=0:120, samples=84]		({\x}, {360-2*\x});
+		\draw[ultra thick, black] 			plot[domain=0:420, samples=84]		({\x}, {120});
+		\draw[ultra thick, black] 			plot[domain=120:420, samples=84]	({120}, {\x});
+		\draw[ultra thick, black, dashed] 	plot[domain=00:120, samples=84]		({120}, {\x});
 		
 	\end{axis}
 \end{tikzpicture}
