@@ -74,9 +74,10 @@ for i in range(0, 10_000):
 
 
 
+
 for den in range(1, 100+1):
     print(den)
-    for num in range(1, den):
+    for num in range(1, 10*den):
         k = num/den
         count = counter(k)
         file.write(f"{count}\t")
