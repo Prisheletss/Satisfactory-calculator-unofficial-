@@ -1,5 +1,6 @@
 \chapter{Многоресурсные системы}
 
+
 \
 
 В реальности часто бывает так, что вдоль одной шины идёт транспортировка множества разных типов ресурсов на параллельных конвейерах, притом эти конвейеры полупустые. Для решения этой проблемы часто используют сушибелт (от англ: sushi-belt -- линия, конвейер, по которой в некоторых заведениях курсируют суши разных видов). На конце такой ленты используют специальный вид разделителей, который может отфильтровать нужный тип ресурса.
@@ -71,7 +72,9 @@
 
 
 
-\vspace{0.5in}
+\vspace{1in}
+
+\section{Вычитатель}
 
 Для конвейеров со смешанными ресурсами выполняются все предыдущие теоремы. Но при помощи фильтра можно построить одну интересную схему. Идея этой схемы начинается с того, что мы прекрасно знаем, как "складывать" ресурсы -- а можем ли мы их вычитать...? Можем!
 
@@ -213,10 +216,11 @@
 
 \vspace{0.5in}
 
+\noindent\begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
 	\begin{axis}[clip = false,
 		xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
-		x=0.5cm, y=0.5cm,
+		x=0.4cm, y=0.4cm,
 		axis lines = middle, xtick = {6, 12},
 		xticklabels = {$60$, $120$},
 		xticklabel style = {anchor=south west}, 
@@ -240,17 +244,12 @@
 		
 	\end{axis}
 \end{tikzpicture}
-
-
-
-
-
-\vspace{0.5in}
-
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
 	\begin{axis}[clip = false,
 		xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
-		x=0.5cm, y=0.5cm,
+		x=0.4cm, y=0.4cm,
 		axis lines = middle, xtick = {6, 12},
 		xticklabels = {$60$, $120$},
 		xticklabel style = {anchor=south west}, 
@@ -269,6 +268,8 @@
 		
 	\end{axis}
 \end{tikzpicture}
+\end{minipage}
+
 
 
 
@@ -282,11 +283,147 @@
 
 \vspace{0.5in}
 
-Как можем заметить, "вычитание" происходит с двух сторон: по мере роста $q$, уменьшаются как $y_1$, так и с какого-то момента и $x_2$. Если второй тип ресурса закольцевать, и поставить буффер -- то получится замкнутая схема, в которой при определённом росте входной скорости, выход на другой -- уменьшается.	
+Как можем заметить, "вычитание" происходит с двух сторон: по мере роста $q$, уменьшаются как $y_1$, так и с какого-то момента и $x_2$. Если второй тип ресурса закольцевать, и поставить буффер -- то получится замкнутая схема, в которой при определённом росте входной скорости, выход на другой -- уменьшается.
+
+\
+
+\noindent Самый интересный график -- $x_2(q)$ -- он задаётся функцией:	
+
+$$
+x_2(q) = \frac18 \left( |q| - 2|q-60| + |q-120| \right)
+$$
+
+\
+
+Первоначально, чем больше ресурсов идёт на вход -- тем больше выход (с коэффициентом $1/4$), но после критического значения в $q=60$ -- выход только уменьшается. А что если выход приплюсовать к входу? Подведём на вход критическое значение ресурсов, соответственно, на выходе поедет $15$ ресурсов, но когда они приедут на вход -- то уменьшат значение на выходе. Но ведь если значение на выходе уменьшилось -- то уменьшилось и значение на входе -- стало быть, выход вырос. Но раз выход вырос -- то вырос и вход -- тогда выход уменьшился...
+
+\
+
+\noindent Честно решив рекурсивное уравнение, получим:
+
+\begin{align*}
+	&x^0_2(q) = \frac18 \left( |q| - 2|q-60| + |q-120| \right)\\
+	&x^n_2(q) = x^0_2(q + g_{n-1}(q))\\
+	&x_2 = \lim_{n\to\infty} x^n_2(x) = \\
+	&\quad = \frac1{30} \left( 5|q| - 8|q-30| + 3|q-120| \right)
+\end{align*}
 
 
 
 
+
+
+\vspace{0.5in}
+
+\noindent\begin{minipage}{0.5\textwidth}
+	\begin{tikzpicture}
+		\begin{axis}[clip = false,
+			xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
+			x=0.4cm, y=0.4cm,
+			axis lines = middle, xtick = {6, 12},
+			xticklabels = {$60$, $120$},
+			xticklabel style = {anchor=south west}, 
+			xmajorgrids = true,
+			ytick = {1.5, 6}, 
+			yticklabels = {$15$, $60$},
+			ymajorgrids = true,
+			grid style = dashed]
+			
+			
+			\addplot[domain=0:12, red, ultra thick]{x/2};
+			\addplot[domain=12:16, red, ultra thick]{6} node[above left, pos=1] {$x_1$};
+			
+			\addplot[domain=0:16, green, ultra thick]{( 5*abs(x) - 8*abs(x-4.5) + 3*abs(x-12) ) / 30} node[above left, pos=1] {$x_2$};
+			
+			\addplot[domain=6:12, blue, ultra thick]{1.5 + 3*(x-6)/4};
+			\addplot[domain=12:16, blue, ultra thick]{x-6} node[above left, pos=1] {$x_3$};
+			\addplot[domain=9:12, blue!75, dashed, thick]{x-6};
+			
+		\end{axis}
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+	\begin{tikzpicture}
+		\begin{axis}[clip = false,
+			xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
+			x=0.4cm, y=0.4cm,
+			axis lines = middle, xtick = {6, 12},
+			xticklabels = {$60$, $120$},
+			xticklabel style = {anchor=south west}, 
+			xmajorgrids = true,
+			ytick = {3, 6}, 
+			yticklabels = {$15$, $60$},
+			ymajorgrids = true,
+			grid style = dashed]
+			
+			
+			\addplot[domain=0:12, red, ultra thick]{6-x/2};
+			\addplot[domain=12:16, red, ultra thick]{0} node[above left, pos=1] {$y_1$};
+			
+			\addplot[domain=0:12, green, ultra thick]{3+x/4};
+			\addplot[domain=12:16, green, ultra thick]{6} node[above left, pos=1] {$y_2, y_3$};
+			
+		\end{axis}
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Мы получили однозначный ответ -- это большое счастье. На самом деле, многие рекуррентные соотношения такого вида не имеют статический точек на бесконечности -- они могут иметь периодический характер решений, а того хуже -- апериодический. Примером такого соотношения будут соотношения вида:
+
+\begin{align*}
+	&x^0_2(q) = \frac18 \left( |q| - 2|q-60| + |q-120| \right)\\
+	&x^n_2(q) = x^0_2(q + k \cdot g_{n-1}(q)) \ , \ k \in \mathbb{R}^+\\
+	&x_2 = \lim_{n\to\infty} x^n_2(x)
+\end{align*}
+
+\
+
+Как можно заметить, для реализации такой системы необходимо реализовать всего лишь один новый элемент -- умножитель. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{1in}
+
+\section{Вестгейт}
+
+Удобнее всего будет реализовать умножитель, используя новый тип делителя -- Вестгейт. Данный термин дословно переводится, как "сбрасыватель излишка". Данный объект является логическим продолжением темы, которая была поднята в главе "\textbf{Избыток на вход}"
 
 
 
