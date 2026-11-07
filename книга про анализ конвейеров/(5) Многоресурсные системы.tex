@@ -102,12 +102,7 @@
 		double distance=1.2pt, 
 		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
 		rounded corners=10pt
-	},
-	l2/.style = {
-		line width=1pt, 
-		double distance=1.2pt,
-		rounded corners=10pt
-	},
+	}
 	]
 	
 	
@@ -174,20 +169,8 @@
 	\draw[r, red]	(s11)		to	(s12);
 	\draw[r, red]	(s12)		to	(p2);
 	
-	%\draw[l2, red]	(p1)		to	(-2, 2.5);
-	%\draw[l2, blue]	(-2, 2.5)	to	(-2, 3);
-	%\draw[l2, red]	(-2, 3)		to	(-2, 3.5);
-	%\draw[l2, blue]	(-2, 3.5)	to	(-2, 4);
-	%\draw[l2, red]	(-2, 4)		to	(-2, 4.5);
-	%\draw[l2, blue]	(-2, 4.5)	to	(-2, 5);
-	%\draw[l2, red]	(-2, 5)		to	(-2, 5.5);
-	%\draw[r2, blue]	(-2, 5.5)	to	(f1);
 	\draw[r2]		(p1)		to	(f1);
 	
-	%\draw[l2, red]	(p2)		to	(2, 4.5);
-	%\draw[l2, blue]	(2, 4.5)	to	(2, 5);
-	%\draw[l2, red]	(2, 5)		to	(2, 5.5);
-	%\draw[r2, blue]	(2, 5.5)	to	(f2);
 	\draw[r2]		(p2)		to	(f2);
 	
 	\draw[r, blue]	(s21)		to	(p1);
@@ -516,9 +499,14 @@ $$
 		draw=blue, fill=blue, very thick, 
 		minimum size=0.05cm, inner sep=0.05cm, outer sep=0.05cm
 	},
-	pri/.style = {
+	prs/.style = {
 		regular polygon, regular polygon sides=3,
 		draw=blue!60, fill=blue!5, very thick, 
+		minimum size=0.05cm, inner sep=0.05cm, outer sep=0.05cm
+	},
+	pra/.style = {
+		regular polygon, regular polygon sides=3,
+		draw=red!60, fill=red!5, very thick, 
 		minimum size=0.05cm, inner sep=0.05cm, outer sep=0.05cm
 	},
 	r/.style = {->, thick, rounded corners=10pt},
@@ -528,74 +516,58 @@ $$
 		double distance=1.2pt, 
 		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
 		rounded corners=10pt
-	},
-	l2/.style = {
-		line width=1pt, 
-		double distance=1.2pt,
-		rounded corners=10pt
-	},
+	}
 	]
 	
 	
 	
-	%\draw[fill=black, thick] (5,6) circle (1.5pt) node[right] {$\infty$};
-	%\draw[fill=white, thick] (5,5.5) circle (3pt) node[right] {$60$};
+	\draw[fill=black, thick] (7,3) circle (1.5pt) node[right] {$\infty$};
+	\draw[fill=white, thick] (7,2.5) circle (3pt) node[right] {$120$};
 	
-	%\draw[fill=red,  thick] (5,4.5) circle (3pt) node[right] {Type 1};
-	%\draw[fill=blue, thick] (5,4) circle (3pt) node[right] {Type 2};
-	%\draw[fill=black, thick] (5,3.5) circle (3pt) node[right] {Mixed zone};
+	\draw[fill=red,  thick] (7,1.5) circle (3pt) node[right] {Type 1};
+	\draw[fill=blue, thick] (7,1) circle (3pt) node[right] {Type 2};
+	\draw[fill=black, thick] (7,0.5) circle (3pt) node[right] {Mixed zone};
 	
 	
 	
 	% === === Nodes === ===
-	\node[o]	(in1)	at	(-2, -4)		{$60$};
-	\node[o]	(in2)	at	(-4, -4)		{$q$};
-	\node[o]	(in3)	at	(6, 0)			{$120$};
+	\node[o]	(inb)	at	(-1.5, -3)		{$120$};
+	\node[o]	(inq)	at	(-3, -3)		{$q$};
+	\node[o]	(inr)	at	(4.5, 0)		{$120$};
 	
-	\node[o]	(out1)	at	(2, 4)			{$1$};
-	\node[o]	(out2)	at	(-2, 4)			{$2$};
-	\node[o]	(out3)	at	(4, -2)			{$2q$};
-	%\node[o]	()
+	\node[o]	(out1)	at	(1.5, 3)		{$1$};
+	\node[o]	(out2)	at	(-1.5, 3)		{$2$};
+	\node[o]	(out3)	at	(3, -1.5)		{$2q$};
+	\node[o]	(out4)	at	(-3, 3)			{$4$};
+	\node[o]	(out5)	at	(-4.5, 3)		{$5$};
 	
 	\node[a]	(a1)	at	(0, 0)			{a};
 	
-	\node[
-		draw=red!60, fill=red!5, very thick,
-		regular polygon, regular polygon sides=3, 
-		rotate=-90, minimum size=0.75cm
-		] 
-		(tri1) at (1.6, 0) 					{};
-	\node[a]	(p1)	at	(2, 0)			{p};
-	\node				at	(1.55, 0)		{$1$};
+	\node[pra, rotate=-90]	(tri0)	at	(1.1, 0) 	{};
+	\node[a]	(p1)	at	(1.5, 0)		{p};
 	
-	\node[1]	(n1)	at	(1.7, 2)		{};
-	\node[2]	(n2)	at	(2, 2.3)		{};
-	\node[s]	(f1)		at	(2, 2)		{f};
+	\node[2]	(n1)	at	(1.2, 1.5)		{};
+	\node[1]	(n2)	at	(1.5, 1.8)		{};
+	\node[s]	(f1)	at	(1.5, 1.5)		{f};
 	
-	\node[s]	(s1)	at	(0, 2)			{s};
-	\node[a]	(a2)	at	(-2, 2)			{a};
+	\node[s]	(s1)	at	(0, 1.5)		{s};
+	\node[a]	(a2)	at	(-1.5, 1.5)		{a};
 	
-	\node[pri, rotate=-90]	(tri1) 	at	(-1.7, 0) 		{};
-	\node[s]	(w1)	at	(-2, 0)			{w};
+	\node[prs, rotate=-90]	(tri1) 	at	(-1.2, 0) 	{};
+	\node[s]	(w1)	at	(-1.5, 0)		{w};
 	
-	\node[pri, rotate=90]	(tri2) 	at	(3.7, 0) 		{};
-	\node[s]	(w2)	at	(4, 0)			{w};
+	\node[prs, rotate=90]	(tri2) 	at	(2.7, 0) 	{};
+	\node[s]	(w2)	at	(3, 0)			{w};
 	
-	\node[pri]	(tri3) 	at	(-2, -1.7) 		{};
-	\node[s]	(w3)	at	(-2, -2)		{w};
+	\node[prs, rotate=90]	(tri3) 	at	(-1.8, -1.5){};
+	\node[s]	(w3)	at	(-1.5, -1.5)	{w};
 	
-	\node[
-		draw=red!60, fill=red!5, very thick,
-		regular polygon, regular polygon sides=3, 
-		rotate=90, minimum size=0.75cm
-		] 
-				(tri2)	at (-3.6, -2) 		{};
-	\node[a]	(p2)	at	(-4, -2)		{p};
-	\node				at	(-3.55, -2)		{$1$};
+	\node[pra]	(tri4)	at 	(-3, -1.9) 		{};
+	\node[a]	(p2)	at	(-3, -1.5)		{p};
 	
-	\node[1]	(n3)	at	(-3.7, 0)		{};
-	\node[2]	(n4)	at	(-4, 0.3)		{};
-	\node[s]	(f2)	at	(-4, 0)			{f};
+	\node[1]	(n3)	at	(-3.3, 0)		{};
+	\node[2]	(n4)	at	(-3, 0.3)		{};
+	\node[s]	(f2)	at	(-3, 0)			{f};
 	
 	
 	
@@ -605,7 +577,29 @@ $$
 	
 	
 	% === === Lines === ===
-	%\draw[r, blue]	(in1)		to	(s21);
+	\draw[r, red]	(inq)	to	(tri4);
+	\draw[r, red]	(inr)	to	(w2);
+	\draw[r, blue]	(inb)	to	(w3);
+	
+	\draw[r, red]	(f2)	-|	(out5);
+	\draw[r, blue]	(f2)	to	(out4);
+	\draw[r, blue]	(a2)	to	(out2);
+	\draw[r, red]	(f1)	to	(out1);
+	\draw[r, red]	(w2)	to	(out3);
+	
+	\draw[r2]		(p1)	to	(f1);
+	\draw[r2]		(p2)	to	(f2);
+	
+	\draw[r, red]	(tri2)	to	(p1);
+	\draw[r, blue]	(w3)	to	(w1);
+	\draw[r, blue]	(tri3)	to	(p2);
+	\draw[r, blue]	(tri1)	to	(a1);
+	\draw[r, blue]	(w1)	to	(a2);
+	\draw[r, blue]	(a1)	to	(tri0);
+	\draw[r, blue]	(f1)	to	(s1);
+	\draw[r, blue]	(s1)	to	(a1);
+	\draw[r, blue]	(s1)	to	(a2);
+	
 	
 \end{tikzpicture}
 
