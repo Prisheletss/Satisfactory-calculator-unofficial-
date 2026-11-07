@@ -475,9 +475,10 @@ $$
 \vspace{0.5in}
 
 Этот новый тип делителя позволяет модифицировать все уже известные нам схемы, основанные на принципе излишков таким образом, чтобы сделать их графики более резкими и выраженными. Также, данный делитель позволяет добиться нулевого выхода при ненулевом входе
+
 \
 
-\noindent Собственно, умножитель:
+\noindent Собственно, умножитель, например, на 2:
 
 
 
@@ -522,7 +523,7 @@ $$
 	
 	
 	\draw[fill=black, thick] (7,3) circle (1.5pt) node[right] {$\infty$};
-	\draw[fill=white, thick] (7,2.5) circle (3pt) node[right] {$120$};
+	\draw[fill=white, thick] (7,2.5) circle (3pt) node[right] {Limited};
 	
 	\draw[fill=red,  thick] (7,1.5) circle (3pt) node[right] {Type 1};
 	\draw[fill=blue, thick] (7,1) circle (3pt) node[right] {Type 2};
@@ -531,15 +532,18 @@ $$
 	
 	
 	% === === Nodes === ===
-	\node[o]	(inb)	at	(-1.5, -3)		{$120$};
+	\node at (2, 0.75) {$120$};
+	\node at (-2.25, -2) {$60$};
+	
+	\node[o]	(inb)	at	(-1.5, -3)		{$60$};
 	\node[o]	(inq)	at	(-3, -3)		{$q$};
 	\node[o]	(inr)	at	(4.5, 0)		{$120$};
 	
-	\node[o]	(out1)	at	(1.5, 3)		{$1$};
-	\node[o]	(out2)	at	(-1.5, 3)		{$2$};
-	\node[o]	(out3)	at	(3, -1.5)		{$2q$};
-	\node[o]	(out4)	at	(-3, 3)			{$4$};
-	\node[o]	(out5)	at	(-4.5, 3)		{$5$};
+	\node[o]	(out1)	at	(1.5, 3)		{$x_2$};
+	\node[o]	(out2)	at	(-1.5, 3)		{$y_2$};
+	\node[o]	(out3)	at	(3, -3)			{$x_3$};
+	\node[o]	(out4)	at	(-3, 3)			{$y_1$};
+	\node[o]	(out5)	at	(-4.5, 3)		{$x_1$};
 	
 	\node[a]	(a1)	at	(0, 0)			{a};
 	
@@ -588,11 +592,11 @@ $$
 	\draw[r, red]	(w2)	to	(out3);
 	
 	\draw[r2]		(p1)	to	(f1);
-	\draw[r2]		(p2)	to	(f2);
+	\draw[r]		(p2)	to	(f2);
 	
 	\draw[r, red]	(tri2)	to	(p1);
 	\draw[r, blue]	(w3)	to	(w1);
-	\draw[r, blue]	(tri3)	to	(p2);
+	\draw[r2, blue]	(tri3)	to	(p2);
 	\draw[r, blue]	(tri1)	to	(a1);
 	\draw[r, blue]	(w1)	to	(a2);
 	\draw[r, blue]	(a1)	to	(tri0);
