@@ -255,7 +255,7 @@
 		xticklabel style = {anchor=south west}, 
 		xmajorgrids = true,
 		ytick = {3, 6}, 
-		yticklabels = {$15$, $60$},
+		yticklabels = {$30$, $60$},
 		ymajorgrids = true,
 		grid style = dashed]
 		
@@ -305,7 +305,7 @@ $$
 	&x^0_2(q) = \frac18 \left( |q| - 2|q-60| + |q-120| \right)\\
 	&x^n_2(q) = x^0_2(q + g_{n-1}(q))\\
 	&x_2 = \lim_{n\to\infty} x^n_2(x) = \\
-	&\quad = \frac1{30} \left( 5|q| - 8|q-30| + 3|q-120| \right)
+	&\quad = \frac1{30} \left( 5|q| - 8|q-45| + 3|q-120| \right)
 \end{align*}
 
 
@@ -315,57 +315,37 @@ $$
 
 \vspace{0.5in}
 
-\noindent\begin{minipage}{0.5\textwidth}
-	\begin{tikzpicture}
-		\begin{axis}[clip = false,
-			xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
-			x=0.4cm, y=0.4cm,
-			axis lines = middle, xtick = {6, 12},
-			xticklabels = {$60$, $120$},
-			xticklabel style = {anchor=south west}, 
-			xmajorgrids = true,
-			ytick = {1.5, 6}, 
-			yticklabels = {$15$, $60$},
-			ymajorgrids = true,
-			grid style = dashed]
-			
-			
-			\addplot[domain=0:12, red, ultra thick]{x/2};
-			\addplot[domain=12:16, red, ultra thick]{6} node[above left, pos=1] {$x_1$};
-			
-			\addplot[domain=0:16, green, ultra thick]{( 5*abs(x) - 8*abs(x-4.5) + 3*abs(x-12) ) / 30} node[above left, pos=1] {$x_2$};
-			
-			\addplot[domain=6:12, blue, ultra thick]{1.5 + 3*(x-6)/4};
-			\addplot[domain=12:16, blue, ultra thick]{x-6} node[above left, pos=1] {$x_3$};
-			\addplot[domain=9:12, blue!75, dashed, thick]{x-6};
-			
-		\end{axis}
-	\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-	\begin{tikzpicture}
-		\begin{axis}[clip = false,
-			xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
-			x=0.4cm, y=0.4cm,
-			axis lines = middle, xtick = {6, 12},
-			xticklabels = {$60$, $120$},
-			xticklabel style = {anchor=south west}, 
-			xmajorgrids = true,
-			ytick = {3, 6}, 
-			yticklabels = {$15$, $60$},
-			ymajorgrids = true,
-			grid style = dashed]
-			
-			
-			\addplot[domain=0:12, red, ultra thick]{6-x/2};
-			\addplot[domain=12:16, red, ultra thick]{0} node[above left, pos=1] {$y_1$};
-			
-			\addplot[domain=0:12, green, ultra thick]{3+x/4};
-			\addplot[domain=12:16, green, ultra thick]{6} node[above left, pos=1] {$y_2, y_3$};
-			
-		\end{axis}
-	\end{tikzpicture}
-\end{minipage}
+\begin{tikzpicture}
+	\begin{axis}[clip = false,
+		xmin = -0.5, xmax = 17, ymin = -0.5, ymax = 11, xlabel=$q$, 
+		x=0.4cm, y=0.4cm,
+		axis lines = middle, xtick = {4.5, 12},
+		xticklabels = {$45$, $120$},
+		xticklabel style = {anchor=south west}, 
+		xmajorgrids = true,
+		ytick = {1.5, 6}, 
+		yticklabels = {$15$, $60$},
+		ymajorgrids = true,
+		grid style = dashed]
+		
+		\addplot[domain=-0.1:4.6, black!30, thin, dashed]{3};
+		\node at (-0.9, 3)	{$30$};
+		
+		
+		\addplot[domain=1.5:4.5, red!75, thick, dashed]{(x-4.5)/2.5+3};
+		\addplot[domain=0:4.5, red, ultra thick]{x/1.5};
+		\addplot[domain=4.5:12, red, ultra thick]{(x-4.5)/2.5 + 3};
+		\addplot[domain=12:16, red, ultra thick]{6} node[above left, pos=1] {$x_1$};
+		
+		\addplot[domain=0:16, green, ultra thick]{( 5*abs(x) - 8*abs(x-4.5) + 3*abs(x-12) ) / 30} node[above left, pos=1] {$x_2$};
+		
+		%\addplot[domain=0:4.5, blue, ultra thick]{x/3};
+		\addplot[domain=4.5:12, blue, ultra thick]{(x-4.5)*0.6 + 1.5};
+		\addplot[domain=12:16, blue, ultra thick]{x-6} node[above left, pos=1] {$x_3$};
+		
+		
+	\end{axis}
+\end{tikzpicture}
 
 
 
@@ -375,7 +355,11 @@ $$
 
 \vspace{0.5in}
 
-Мы получили однозначный ответ -- это большое счастье. На самом деле, многие рекуррентные соотношения такого вида не имеют статический точек на бесконечности -- они могут иметь периодический характер решений, а того хуже -- апериодический. Примером такого соотношения будут соотношения вида:
+Интересно, что такое преобразование, по сути, берёт отрезок $[0; \ 60]$, и сдвигает точку $30$ в положение $15$, сохраняя значения функций в этой точке, и сохраняя непрерывность первоначальной функции. Такое преобразование и описывается сменой оси $x$ на $x + h(x)$, при сохранении первоначальной разметки.
+
+\
+
+Мы получили однозначный ответ -- это большое счастье. На самом деле, многие рекуррентные соотношения такого вида не имеют статический точек на бесконечности -- они могут иметь периодический характер решений, а того хуже -- апериодический. В общем виде имеем:
 
 \begin{align*}
 	&x^0_2(q) = \frac18 \left( |q| - 2|q-60| + |q-120| \right)\\
@@ -423,12 +407,207 @@ $$
 
 \section{Вестгейт}
 
-Удобнее всего будет реализовать умножитель, используя новый тип делителя -- Вестгейт. Данный термин дословно переводится, как "сбрасыватель излишка". Данный объект является логическим продолжением темы, которая была поднята в главе "\textbf{Избыток на вход}"
+\
+
+Удобнее всего будет реализовать умножитель, используя новый тип делителя -- Вестгейт. Данный термин дословно переводится, как "сбрасыватель излишка". Данный объект является логическим продолжением темы, которая была поднята в главе "\textbf{Избыток на вход}". 
 
 
 
 
 
+
+
+
+\vspace{0.5in}
+
+\begin{minipage}{0.35\textwidth}
+	\begin{tikzpicture}[
+		s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=20},
+		a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=20},
+		o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=20},
+		r/.style = {->, thick, rounded corners=10pt},
+		r2/.style = {line width=1pt, 
+			double distance=1pt, 
+			arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+			rounded corners=10pt,
+			black!30!red!80
+		},
+		]
+		
+		% === === Nodes === ===
+		\node[o]	(in)	at	(0, 2)	{in};
+		\node[o]	(out1)	at	(0, -2)	{$y_1$};
+		\node[o]	(out2)	at	(1, -2)	{$y_2$};
+		
+		\draw[r2]	(0, 0)		to	node[left]	{$q_1$}		(out1.north);
+		\node[
+			draw=blue!60, fill=blue!5, very thick,
+			regular polygon, regular polygon sides=3, 
+			rotate=180, minimum size=0.1cm
+			] 
+			(tri1) at (0, -0.4) 			{};
+		\node[s]	(w)		at	(0, 0)		{w};
+		
+		\draw[fill=black, thick] (-2,4) circle (3pt) node[right] {$\ q_0>>q$};
+		\draw[fill=white, draw=red, thick] (-2,3) circle (3pt) node[right] {$\ q_1 < q/2$};
+		
+		
+		
+		% === === Lines === ===
+		\draw[r]	(in.south)	to	node[right]	{$q$}		(w);
+		\draw[r]	(w)			-|	node[above]	{$q-q_1$}	(out2.north);
+		
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+	\begin{tikzpicture}
+		\begin{axis}[clip = false,
+			xmin = -0.5, xmax = 6, ymin = -0.5, ymax = 4, x=1.25cm, y=1.25cm,
+			xlabel=$q$,
+			axis lines = middle, xtick = {2},
+			xticklabels = {$q_1$},
+			xticklabel style = {anchor=north west}, 
+			xmajorgrids = true,
+			ytick = {0}, 
+			yticklabels = {},
+			grid style = dashed]
+			
+			
+			\addplot[domain=0:2, red, very thick]{x};
+			\addplot[domain=2:5, red, very thick]{2} node[above left, pos=1] {$y_1$};
+			
+			\addplot[domain=0:2, blue, very thick]{0};
+			\addplot[domain=2:5, blue, very thick]{x-2} node[left, pos=1] {$y_2$};
+			
+		\end{axis}
+	\end{tikzpicture}
+\end{minipage}
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+Этот новый тип делителя позволяет модифицировать все уже известные нам схемы, основанные на принципе излишков таким образом, чтобы сделать их графики более резкими и выраженными. Также, данный делитель позволяет добиться нулевого выхода при ненулевом входе
+\
+
+\noindent Собственно, умножитель:
+
+
+
+
+
+
+
+
+
+\vspace{0.5in}
+
+\begin{tikzpicture}[
+	s/.style = {rectangle, draw=blue!60,	fill=blue!5,	very thick, minimum size=15},
+	a/.style = {rectangle, draw=red!60,		fill=red!5,		very thick, minimum size=15},
+	o/.style = {rectangle, draw=green!60,	fill=green!5,	very thick, minimum size=15},
+	1/.style = {rectangle, draw=red,		fill=red, 					minimum size=0.25cm},
+	2/.style = {
+		regular polygon, regular polygon sides=3, rotate=-90,
+		draw=blue, fill=blue, very thick, 
+		minimum size=0.05cm, inner sep=0.05cm, outer sep=0.05cm
+	},
+	pri/.style = {
+		regular polygon, regular polygon sides=3,
+		draw=blue!60, fill=blue!5, very thick, 
+		minimum size=0.05cm, inner sep=0.05cm, outer sep=0.05cm
+	},
+	r/.style = {->, thick, rounded corners=10pt},
+	l/.style = {	thick, rounded corners=8pt},
+	r2/.style = {
+		line width=1pt, 
+		double distance=1.2pt, 
+		arrows = {-Stealth[inset=0pt, angle=45:10pt]},
+		rounded corners=10pt
+	},
+	l2/.style = {
+		line width=1pt, 
+		double distance=1.2pt,
+		rounded corners=10pt
+	},
+	]
+	
+	
+	
+	%\draw[fill=black, thick] (5,6) circle (1.5pt) node[right] {$\infty$};
+	%\draw[fill=white, thick] (5,5.5) circle (3pt) node[right] {$60$};
+	
+	%\draw[fill=red,  thick] (5,4.5) circle (3pt) node[right] {Type 1};
+	%\draw[fill=blue, thick] (5,4) circle (3pt) node[right] {Type 2};
+	%\draw[fill=black, thick] (5,3.5) circle (3pt) node[right] {Mixed zone};
+	
+	
+	
+	% === === Nodes === ===
+	\node[o]	(in1)	at	(-2, -4)		{$60$};
+	\node[o]	(in2)	at	(-4, -4)		{$q$};
+	\node[o]	(in3)	at	(6, 0)			{$120$};
+	
+	\node[o]	(out1)	at	(2, 4)			{$1$};
+	\node[o]	(out2)	at	(-2, 4)			{$2$};
+	\node[o]	(out3)	at	(4, -2)			{$2q$};
+	%\node[o]	()
+	
+	\node[a]	(a1)	at	(0, 0)			{a};
+	
+	\node[
+		draw=red!60, fill=red!5, very thick,
+		regular polygon, regular polygon sides=3, 
+		rotate=-90, minimum size=0.75cm
+		] 
+		(tri1) at (1.6, 0) 					{};
+	\node[a]	(p1)	at	(2, 0)			{p};
+	\node				at	(1.55, 0)		{$1$};
+	
+	\node[1]	(n1)	at	(1.7, 2)		{};
+	\node[2]	(n2)	at	(2, 2.3)		{};
+	\node[s]	(f1)		at	(2, 2)		{f};
+	
+	\node[s]	(s1)	at	(0, 2)			{s};
+	\node[a]	(a2)	at	(-2, 2)			{a};
+	
+	\node[pri, rotate=-90]	(tri1) 	at	(-1.7, 0) 		{};
+	\node[s]	(w1)	at	(-2, 0)			{w};
+	
+	\node[pri, rotate=90]	(tri2) 	at	(3.7, 0) 		{};
+	\node[s]	(w2)	at	(4, 0)			{w};
+	
+	\node[pri]	(tri3) 	at	(-2, -1.7) 		{};
+	\node[s]	(w3)	at	(-2, -2)		{w};
+	
+	\node[
+		draw=red!60, fill=red!5, very thick,
+		regular polygon, regular polygon sides=3, 
+		rotate=90, minimum size=0.75cm
+		] 
+				(tri2)	at (-3.6, -2) 		{};
+	\node[a]	(p2)	at	(-4, -2)		{p};
+	\node				at	(-3.55, -2)		{$1$};
+	
+	\node[1]	(n3)	at	(-3.7, 0)		{};
+	\node[2]	(n4)	at	(-4, 0.3)		{};
+	\node[s]	(f2)	at	(-4, 0)			{f};
+	
+	
+	
+	
+	
+	
+	
+	
+	% === === Lines === ===
+	%\draw[r, blue]	(in1)		to	(s21);
+	
+\end{tikzpicture}
 
 
 
